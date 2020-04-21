@@ -1,6 +1,12 @@
 package Modelo;
 
-public class ClasePrueba {
+public class ClasePrueba
+{
 	String nombre;
-        String apellido;
+	String apellido;
+
+	public ClasePrueba()
+	{
+
+	}
 }
