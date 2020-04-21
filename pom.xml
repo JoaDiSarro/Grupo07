@@ -16,9 +16,7 @@
       </resource>
     </resources>
   </build>
-  <modules>
-    <module>Client</module>
-  </modules>
+  <modules/>
   <dependencies>
     <dependency>
       <groupId>CompetenciaPokemon</groupId>
