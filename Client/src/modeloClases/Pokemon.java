@@ -1,11 +1,12 @@
-package modelo;
-
+package modeloClases;
 public abstract class Pokemon {
     protected String nombre;
     protected double vitalidad;
     protected double escudo;
     protected double fuerza;
     protected int experiencia;
+    
+    public Pokemon(){}
     
     public Pokemon(String nombre){
         this.nombre = nombre;

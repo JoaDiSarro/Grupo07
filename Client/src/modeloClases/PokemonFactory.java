@@ -1,4 +1,4 @@
-package modelo;
+package modeloClases;
 
 public final class PokemonFactory {
     public PokemonFactory() {
