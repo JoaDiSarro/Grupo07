@@ -1,4 +1,4 @@
-package Modelo;
+package modelo;
 
 public abstract class PokemonDecorator extends Pokemon{
     

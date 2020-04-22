@@ -1,7 +1,7 @@
-package Modelo;
+package modelo;
 
 public class PokemonLegendario extends Pokemon {
-    public PokemonLegendario() {
-        super();
+    public PokemonLegendario(String nombre) {
+        super(nombre);
     }
 }
