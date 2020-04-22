@@ -3,6 +3,7 @@ package modeloClases;
 import interfaces.Hechizable;
 
 public abstract class Pokemon implements Hechizable{
+	
     protected String nombre;
     protected double vitalidad;
     protected double escudo;
@@ -16,7 +17,43 @@ public abstract class Pokemon implements Hechizable{
         this.experiencia = 0;
     }
     
-    public void ataca(Pokemon pokemon){
+    public String getNombre() {
+		return nombre;
+	}
+
+	public double getVitalidad() {
+		return vitalidad;
+	}
+
+	public double getEscudo() {
+		return escudo;
+	}
+
+	public double getFuerza() {
+		return fuerza;
+	}
+
+	public int getExperiencia() {
+		return experiencia;
+	}
+
+	public void setFuerza(double fuerza) {
+    	this.fuerza=fuerza;
+    }
+    
+    public void setEscudo(double escudo) {
+    	this.escudo=escudo;
+    }
+    
+    public void setVitalidad(double vitalidad) {
+    	this.vitalidad=vitalidad;
+    }
+    
+    public void setExperiencia(int experiencia) {
+		this.experiencia = experiencia;
+	}
+
+	public void ataca(Pokemon pokemon){
         golpeInicial(pokemon);
         recarga();
         golpeFinal(pokemon);

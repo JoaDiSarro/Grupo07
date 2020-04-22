@@ -1,6 +1,51 @@
 package modeloClases;
 
+import interfaces.Hechizable;
+
 public final class PokemonFuego extends PokemonDecorator {
+	
+	public PokemonFuego(Hechizable hechizable) {
+		super(hechizable);
+		
+		Pokemon auxPokemon = (Pokemon) this.getHechizable();
+		auxPokemon.setFuerza(120);
+		auxPokemon.setEscudo(100);
+		auxPokemon.setVitalidad(500);
+		
+	}
+
+	public double getFuerza() {
+		return this.getHechizable().getFuerza();
+	}
+
+	public double getVitalidad() {
+		return this.getHechizable().getVitalidad();
+	}
+
+	public double getEscudo() {
+		return this.getHechizable().getEscudo();
+	}
+
+	public void hechizarNiebla() {
+		Pokemon auxPokemon = (Pokemon) this.getHechizable();
+		
+		auxPokemon.setFuerza(auxPokemon.getFuerza()*0.9);
+		auxPokemon.setVitalidad(auxPokemon.getVitalidad()*0.9);
+		auxPokemon.setEscudo(auxPokemon.getEscudo()*0.9);
+	}
+	    
+	public void hechizarViento() {
+	    Pokemon auxPokemon = (Pokemon) this.getHechizable();
+	   	auxPokemon.setFuerza(auxPokemon.getFuerza() - auxPokemon.getVitalidad()*0.1);
+	}
+	    
+	public void hechizarTormenta() {
+		Pokemon auxPokemon = (Pokemon) this.getHechizable();
+		auxPokemon.setVitalidad(auxPokemon.getVitalidad()*0.6);
+	}
+	
+	/*
+	
     public PokemonFuego(Pokemon pokemon) {
         super(pokemon);
         this.vitalidad = 530;
@@ -49,4 +94,6 @@ public final class PokemonFuego extends PokemonDecorator {
     public void hechizarTormenta() {
     	this.vitalidad*=0.6;
     }
+    
+    */
 }

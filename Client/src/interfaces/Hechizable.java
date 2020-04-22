@@ -2,8 +2,9 @@ package interfaces;
 
 public interface Hechizable {
 
-	void hechizarNiebla();
-	void hechizarTormenta();
-	void hechizarViento();
+	String getNombre();
+	double getFuerza();
+	double getVitalidad();
+	double getEscudo();
 	
 }

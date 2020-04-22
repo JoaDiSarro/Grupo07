@@ -1,11 +1,23 @@
 package modeloClases;
 
-public abstract class PokemonDecorator extends Pokemon{
+import interfaces.Hechizable;
+
+public abstract class PokemonDecorator implements Hechizable{
     
-    private Pokemon pokemon;
+    private Hechizable hechizable;
     
-    public PokemonDecorator(Pokemon pokemon){
+    public PokemonDecorator(Hechizable hechizable){
         super();
-        this.pokemon = pokemon;
+        this.hechizable = hechizable;
     }
+    
+    public Hechizable getHechizable() {
+    	return this.hechizable;
+    }
+    
+	public String getNombre() {
+		return this.hechizable.getNombre();
+	}
+    
+    
 }
