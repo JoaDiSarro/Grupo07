@@ -1,4 +1,4 @@
-package modelo;
+package modeloClases;
 
 public final class PokemonHieloRecargado extends PokemonHielo {
     public PokemonHieloRecargado(Pokemon pokemon) {
@@ -9,3 +9,4 @@ public final class PokemonHieloRecargado extends PokemonHielo {
         this.fuerza = 400;
     }
 }
+

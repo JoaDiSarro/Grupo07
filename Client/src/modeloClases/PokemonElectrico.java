@@ -1,4 +1,4 @@
-package modelo;
+package modeloClases;
 
 public final class PokemonElectrico extends PokemonDecorator {
     public PokemonElectrico(Pokemon pokemon) {
