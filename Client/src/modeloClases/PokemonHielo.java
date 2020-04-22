@@ -35,4 +35,21 @@ public class PokemonHielo extends PokemonDecorator {
         //else
             //Reveer que sucede si muere    
     }
+    
+    public void hechizarNiebla() {
+    	double auxFuerza = this.fuerza*0.3;
+    	
+    	this.fuerza-=auxFuerza;
+    	this.vitalidad-=auxFuerza;
+    	this.escudo-=auxFuerza;
+    }
+    
+    public void hechizarViento() {
+    	this.fuerza -= ((this.escudo*0.1) + (this.vitalidad*0.1));
+    }
+    
+    public void hechizarTormenta() {
+    	this.vitalidad*=0.85;
+    	this.escudo*=0.85;
+    }
 }

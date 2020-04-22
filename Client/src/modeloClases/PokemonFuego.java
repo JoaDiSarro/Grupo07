@@ -35,4 +35,18 @@ public final class PokemonFuego extends PokemonDecorator {
         //else
             //Reveer que sucede si muere
     }
+    
+    public void hechizarNiebla() {
+    	this.escudo*=0.9;
+    	this.fuerza*=0.9;
+    	this.vitalidad*=0.9;
+    }
+    
+    public void hechizarViento() {
+    	this.fuerza-= (this.vitalidad*0.1);
+    }
+    
+    public void hechizarTormenta() {
+    	this.vitalidad*=0.6;
+    }
 }

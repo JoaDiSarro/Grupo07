@@ -1,5 +1,8 @@
 package modeloClases;
-public abstract class Pokemon {
+
+import interfaces.Hechizable;
+
+public abstract class Pokemon implements Hechizable{
     protected String nombre;
     protected double vitalidad;
     protected double escudo;

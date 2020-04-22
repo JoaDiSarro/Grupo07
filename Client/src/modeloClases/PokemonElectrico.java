@@ -31,4 +31,18 @@ public final class PokemonElectrico extends PokemonDecorator {
         }//else
             //Reveer que sucede si muere          
     }
+    
+    public void hechizarNiebla() {
+    	this.fuerza*=0.85;
+    	this.escudo*=0.85;
+    	this.vitalidad*=0.85;
+    }
+    
+    public void hechizarViento() {
+    	this.fuerza-= (this.escudo*0.2);
+    }
+    
+    public void hechizarTormenta() {
+    	this.vitalidad*=0.9;
+    }
 }

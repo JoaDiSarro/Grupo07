@@ -32,4 +32,18 @@ public final class PokemonAgua extends PokemonDecorator {
         }//else
             //Reveer que sucede si muere   
     }
+    
+    public void hechizarNiebla() {
+    	this.escudo*=0.93;
+    	this.vitalidad*=0.93;
+    	this.fuerza*=0.93;
+    }
+    
+    public void hechizarViento() {
+    	this.fuerza-= (this.escudo*0.5);
+    }
+    
+    public void hechizarTormenta() {
+    	this.escudo-=this.escudo*0.8;
+    }
 }
