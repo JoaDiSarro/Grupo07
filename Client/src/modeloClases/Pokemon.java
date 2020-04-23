@@ -1,5 +1,5 @@
 package modeloClases;
-public abstract class Pokemon {
+public abstract class Pokemon implements IHechizable{
     protected String nombre;
     protected double vitalidad;
     protected double escudo;
@@ -27,16 +27,35 @@ public abstract class Pokemon {
     
     //estos metodos son para poder utilizar el gancho con cada elemento
     
-    public void terminaCansancio(){}
+    public abstract void terminaCansancio();
     
-    public void recarga(){}
+    public abstract  void recarga();
     
-    public void golpeFinal(Pokemon pokemon){}
+    public abstract void golpeFinal(Pokemon pokemon);
     
     //Evaluar que sucede si el pokemon muere
     
-    public void recibeDaño(double daño){}
+    public abstract void recibeDaño(double daño);
     
-    
-    
+   
+    public String getNombre() {
+        return nombre;
+    }
+
+    public double getVitalidad() {
+        return vitalidad;
+    }
+
+    public double getEscudo() {
+        return escudo;
+    }
+
+    public int getExperiencia() {
+        return experiencia;
+    }
+
+    public double getFuerza() {
+        return fuerza;
+    }
+
 }
