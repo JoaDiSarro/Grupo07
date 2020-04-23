@@ -1,7 +1,66 @@
 package modeloClases;
 
+import interfaces.Hechizable;
+
 public final class PokemonTierra extends PokemonDecorator {
-    public PokemonTierra(Pokemon pokemon) {
+    
+	private Pokemon pokemon;
+
+	public PokemonTierra(Hechizable hechizable) {
+		super(hechizable);
+		
+		pokemon = (Pokemon) super.getHechizable();
+		pokemon.setFuerza(40);
+		pokemon.setEscudo(120);
+		pokemon.setVitalidad(600);
+		
+	}
+
+	public double getFuerza() {
+		return super.getHechizable().getFuerza();
+	}
+
+	public double getVitalidad() {
+		return super.getHechizable().getVitalidad();
+	}
+
+	public double getEscudo() {
+		return super.getHechizable().getEscudo();
+	}
+
+	public void hechizarNiebla() {
+		double auxVitalidad = pokemon.getVitalidad()*0.2;
+		
+		pokemon.setFuerza(pokemon.getFuerza()-auxVitalidad);
+		pokemon.setVitalidad(pokemon.getVitalidad()-auxVitalidad);
+		pokemon.setEscudo(pokemon.getEscudo()-auxVitalidad);
+	}
+	    
+	public void hechizarViento() {
+	   	pokemon.setFuerza(pokemon.getFuerza()*0.8);
+	}
+	    
+	public void hechizarTormenta() {
+		pokemon.setVitalidad(pokemon.getVitalidad()- pokemon.getEscudo());
+	}
+	
+	public void terminaCansancio() {
+		pokemon.setFuerza(40);
+	}
+	
+	public void recarga() {
+		pokemon.setFuerza(40);
+	}
+	
+	public void golpeFinal(Hechizable hechizable) {
+		Pokemon contrincante = (Pokemon) hechizable;
+		
+		contrincante.recibeDaño(pokemon.getFuerza());
+		pokemon.setFuerza(pokemon.getFuerza()*1.4);
+	}
+	
+	/*
+	public PokemonTierra(Pokemon pokemon) {
         super(pokemon);
         this.vitalidad = 600;
         this.escudo = 120;
@@ -44,4 +103,5 @@ public final class PokemonTierra extends PokemonDecorator {
     public void hechizarTormenta() {
     	this.vitalidad-=this.escudo;
     }
+    */
 }

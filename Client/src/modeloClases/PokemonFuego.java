@@ -4,44 +4,59 @@ import interfaces.Hechizable;
 
 public final class PokemonFuego extends PokemonDecorator {
 	
+	private Pokemon pokemon;
+
 	public PokemonFuego(Hechizable hechizable) {
 		super(hechizable);
 		
-		Pokemon auxPokemon = (Pokemon) this.getHechizable();
-		auxPokemon.setFuerza(120);
-		auxPokemon.setEscudo(100);
-		auxPokemon.setVitalidad(500);
+		pokemon = (Pokemon) super.getHechizable();
+		pokemon.setFuerza(80);
+		pokemon.setEscudo(200);
+		pokemon.setVitalidad(530);
 		
 	}
 
 	public double getFuerza() {
-		return this.getHechizable().getFuerza();
+		return super.getHechizable().getFuerza();
 	}
 
 	public double getVitalidad() {
-		return this.getHechizable().getVitalidad();
+		return super.getHechizable().getVitalidad();
 	}
 
 	public double getEscudo() {
-		return this.getHechizable().getEscudo();
+		return super.getHechizable().getEscudo();
 	}
 
 	public void hechizarNiebla() {
-		Pokemon auxPokemon = (Pokemon) this.getHechizable();
 		
-		auxPokemon.setFuerza(auxPokemon.getFuerza()*0.9);
-		auxPokemon.setVitalidad(auxPokemon.getVitalidad()*0.9);
-		auxPokemon.setEscudo(auxPokemon.getEscudo()*0.9);
+		pokemon.setFuerza(pokemon.getFuerza()*0.9);
+		pokemon.setVitalidad(pokemon.getVitalidad()*0.9);
+		pokemon.setEscudo(pokemon.getEscudo()*0.9);
 	}
 	    
 	public void hechizarViento() {
-	    Pokemon auxPokemon = (Pokemon) this.getHechizable();
-	   	auxPokemon.setFuerza(auxPokemon.getFuerza() - auxPokemon.getVitalidad()*0.1);
+	   	pokemon.setFuerza(pokemon.getFuerza() - pokemon.getVitalidad()*0.1);
 	}
 	    
 	public void hechizarTormenta() {
-		Pokemon auxPokemon = (Pokemon) this.getHechizable();
-		auxPokemon.setVitalidad(auxPokemon.getVitalidad()*0.6);
+		pokemon.setEscudo(pokemon.getVitalidad()*0.6);
+	}
+	
+	public void terminaCansancio() {
+		pokemon.setFuerza(80);
+	}
+	
+	public void recarga() {
+		pokemon.setFuerza(pokemon.getFuerza()*1.1);
+		pokemon.setFuerza(pokemon.getVitalidad()*1.1);
+	}
+	
+	public void golpeFinal(Hechizable hechizable) {
+		Pokemon contrincante = (Pokemon) hechizable;
+		
+		contrincante.recibeDaño(pokemon.getFuerza()*1.25);
+		pokemon.setFuerza(0);
 	}
 	
 	/*

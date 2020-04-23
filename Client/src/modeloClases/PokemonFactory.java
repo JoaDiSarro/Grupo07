@@ -1,12 +1,14 @@
 package modeloClases;
 
+import interfaces.Hechizable;
+
 public final class PokemonFactory {
     public PokemonFactory() {
         super();
     }
     
-    public Pokemon creaPokemon(String nombre, String tipo, String elemento){
-        Pokemon pokemonTipo;
+    public Hechizable creaPokemon(String nombre, String tipo, String elemento){
+        Hechizable pokemonTipo;
         
         if(tipo.equalsIgnoreCase("comun")){
             pokemonTipo = new PokemonComun(nombre);
@@ -17,15 +19,15 @@ public final class PokemonFactory {
         
         if(elemento.equalsIgnoreCase("agua"))
             return new PokemonAgua(pokemonTipo);  
-        if(elemento.equalsIgnoreCase("hielo"))
+        else if(elemento.equalsIgnoreCase("hielo"))
             return new PokemonHielo(pokemonTipo);
-        if(elemento.equalsIgnoreCase("hielo recargado"))
-            return new PokemonHieloRecargado(pokemonTipo);
-        if(elemento.equalsIgnoreCase("fuego"))
+        //if(elemento.equalsIgnoreCase("hielo recargado"))
+        //    return new PokemonHieloRecargado(pokemonTipo);
+        else if(elemento.equalsIgnoreCase("fuego"))
             return new PokemonFuego(pokemonTipo);
-        if(elemento.equalsIgnoreCase("tierra"))
+        else if(elemento.equalsIgnoreCase("tierra"))
             return new PokemonTierra(pokemonTipo);
-        if(elemento.equalsIgnoreCase("electrico"))
+        else if(elemento.equalsIgnoreCase("electrico"))
             return new PokemonElectrico(pokemonTipo);
         
         return null;

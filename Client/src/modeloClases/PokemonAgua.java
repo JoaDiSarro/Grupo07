@@ -3,45 +3,60 @@ package modeloClases;
 import interfaces.Hechizable;
 
 public final class PokemonAgua extends PokemonDecorator {
+	
+	private Pokemon pokemon;
 
 	public PokemonAgua(Hechizable hechizable) {
 		super(hechizable);
 		
-		Pokemon auxPokemon = (Pokemon) this.getHechizable();
-		auxPokemon.setFuerza(120);
-		auxPokemon.setEscudo(100);
-		auxPokemon.setVitalidad(500);
+		pokemon = (Pokemon) super.getHechizable();
+		pokemon.setFuerza(120);
+		pokemon.setEscudo(100);
+		pokemon.setVitalidad(500);
 		
 	}
 
 	public double getFuerza() {
-		return this.getHechizable().getFuerza();
+		return super.getHechizable().getFuerza();
 	}
 
 	public double getVitalidad() {
-		return this.getHechizable().getVitalidad();
+		return super.getHechizable().getVitalidad();
 	}
 
 	public double getEscudo() {
-		return this.getHechizable().getEscudo();
+		return super.getHechizable().getEscudo();
 	}
 
 	public void hechizarNiebla() {
-		Pokemon auxPokemon = (Pokemon) this.getHechizable();
 		
-		auxPokemon.setFuerza(auxPokemon.getFuerza()*0.93);
-		auxPokemon.setVitalidad(auxPokemon.getVitalidad()*0.93);
-		auxPokemon.setEscudo(auxPokemon.getEscudo()*0.93);
+		pokemon.setFuerza(pokemon.getFuerza()*0.93);
+		pokemon.setVitalidad(pokemon.getVitalidad()*0.93);
+		pokemon.setEscudo(pokemon.getEscudo()*0.93);
 	}
 	    
 	public void hechizarViento() {
-	    Pokemon auxPokemon = (Pokemon) this.getHechizable();
-	   	auxPokemon.setFuerza(auxPokemon.getFuerza() - auxPokemon.getEscudo()*0.5);
+	   	pokemon.setFuerza(pokemon.getFuerza() - pokemon.getEscudo()*0.5);
 	}
 	    
 	public void hechizarTormenta() {
-		Pokemon auxPokemon = (Pokemon) this.getHechizable();
-		auxPokemon.setEscudo(auxPokemon.getEscudo()*0.8);
+		pokemon.setEscudo(pokemon.getEscudo()*0.8);
+	}
+	
+	public void terminaCansancio() {
+		pokemon.setFuerza(120);
+	}
+	
+	public void recarga() {
+		pokemon.setFuerza(pokemon.getFuerza()*1.1);
+		pokemon.setFuerza(pokemon.getVitalidad()*1.1);
+	}
+	
+	public void golpeFinal(Hechizable hechizable) {
+		Pokemon contrincante = (Pokemon) hechizable;
+		
+		contrincante.recibeDaño(pokemon.getFuerza());
+		pokemon.setFuerza(pokemon.getFuerza()*0.5);
 	}
 	
 	/*
