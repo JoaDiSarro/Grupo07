@@ -2,7 +2,7 @@ package modeloClases;
 
 public final class PokemonTierra extends PokemonDecorator {
     public PokemonTierra(Pokemon pokemon) {
-        super(pokemon);
+        super.setPokemon(pokemon);
         this.vitalidad = 600;
         this.escudo = 120;
         this.fuerza = 40;
@@ -28,5 +28,20 @@ public final class PokemonTierra extends PokemonDecorator {
             this.escudo = 0;
         }//else
             //Reveer que sucede si muere      
+    }
+
+    @Override
+    public void hechizarNiebla() {
+        // TODO Implement this method
+    }
+
+    @Override
+    public void hechizarViento() {
+        // TODO Implement this method
+    }
+
+    @Override
+    public void hechizarTormenta() {
+        // TODO Implement this method
     }
 }

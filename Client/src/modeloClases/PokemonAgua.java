@@ -3,11 +3,12 @@ package modeloClases;
 public final class PokemonAgua extends PokemonDecorator {
     
     public PokemonAgua(Pokemon pokemon) {
-        super(pokemon);
+        super.setPokemon(pokemon);
         this.vitalidad = 500;
         this.escudo = 100;
         this.fuerza = 120;
     }
+    
     
     public void terminaCansancio(){
         this.fuerza = 120;
@@ -31,5 +32,24 @@ public final class PokemonAgua extends PokemonDecorator {
             this.escudo = 0;
         }//else
             //Reveer que sucede si muere   
+    }
+    
+    public void atacaNiebla(){
+        //ACA HAGO ALGO
+    }
+
+    @Override
+    public void hechizarNiebla() {
+        // TODO Implement this method
+    }
+
+    @Override
+    public void hechizarViento() {
+        // TODO Implement this method
+    }
+
+    @Override
+    public void hechizarTormenta() {
+        // TODO Implement this method
     }
 }
