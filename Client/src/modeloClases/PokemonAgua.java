@@ -39,6 +39,7 @@ public final class PokemonAgua extends PokemonDecorator {
      *Método que aplica el efecto de la carta de niebla al pokémon de agua.<br>
      *Reduce las estadísticas de combate un 7%. <br>
      */
+    @Override
     public void hechizarNiebla() {
         this.fuerza*=0.93;
         this.escudo*=0.93;
@@ -50,6 +51,7 @@ public final class PokemonAgua extends PokemonDecorator {
      * Disminuye la fuerza un 50% del escudo actual.<br>
      * En caso de ser mayor o igual esa cantidad de escudo a la fuerza, la deja en 1.<br>
      */
+    @Override
     public void hechizarViento() {
     	if (this.escudo*0.5 >= this.fuerza)
     		this.fuerza=1;
@@ -61,6 +63,7 @@ public final class PokemonAgua extends PokemonDecorator {
      *Método que aplica el efecto de la carta de tormenta al pokémon de agua.<br> 
      *Disminuye el escudo en un 20%.<br>
      */
+    @Override
     public void hechizarTormenta() {
         this.escudo*=0.8;
     }

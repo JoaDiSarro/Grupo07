@@ -13,6 +13,32 @@ public abstract class Pokemon implements IHechizable{
         this.experiencia = 0;
     }
     
+    public String getNombre() {
+        return nombre;
+    }
+
+    public double getVitalidad() {
+        return vitalidad;
+    }
+
+    public double getEscudo() {
+        return escudo;
+    }
+
+    public int getExperiencia() {
+        return experiencia;
+    }
+
+    public double getFuerza() {
+        return fuerza;
+    }
+    
+    public abstract void hechizarNiebla();
+    
+    public abstract void hechizarTormenta();
+
+    public abstract void hechizarViento();
+    
     public void ataca(Pokemon pokemon){
         golpeInicial(pokemon);
         recarga();
@@ -38,24 +64,6 @@ public abstract class Pokemon implements IHechizable{
     public abstract void recibeDaño(double daño);
     
    
-    public String getNombre() {
-        return nombre;
-    }
-
-    public double getVitalidad() {
-        return vitalidad;
-    }
-
-    public double getEscudo() {
-        return escudo;
-    }
-
-    public int getExperiencia() {
-        return experiencia;
-    }
-
-    public double getFuerza() {
-        return fuerza;
-    }
+    
 
 }

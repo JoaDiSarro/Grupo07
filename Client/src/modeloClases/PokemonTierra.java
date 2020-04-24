@@ -37,6 +37,7 @@ public final class PokemonTierra extends PokemonDecorator {
      *Si el porcentaje de vitalidad es mayor al escudo, éste se vuelve 0.<br>
      *Si el porcentaje de vitalidad es mayor o igual a la fuerza, ésta se vuelve 1.<br>
      */
+    @Override
     public void hechizarNiebla() {
     	double auxVitalidad = this.vitalidad*0.2;
     	
@@ -56,6 +57,7 @@ public final class PokemonTierra extends PokemonDecorator {
      *Método que aplica el efecto de la carta de viento al pokémon de tierra.<br>
      *Reduce la fuerza actual un 20%.<br>
      */
+    @Override
     public void hechizarViento() {
         this.fuerza*=0.8;
     }
@@ -66,6 +68,7 @@ public final class PokemonTierra extends PokemonDecorator {
      *Resta de la vitalidad la cantidad actual de escudo.<br>
      *Si el escudo es mayor o igual a la vitalidad, ésta se vuelve 1.<br>
      */
+    @Override
     public void hechizarTormenta() {
         if (this.escudo>=this.vitalidad)
         	this.vitalidad=1;
