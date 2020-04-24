@@ -25,17 +25,17 @@ public class PokemonComun extends Pokemon implements Cloneable{
         // TODO Implement this method
     }
 
-    @Override
+    //@Override
     public void hechizarNiebla() {
         // TODO Implement this method
     }
 
-    @Override
+   // @Override
     public void hechizarViento() {
         // TODO Implement this method
     }
 
-    @Override
+    //@Override
     public void hechizarTormenta() {
         // TODO Implement this method
     }

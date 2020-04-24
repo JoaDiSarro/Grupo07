@@ -1,11 +1,25 @@
 package modeloClases;
 
+/**
+ * @author Frangolini,Luciano.<br>
+ * Clase que representa una carta de viento. Esta carta será utilizada por los participantes de un torneo pokémon.<br>
+ */
 public class CartaViento implements ICarta{
+	
+	
+    /**
+     * Constructor de la carta de viento.
+     */
     public CartaViento() {
         super();
     }
     
-    @Override
+    /**
+     *Método que se encarga de hechizar con una carta de viento.<br>
+     *@param hechizable, de tipo IHechizable : Representa el objeto a hechizar con la carta de viento.<br>
+     *<b> Pre: <\b> El parámetro hechizable debe ser distinto de null.<br>
+     *<b> Post: <\b> El objeto queda hechizado por una carta de viento.<br>
+     */
     public void hechizar(IHechizable hechizable) {
         hechizable.hechizarViento();
     }
