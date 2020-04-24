@@ -62,7 +62,7 @@ public class PokemonHielo extends PokemonDecorator {
     /**
      *Método que aplica el efecto de la carta de viento al pokémon de hielo.<br>
      *Reduce la fuerza un 10% de la vitalidad mas un 10 % del escudo actuales. <br>
-     *En caso de ser menor o igualla fuerza que la suma de estos valores, se vuelve 1.<br>
+     *En caso de ser menor o igual la fuerza que la suma de estos valores, se vuelve 1.<br>
      */
     @Override
     public void hechizarViento() {
