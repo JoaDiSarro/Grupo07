@@ -1,10 +1,33 @@
 package modeloClases;
 
+/**
+ * @author DiSarro,Joaquina.
+ * @version 1.0
+ * <br>
+ * Clase que se encarga de generar un Pokemon dependiendo de los parametros de entrada.<br>
+ * Se especifica el tipo de Pokemon a crear: Comun o Legendario.<br>
+ * Se especifica el nombre que se le quiere asignar al pokemon.<br>
+ * Se especifica el elemento al que el Pokemon pertenece: Hielo, Hielo Recargado, Agua, Fuego, Tierra o Electrico.<br>
+ */
 public final class PokemonFactory {
+    /**
+     * Metodo Constructor por defecto.<br>
+     */
     public PokemonFactory() {
         super();
     }
-    
+
+    /**
+     * Metodo que crea un pokemon dependiendo de los parametros de entrada.<br>
+     * Se debe de ingresar el nombre, el tipo (Comun o Legendario) y el elemento (Hielo, Hielo Recargado, Agua, Fuego, Tierra o Electrico).
+     * En caso contrario, devolvera un null.<br>
+     * <b>Pre:</b> Los parametros nombre,tipo y elemento deben ser distintos de null y de vacio. 
+     * <b>Post:</b> Se genera un Pokemon con su respectivo nombre, tipo y elemento. En caso que alguno de los parametros de entrada sean incorrectos, se devolvera un null.
+     * @param nombre : nombre que se le asiganara al Pokemon.
+     * @param tipo : puede ser Comun o Legendario.
+     * @param elemento : puede ser Hielo, Hielo Recargado, Agua, Fuego, Tierra o Electrico
+     * @return devuelve un Pokemon.
+     */
     public Pokemon creaPokemon(String nombre, String tipo, String elemento){
         Pokemon pokemonTipo;
         
