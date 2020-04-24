@@ -1,6 +1,5 @@
 package modeloClases;
 
-
 /**
  * @author DiSarro,Joaquina.
  * @version 1.0
@@ -9,6 +8,7 @@ package modeloClases;
  * Pokemon es una clase abstracta e implementa Cloneable.<br>
  */
 public abstract class Pokemon implements Cloneable{
+
     protected String nombre;
     protected double vitalidad;
     protected double escudo;
@@ -31,7 +31,33 @@ public abstract class Pokemon implements Cloneable{
         this.nombre = nombre;
         this.experiencia = 0;
     }
+    
+    public String getNombre() {
+        return nombre;
+    }
 
+    public double getVitalidad() {
+        return vitalidad;
+    }
+
+    public double getEscudo() {
+        return escudo;
+    }
+
+    public int getExperiencia() {
+        return experiencia;
+    }
+
+    public double getFuerza() {
+        return fuerza;
+    }
+    
+    public abstract void hechizarNiebla();
+    
+    public abstract void hechizarTormenta();
+
+    public abstract void hechizarViento();
+    
     /**
      * Metodo para atacar a otro Pokemon. Se realiza una secuencia de acciones.<br>
      * <b>Pre:</b> El parametro pokemon debe ser distinto de null.<br>
@@ -56,17 +82,19 @@ public abstract class Pokemon implements Cloneable{
         this.fuerza *= 0.5;
     }
     
-
-    public void terminaCansancio(){}
+    //estos metodos son para poder utilizar el gancho con cada elemento
     
-    public void recarga(){}
+    public abstract void terminaCansancio();
     
-    public void golpeFinal(Pokemon pokemon){}
+    public abstract  void recarga();
+    
+    public abstract void golpeFinal(Pokemon pokemon);
     
     //Evaluar que sucede si el pokemon muere
     
-    public void recibeDaño(double daño){}
+    public abstract void recibeDaño(double daño);
     
+   
     
-    
+
 }
