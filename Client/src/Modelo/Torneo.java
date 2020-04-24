@@ -1,62 +1,81 @@
 package Modelo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
- * @author Grupo
+ * @author Ivo Vucetic<br>
  * 
  *         Esta clase representa el funcionamiento de un torneo eliminatorio
  *         para 8 competidores. Cuenta con el conjunto de entrenadores que
- *         participaran en dicho torneo, el nombre del torneo y una
- *         variable que hara referencia a una sola instancia del
- *         torneo.
+ *         participaran en dicho torneo, el nombre del torneo, una variable que
+ *         hara referencia a una sola instancia del torneo y una lista con las
+ *         rondas del mismo.
  */
 public class Torneo
 {
-	private String nombre_torneo;
-	private ArrayList<Entrenador> entrenadores;
-	private static Torneo instance_torneo = null;
-	private ArrayList<Ronda> rondas;
-	
+	private String nombre;
+	private ArrayList<Entrenador> listaEntrenadores;
+	private static Torneo instanceTorneo = null;
+	private ArrayList<Ronda> listaRondas;
+
 	/**
-	 * Constructor para iniciar la lista que contendra a los entrenadores.
+	 * Constructor para iniciar la lista que contendra a los entrenadores y las
+	 * rondas. <br>
 	 */
 	private Torneo()
 	{
-		this.entrenadores = new ArrayList<Entrenador>();
+		this.listaEntrenadores = new ArrayList<Entrenador>();
+		this.listaRondas = new ArrayList<Ronda>();
 	}
 
 	/**
-	 * Este método nos devuelve una instancia única del torneo.
+	 * Este método nos devuelve una instancia única del torneo. <br>
 	 * 
 	 * @return Referencia de tipo Torneo
 	 */
 	public static Torneo getInstance()
 	{
-		if (Torneo.instance_torneo == null)
-			Torneo.instance_torneo = new Torneo();
-		return instance_torneo;
+		if (Torneo.instanceTorneo == null)
+			Torneo.instanceTorneo = new Torneo();
+		return instanceTorneo;
 	}
 
-	public String getNombre_torneo()
+	public String getNombre()
 	{
-		return nombre_torneo;
+		return nombre;
 	}
 
-	public void setNombre_torneo(String nombre_torneo)
+	public void setNombre(String nombre)
 	{
-		this.nombre_torneo = nombre_torneo;
+		this.nombre = nombre;
 	}
 
 	/**
 	 * Estem método se encarga de agregar un entrenador a la lista de los mismos.
+	 * <br>
 	 */
-	public void AgregaEntrenador(Entrenador entrenador)
+	public void agregaEntrenador(Entrenador entrenador)
 	{
-		this.entrenadores.add(entrenador);
+		this.listaEntrenadores.add(entrenador);
 	}
-	
-	public void inicia_ronda()
-	
+
+	/**
+	 * Este método se encarga de crear la ronda para luego delegar el trabajo de
+	 * iniciarla. <br>
+	 * <b>Pre:</b> numero >= 0
+	 * 
+	 * @param numero: Representa la actual.
+	 */
+	public void creaRonda(int numero)
+	{
+		Ronda nuevaRonda = new Ronda(numero);
+		if (numero == 1)
+			nuevaRonda.Inicia(listaEntrenadores);
+		else
+			nuevaRonda.Inicia(listaRondas.get(numero - 2).getListaGanadores());
+		listaRondas.add(nuevaRonda);
+	}
 
 }
+

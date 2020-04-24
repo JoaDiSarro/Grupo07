@@ -1,28 +1,25 @@
 package Modelo;
 
-public class main
+public class Prueba
 {
-
 	public static void main(String[] args)
 	{
-		Torneo nuevo_torneo = Torneo.getInstance();
-		nuevo_torneo.setNombre_torneo("COPA PISTON");
+		Torneo torneo = Torneo.getInstance();
+		torneo.setNombre("COPA PISTON");
 		System.out.println("----------------------------------------");
-		System.out.println("-----BIENVENIDOS AL TORNEO"+ nuevo_torneo.getNombre_torneo()+"-----");
+		System.out.println("-----BIENVENIDOS AL TORNEO"+ torneo.getNombre()+"-----");
 		System.out.println("----------------------------------------");
 		
 		System.out.println("----INSCRIPCION DE ENTRENADORES------");
-		nuevo_torneo.AgregaEntrenador(new Entrenador());
-		nuevo_torneo.AgregaEntrenador(new Entrenador());
-		nuevo_torneo.AgregaEntrenador(new Entrenador());
-		nuevo_torneo.AgregaEntrenador(new Entrenador());
-		nuevo_torneo.AgregaEntrenador(new Entrenador());
-		nuevo_torneo.AgregaEntrenador(new Entrenador());
-		nuevo_torneo.AgregaEntrenador(new Entrenador());
-		nuevo_torneo.AgregaEntrenador(new Entrenador());
+		torneo.agregaEntrenador(new Entrenador());
+		torneo.agregaEntrenador(new Entrenador());
+		torneo.agregaEntrenador(new Entrenador());
+		torneo.agregaEntrenador(new Entrenador());
+		torneo.agregaEntrenador(new Entrenador());
+		torneo.agregaEntrenador(new Entrenador());
+		torneo.agregaEntrenador(new Entrenador());
+		torneo.agregaEntrenador(new Entrenador());
 		System.out.println("----TODOS INSCRIPTOS, QUE INICIE EL TORNEO!!----");
-		nuevo_torneo.iniciaRonda("ronda1");
-
+		torneo.creaRonda(1);
 	}
-
 }
