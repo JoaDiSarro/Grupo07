@@ -7,7 +7,7 @@ package modeloClases;
   * Esta clase contiene metodos correspondientes a un Pokemon Comun.<br>
   * La clase extiende de Pokemon y permite ser clonable.
   */
-public class PokemonComun extends Pokemon {
+public class PokemonComun extends Pokemon implements Cloneable {
 
     /**
      * Constructor parametrizado.<br>
@@ -17,8 +17,26 @@ public class PokemonComun extends Pokemon {
      */
     public PokemonComun(String nombre) {
         super(nombre);
+        
     }
 
+    /**
+     * Método que clona un pokémon común.<br>
+     *@return Retorna el clon de un pokémon común .
+     */
+    @Override
+	public Object clone() {
+		
+		Object clon=null;
+		try {
+			return super.clone();
+		} 
+		catch (CloneNotSupportedException e) {
+			//Nunca entro aca
+		}
+		return clon;
+	}
+    
     @Override
     public void terminaCansancio() {
         // TODO Implement this method
@@ -53,4 +71,5 @@ public class PokemonComun extends Pokemon {
     public void hechizarTormenta() {
         // TODO Implement this method
     }
+
 }

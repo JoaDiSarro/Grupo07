@@ -4,7 +4,7 @@ package modeloClases;
  * @author Frangolini,Luciano.<br>
  * Clase que representa una carta de niebla. Esta carta será utilizada por los participantes de un torneo pokémon.<br>
  */
-public class CartaNiebla implements ICarta {
+public class CartaNiebla extends Carta {
 	
     
     /**

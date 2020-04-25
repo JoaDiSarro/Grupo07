@@ -10,65 +10,62 @@ public final class PokemonFuego extends PokemonDecorator {
     
     /**
      * Metodo constructor parametrizado<br>
-     * Por defecto los valores de vitalidad, escudo y fuerza son establecidos.
-     * <b>Pre:</b> El pokemon pasado por parametro debe ser distinto de null
-     * <b>Post:</b> Se le agrega al pokemon la funcionalidad del elemento fuego.
-     * @param pokemon : Pokemon al que se lo decora con el elemento fuego
+     * Por defecto los valores de vitalidad, escudo y fuerza son establecidos.<br>
+     * <b>Pre:</b> El pokemon pasado por parametro debe ser distinto de null<br>
+     * <b>Post:</b> Se le agrega al pokemon la funcionalidad del elemento fuego.<br>
+     * @param pokemon : Pokemon al que se lo decora con el elemento fuego<br>
      */
     public PokemonFuego(Pokemon pokemon) {
-        super(pokemon);
-        this.vitalidad = 530;
-        this.escudo = 200;
-        this.fuerza = 80;
+    	super(pokemon,530,80,200);
     }
     
     
     /**
-     * Metodo por el cual el Pokemon de Fuego recupera toda su fuerza inicial.
+     * Metodo por el cual el Pokemon de Fuego recupera toda su fuerza inicial.<br>
      * <b>Post:</b> El pokemon setea su fuerza a 80 por defecto.
      */
     public void terminaCansancio(){
-        this.fuerza = 80;    
+    	super.pokemon.fuerza = 80;    
     }
     
     /**
-     * Metodo por el cual el Pokemon de Fuego realiza una recarga de su fuerza y vitalidad
-     * <b>Post:</b> Su fuerza aumenta un 10%. Su vitalidad aumenta un 10%
+     * Metodo por el cual el Pokemon de Fuego realiza una recarga de su fuerza y vitalidad.<br>
+     * <b>Post:</b> Su fuerza aumenta un 10%. Su vitalidad aumenta un 10%.
      */
     public void recarga(){
-        this.fuerza *= 1.1;
-        this.vitalidad *= 1.1;    
+    	super.pokemon.fuerza *= 1.1;
+    	super.pokemon.vitalidad *= 1.1;    
     }
     
     /**
      * Metodo por el cual el Pokemon de Fuego le provoca al adversario un daño igual a su fuerza mas un 25%<br>
-     * Luego la fuerza se agota por completo (queda en cero)
-     * <b>Pre:</b> el pokemon pasado por parametro debe ser distinto de null
-     * <b>Post:</b> El pokemon de Fuego le realiza un daño al pokemon pasado como parametro. Luego disminuye su fuerza a cero
-     * @param pokemon : pokemon al cual le realizaremos daño
+     * Luego la fuerza se agota por completo (queda en cero)<br>
+     * <b>Pre:</b> el pokemon pasado por parametro debe ser distinto de null<br>
+     * <b>Post:</b> El pokemon de Fuego le realiza un daño al pokemon pasado como parametro. Luego disminuye su fuerza a cero<br>
+     * @param pokemon : pokemon al cual le realizaremos daño<br>
      */
     public void golpeFinal(Pokemon pokemon){
-        pokemon.recibeDaño(this.fuerza*1.25);
-        this.fuerza = 0;
+        pokemon.recibeDaño(super.pokemon.fuerza*1.25);
+        super.pokemon.fuerza = 0;
     }
 
     /**
      * Metodo por el cual el Pokemon de Fuego recibe daño.<br>
-     * El escudo y la vitalidad absorben la mitad del daño cada uno (decrementándose).
-     * <b>Pre:</b> El daño pasado como parametro debe ser distinto de null
-     * <b>Post:</b> El Pokemon de Fuego recibe cierta cantidad de daño. Existe la posibilidad de que muera
+     * El escudo y la vitalidad absorben la mitad del daño cada uno (decrementándose).<br>
+     * <b>Pre:</b> El daño pasado como parametro debe ser distinto de null<br>
+     * <b>Post:</b> El Pokemon de Fuego recibe cierta cantidad de daño. Existe la posibilidad de que muera<br>
      * @param daño : valor del impacto recibido.
      */
     public void recibeDaño(double daño){
         double aux = 0;
-        if(daño*0.5 < this.escudo)
-            this.escudo -= daño*0.5;
+        if(daño*0.5 < super.pokemon.escudo)
+        	super.pokemon.escudo -= daño*0.5;
         else{
             aux = daño*0.5 - escudo;
-            this.escudo = 0;
+            super.pokemon.escudo = 0;
         }
-        if((daño*0.5 + aux) < this.vitalidad)     
-            this.vitalidad -= daño*0.5 + aux;
+        if((daño*0.5 + aux) < super.pokemon.vitalidad)     
+        	super.pokemon.vitalidad -= daño*0.5 + aux;
         //else
             //Reveer que sucede si muere
     }
@@ -80,9 +77,9 @@ public final class PokemonFuego extends PokemonDecorator {
      */
     @Override
     public void hechizarNiebla() {
-    	this.escudo*=0.9;
-    	this.fuerza*=0.9;
-    	this.vitalidad*=0.9;
+    	super.pokemon.escudo*=0.9;
+    	super.pokemon.fuerza*=0.9;
+    	super.pokemon.vitalidad*=0.9;
     }
 
     
@@ -93,10 +90,10 @@ public final class PokemonFuego extends PokemonDecorator {
      */
     @Override
     public void hechizarViento() {
-    	if (this.vitalidad*0.1>=this.fuerza)
-    		this.fuerza=1;
+    	if (super.pokemon.vitalidad*0.1>=super.pokemon.fuerza)
+    		super.pokemon.fuerza=1;
     	else
-    		this.fuerza-= this.vitalidad*0.1;
+    		super.pokemon.fuerza-= super.pokemon.vitalidad*0.1;
     }
 
     
@@ -106,6 +103,6 @@ public final class PokemonFuego extends PokemonDecorator {
      */
     @Override
     public void hechizarTormenta() {
-        this.vitalidad*=0.6;
+    	super.pokemon.vitalidad*=0.6;
     }
 }

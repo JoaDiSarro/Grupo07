@@ -7,21 +7,59 @@ package modeloClases;
   * Clase que se encarga de decorar Pokemones dandoles asi distintos tipos de funcionalidades dependiendo el Elemento que sean.<br>
   * La clase extiende de Pokemon.<br>
   */
-public abstract class PokemonDecorator extends Pokemon{
+public abstract class PokemonDecorator extends Pokemon implements Cloneable{
     
-    private Pokemon pokemon;
+    protected Pokemon pokemon;
 
     /**
      * Constructor parametrizado.<br>
-     * <b>Post:</b> Se decora un pokemon con un elemento especifico.
-     * @param pokemon : se encarga de guardar la referencia a memoria de un Pokemon base.
-     */
-    public PokemonDecorator(Pokemon pokemon){
-        super();
-        this.pokemon = pokemon;
+     * <b>Post:</b> Se decora un pokemon con un elemento especifico.<br>
+     * @param pokemon, de tipo Pokemon : Se encarga de guardar la referencia a memoria de un Pokemon base.<br>
+     * @param vitalidad, de tipo double : Vitalidad que se le asigna al pokémon.<br>
+     * @param fuerza, de tipo double : Fuerza que se le asigna al pokémon.<br>
+     * @param escudo, de tipo double : Escudo que se le asigna al pokémon. <br>
+     */    
+    public PokemonDecorator(Pokemon pokemon,double vitalidad, double fuerza, double escudo) {
+    	this.pokemon=pokemon;
+    	this.pokemon.vitalidad=vitalidad;
+        this.pokemon.fuerza=fuerza;
+        this.pokemon.escudo=escudo;
+    	
     }
     
-    public void setPokemon(Pokemon pokemon) {
+    /**
+     *Método encargado de clonar un pokémon de cualquier elemento.
+     */
+    @Override
+	public Object clone() {
+    	PokemonDecorator clonElemento=null;
+    	
+    	try {
+    		Pokemon pokemonAux = (Pokemon) pokemon.clone();
+    		clonElemento = (PokemonDecorator) super.clone();
+    		clonElemento.setPokemon(pokemonAux);
+    	}
+    	catch (CloneNotSupportedException e) {
+    		e.getMessage();
+    	}
+		return clonElemento;
+	}    
+
+	/**
+	 *Sobreescritura del método toString.<br>
+	 *Muestra los atributos propios del pokemon.
+	 */
+	@Override
+	public String toString() {
+		return "Nombre: "+this.pokemon.nombre+" / "+
+				"Vitalidad: "+this.pokemon.vitalidad+" / "+
+				"Escudo: "+this.pokemon.escudo+" / "+
+				"Fuerza: "+this.pokemon.fuerza+" / "+
+				"Experiencia: "+this.pokemon.experiencia+" / "+
+				"Nivel: "+this.pokemon.clasificacionActual;
+	}
+
+	public void setPokemon(Pokemon pokemon) {
         this.pokemon = pokemon;
     }
 
@@ -32,4 +70,62 @@ public abstract class PokemonDecorator extends Pokemon{
     public String getNombre(){
         return this.pokemon.getNombre();
     }
+    
+    public double getFuerza(){
+        return this.pokemon.getFuerza();
+    }
+    
+    public double getVitalidad(){
+        return this.pokemon.getVitalidad();
+    }
+    
+    public double getEscudo(){
+        return this.pokemon.getEscudo();
+    }
+    
+    public int getExperiencia(){
+        return this.pokemon.getExperiencia();
+    }
+    
+
+	@Override
+	public void hechizarNiebla() {
+	}
+
+
+
+	@Override
+	public void hechizarTormenta() {
+	}
+
+
+
+	@Override
+	public void hechizarViento() {
+	}
+
+
+
+	@Override
+	public void terminaCansancio() {
+	}
+
+
+
+	@Override
+	public void recarga() {
+	}
+
+
+
+	@Override
+	public void golpeFinal(Pokemon pokemon) {
+	}
+
+
+
+	@Override
+	public void recibeDaño(double daño) {
+	}
+
 }
