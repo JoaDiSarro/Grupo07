@@ -2,6 +2,11 @@ package modeloClases;
 
 import java.util.ArrayList;
 
+/**
+ * @author DiSarro,Joaquina.
+ * @version 1.0
+ * <br>
+ */
 public class Torneo {
     
     private String nombre;

@@ -4,7 +4,7 @@ package modeloClases;
  * @author Frangolini,Luciano.<br>
  * Clase que representa una carta de viento. Esta carta será utilizada por los participantes de un torneo pokémon.<br>
  */
-public class CartaViento implements ICarta{
+public class CartaViento extends Carta{
 	
 	
     /**
