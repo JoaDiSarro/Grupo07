@@ -10,64 +10,61 @@ public class PokemonHielo extends PokemonDecorator {
     
     /**
      * Metodo constructor parametrizado<br>
-     * Por defecto los valores de vitalidad, escudo y fuerza son establecidos.
-     * <b>Pre:</b> El pokemon pasado por parametro debe ser distinto de null.
-     * <b>Post:</b> Se le agrega al pokemon la funcionalidad del elemento hielo.
-     * @param pokemon : Pokemon al que se lo decora con el elemento hielo.
+     * Por defecto los valores de vitalidad, escudo y fuerza son establecidos.<br>
+     * <b>Pre:</b> El pokemon pasado por parametro debe ser distinto de null.<br>
+     * <b>Post:</b> Se le agrega al pokemon la funcionalidad del elemento hielo.<br>
+     * @param pokemon : Pokemon al que se lo decora con el elemento hielo.<br>
      */
     public PokemonHielo(Pokemon pokemon) {
-                super(pokemon);;
-        this.vitalidad = 500;
-        this.escudo = 120;
-        this.fuerza = 100;
+    	super(pokemon,500,100,120);
     }
     
     /**
-     * Metodo por el cual el Pokemon de Hielo recupera toda su fuerza inicial.
+     * Metodo por el cual el Pokemon de Hielo recupera toda su fuerza inicial.<br>
      * <b>Post:</b> El pokemon setea su fuerza a 100 por defecto.
      */
     public void terminaCansancio(){
-        this.fuerza = 100;    
+    	super.pokemon.fuerza = 100;    
     }
     
     /**
-     * Metodo por el cual el Pokemon de Agua realiza una recarga de su fuerza y vitalidad
+     * Metodo por el cual el Pokemon de Agua realiza una recarga de su fuerza y vitalidad<br>
      * <b>Post:</b> Su fuerza aumenta un 10%. Su vitalidad aumenta un 10%
      */
     public void recarga(){
-        this.fuerza *= 1.1;
-        this.vitalidad *= 1.1;    
+    	super.pokemon.fuerza *= 1.1;
+    	super.pokemon.vitalidad *= 1.1;    
     }
     
     /**
      * Metodo por el cual el Pokemon de Hielo le provoca al adversario un daño igual a su fuerza menos un 10%.<br>
-     * Conserva la misma fuerza original.
-     * <b>Pre:</b> el pokemon pasado por parametro debe ser distinto de null.
-     * <b>Post:</b> El pokemon de Hielo le realiza un daño al pokemon pasado como parametro.
+     * Conserva la misma fuerza original.<br>
+     * <b>Pre:</b> el pokemon pasado por parametro debe ser distinto de null.<br>
+     * <b>Post:</b> El pokemon de Hielo le realiza un daño al pokemon pasado como parametro.<br>
      * @param pokemon : pokemon al cual le realizaremos daño.
      */
     public void golpeFinal(Pokemon pokemon){
-        pokemon.recibeDaño(this.fuerza*0.90);    
+        pokemon.recibeDaño(super.pokemon.fuerza*0.90);    
     }
     
     /**
      * Metodo por el cual el Pokemon de Hielo recibe daño.<br>
-     * El escudo absorbe el 75% del daño y la vitalidad el otro 25%.
-     * <b>Pre:</b> El daño pasado como parametro debe ser distinto de null.
-     * <b>Post:</b> El Pokemon de Hielo recibe cierta cantidad de daño. Existe la posibilidad de que muera.
-     * @param daño : valor del impacto recibido.
+     * El escudo absorbe el 75% del daño y la vitalidad el otro 25%.<br>
+     * <b>Pre:</b> El daño pasado como parametro debe ser distinto de null.<br>
+     * <b>Post:</b> El Pokemon de Hielo recibe cierta cantidad de daño. Existe la posibilidad de que muera.<br>
+     * @param daño : valor del impacto recibido.<br>
      */
     public void recibeDaño(double daño){
         double aux = 0;
-        if(daño*0.75 < this.escudo)
-            this.escudo -= daño*0.75;
+        if(daño*0.75 < super.pokemon.escudo)
+        	super.pokemon.escudo -= daño*0.75;
         else{
             aux = daño*0.75 - escudo;
-            this.escudo = 0;
+            super.pokemon.escudo = 0;
         }
         
-        if((daño*0.25 + aux) < this.vitalidad)     
-            this.vitalidad -= daño*0.25 + aux;
+        if((daño*0.25 + aux) < super.pokemon.vitalidad)     
+        	super.pokemon.vitalidad -= daño*0.25 + aux;
         //else
             //Reveer que sucede si muere    
     }
@@ -81,17 +78,17 @@ public class PokemonHielo extends PokemonDecorator {
      */
     @Override
     public void hechizarNiebla() {
-    	double auxFuerza = this.fuerza*0.3;
+    	double auxFuerza = super.pokemon.fuerza*0.3;
     	
-    	if (auxFuerza>this.escudo)
-    		this.escudo=0;
+    	if (auxFuerza>super.pokemon.escudo)
+    		super.pokemon.escudo=0;
     	else
-    		this.escudo-=auxFuerza;
-    	if (auxFuerza>=this.vitalidad)
-    		this.vitalidad=1;
+    		super.pokemon.escudo-=auxFuerza;
+    	if (auxFuerza>=super.pokemon.vitalidad)
+    		super.pokemon.vitalidad=1;
     	else
-    		this.vitalidad-=auxFuerza;
-    	this.fuerza-=auxFuerza;
+    		super.pokemon.vitalidad-=auxFuerza;
+    	super.pokemon.fuerza-=auxFuerza;
     }
 
     
@@ -102,12 +99,12 @@ public class PokemonHielo extends PokemonDecorator {
      */
     @Override
     public void hechizarViento() {
-    	double auxValor = (this.vitalidad*0.1) + (this.escudo*0.1);
+    	double auxValor = (super.pokemon.vitalidad*0.1) + (super.pokemon.escudo*0.1);
     	
-        if (auxValor >= this.fuerza)
-        	this.fuerza=1;
+        if (auxValor >= super.pokemon.fuerza)
+        	super.pokemon.fuerza=1;
         else
-        	this.fuerza-=auxValor;
+        	super.pokemon.fuerza-=auxValor;
     }
 
     
@@ -117,7 +114,7 @@ public class PokemonHielo extends PokemonDecorator {
      */
     @Override
     public void hechizarTormenta() {
-        this.vitalidad*=0.85;
-        this.escudo*=0.85;
+    	super.pokemon.vitalidad*=0.85;
+    	super.pokemon.escudo*=0.85;
     }
 }

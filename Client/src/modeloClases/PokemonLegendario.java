@@ -7,7 +7,7 @@ package modeloClases;
   * Esta clase contiene metodos correspondientes a un Pokemon Legendario.<br>
   * La clase extiende de Pokemon y no permite ser clonable.
   */
-public class PokemonLegendario extends Pokemon {
+public class PokemonLegendario extends Pokemon implements Cloneable {
     
     /**
      * Constructor parametrizado.<br>
@@ -18,6 +18,15 @@ public class PokemonLegendario extends Pokemon {
     public PokemonLegendario(String nombre) {
         super(nombre);
     }
+    
+    /**
+     *Método que se encarga de no permitir la clonación de los pokemones legendarios.<br>
+     *@throws CloneNotSupportedException : Se lanzará siempre que se intente clonar un pokémon legendario.
+     */
+    @Override
+	public Object clone() throws CloneNotSupportedException {
+		throw new CloneNotSupportedException("No se puede clonar un pokemon legendario");
+	}
 
     @Override
     public void terminaCansancio() {

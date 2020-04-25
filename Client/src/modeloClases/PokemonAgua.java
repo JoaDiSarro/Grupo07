@@ -10,62 +10,60 @@ public final class PokemonAgua extends PokemonDecorator {
 
     /**
      * Metodo constructor parametrizado<br>
-     * Por defecto los valores de vitalidad, escudo y fuerza son establecidos.
-     * <b>Pre:</b> El pokemon pasado por parametro debe ser distinto de null.
-     * <b>Post:</b> Se le agrega al pokemon la funcionalidad del elemento agua.
+     * Por defecto los valores de vitalidad, escudo y fuerza son establecidos.<br>
+     * <b>Pre:</b> El pokemon pasado por parametro debe ser distinto de null.<br>
+     * <b>Post:</b> Se le agrega al pokemon la funcionalidad del elemento agua.<br>
      * @param pokemon : Pokemon al que se lo decora con el elemento agua.
      */
     public PokemonAgua(Pokemon pokemon) {
-        super(pokemon);
-        this.vitalidad = 500;
-        this.escudo = 100;
-        this.fuerza = 120;
+    	super(pokemon,500,120,100);
     }
 
     /**
-     * Metodo por el cual el Pokemon de Agua recupera toda su fuerza inicial.
+     * Metodo por el cual el Pokemon de Agua recupera toda su fuerza inicial.<br>
      * <b>Post:</b> El pokemon setea su fuerza a 120 por defecto.
      */
     public void terminaCansancio(){
-        this.fuerza = 120;
+        super.pokemon.fuerza = 120;
     }
 
     /**
-     * Metodo por el cual el Pokemon de Agua realiza una recarga de su fuerza y vitalidad.
+     * Metodo por el cual el Pokemon de Agua realiza una recarga de su fuerza y vitalidad.<br>
      * <b>Post:</b> Su fuerza aumenta un 10%. Su vitalidad aumenta un 10%.
      */
     public void recarga(){
-        this.fuerza *= 1.1;
-        this.vitalidad *= 1.1;
+    	super.pokemon.fuerza *= 1.1;
+    	super.pokemon.vitalidad *= 1.1;
     }
 
     /**
      * Metodo por el cual el Pokemon de Agua le provoca a su adversario un daño igual a su fuerza.<br>
-     * Luego su fuerza se reduce a la mitad.
-     * <b>Pre:</b> el pokemon pasado por parametro debe ser distinto de null.
-     * <b>Post:</b> El pokemon de Agua le realiza un daño al pokemon pasado como parametro. Luego disminuye su fuerza un 50%.
+     * Luego su fuerza se reduce a la mitad.<br>
+     * <b>Pre:</b> el pokemon pasado por parametro debe ser distinto de null.<br>
+     * <b>Post:</b> El pokemon de Agua le realiza un daño al pokemon pasado como parametro. Luego disminuye su fuerza un 50%.<br>
      * @param pokemon : pokemon al cual le realizaremos daño.
      */
     public void golpeFinal(Pokemon pokemon){
-        pokemon.recibeDaño(this.fuerza);
-        this.fuerza *= 0.5;
+        pokemon.recibeDaño(super.pokemon.fuerza);
+        super.pokemon.fuerza *= 0.5;
     }
 
     /**
      * Metodo por el cual el Pokemon de Agua recibe daño.<br>
-     * El escudo es el encargado de absorver todo el daño y solo cuando este se agota, comienza a decrementarse la vitalidad.
-     * <b>Pre:</b> El daño pasado como parametro debe ser distinto de null.
-     * <b>Post:</b> El Pokemon de Agua recibe cierta cantidad de daño. Existe la posibilidad de que muera.
+     * El escudo es el encargado de absorver todo el daño y solo cuando este se agota, comienza a decrementarse la vitalidad.<br>
+     * <b>Pre:</b> El daño pasado como parametro debe ser distinto de null.<br>
+     * <b>Post:</b> El Pokemon de Agua recibe cierta cantidad de daño. Existe la posibilidad de que muera.<br>
      * @param daño : valor del impacto recibido.
      */
     public void recibeDaño(double daño){
-        if(daño < this.escudo)
-            this.escudo -= daño;
-        else if(this.vitalidad > (daño-this.escudo)){
-            this.vitalidad = daño - this.escudo;
-            this.escudo = 0;
-        }//else
-            //Reveer que sucede si muere   
+        if(daño < super.pokemon.escudo)
+        	super.pokemon.escudo -= daño;
+        else if(super.pokemon.vitalidad > (daño-super.pokemon.escudo)){
+        	super.pokemon.vitalidad = daño - super.pokemon.escudo;
+        	super.pokemon.escudo = 0;
+        }
+        else
+        	super.pokemon.vitalidad=0;   
     }
 
     
@@ -75,9 +73,9 @@ public final class PokemonAgua extends PokemonDecorator {
      */
     @Override
     public void hechizarNiebla() {
-        this.fuerza*=0.93;
-        this.escudo*=0.93;
-        this.vitalidad*=0.93;
+    	super.pokemon.fuerza*=0.93;
+    	super.pokemon.escudo*=0.93;
+    	super.pokemon.vitalidad*=0.93;
     }
 
     /**
@@ -87,10 +85,10 @@ public final class PokemonAgua extends PokemonDecorator {
      */
     @Override
     public void hechizarViento() {
-    	if (this.escudo*0.5 >= this.fuerza)
-    		this.fuerza=1;
+    	if (super.pokemon.escudo*0.5 >= super.pokemon.fuerza)
+    		super.pokemon.fuerza=1;
     	else
-    		this.fuerza-= this.escudo*0.5;
+    		super.pokemon.fuerza-= super.pokemon.escudo*0.5;
     }
 
     /**
@@ -99,6 +97,6 @@ public final class PokemonAgua extends PokemonDecorator {
      */
     @Override
     public void hechizarTormenta() {
-        this.escudo*=0.8;
+    	super.pokemon.escudo*=0.8;
     }
 }

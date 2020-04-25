@@ -7,16 +7,17 @@ package modeloClases;
  * Esta clase contiene los atributos y metodos correspondientes a un Pokemon.<br>
  * Pokemon es una clase abstracta e implementa Cloneable.<br>
  */
-public abstract class Pokemon implements Cloneable{
+public abstract class Pokemon implements Cloneable,IClasificable{
 
     protected String nombre;
     protected double vitalidad;
     protected double escudo;
     protected double fuerza;
-    protected int experiencia;
+    protected int experiencia=0;
+    protected int clasificacionActual=1;
 
     /**
-     * Metodo Constructor por defecto
+     * Metodo Constructor de un Pokémon por defecto
      */
     public Pokemon(){}
 
@@ -25,11 +26,10 @@ public abstract class Pokemon implements Cloneable{
      * Por defecto su experiencia comienza con valor = 0<br>
      * <b>Pre:</b>El parametro nombre debe ser distinto de null.<br>
      * <b>Post:</b>Se genera un nuevo Pokemon.<br>
-     * @param nombre : Nombre del Pokemon.
+     * @param nombre : Nombre del Pokemon.<br>
      */
     public Pokemon(String nombre){
         this.nombre = nombre;
-        this.experiencia = 0;
     }
     
     public String getNombre() {
@@ -52,11 +52,53 @@ public abstract class Pokemon implements Cloneable{
         return fuerza;
     }
     
-    public abstract void hechizarNiebla();
+    /**
+     *Método encargado de clonar un pokémon.<br>
+     *@return Retorna un clon del pokémon.<br>
+     */
+    @Override
+	public Object clone() throws CloneNotSupportedException {
+    		return super.clone();
+	}
     
-    public abstract void hechizarTormenta();
-
-    public abstract void hechizarViento();
+    
+    /**
+     *Método encargado de sumar experiencia a un pokémon cuando gana una batalla.<br>
+     */
+    public void ganaBatalla() {
+    	this.experiencia+=3;
+    }
+    
+    /**
+     * Método encargado de sumar experiencia a un pokémon cuando pierde una batalla.<br>
+     */
+    public void pierdeBatalla() {
+    	this.experiencia+=1;
+    }
+    
+    /**
+     *Método encargado de clasificar pokemones acorde a su experiencia.<br>
+     *<b> Post: </b> El pokémon puede subir de nivel, incrementando sus atributos.<br>
+     */
+    public void actualizaClasificacion() {
+    	if (this.clasificacionActual==1) {
+    		if (this.experiencia > 5) {
+    			this.clasificacionActual = 2;
+    			this.escudo*=1.3;
+    			this.vitalidad*=1.3;
+    			this.fuerza*=1.3;
+    		}
+    	}
+    	else
+    		if (this.clasificacionActual==2){
+    			if (this.experiencia > 10) {
+    				this.clasificacionActual = 3;
+    				this.escudo*=2;
+    				this.fuerza*=2;
+    				this.vitalidad*=2;
+    			}
+    		}
+    }
     
     /**
      * Metodo para atacar a otro Pokemon. Se realiza una secuencia de acciones.<br>
@@ -81,6 +123,13 @@ public abstract class Pokemon implements Cloneable{
         //se cansa
         this.fuerza *= 0.5;
     }
+    
+    public abstract void hechizarNiebla();
+    
+    public abstract void hechizarTormenta();
+
+    public abstract void hechizarViento();
+    
     
     //estos metodos son para poder utilizar el gancho con cada elemento
     
