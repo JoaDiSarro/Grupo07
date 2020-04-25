@@ -16,7 +16,8 @@ public class Ronda {
     }
     
     
-    public ArrayList<Entrenador> inicia(ArrayList<Entrenador> listaEntrenadores){
+  //Se le agrega el parametro listaReportes y se lo pasa en enfrentamiento
+    public ArrayList<Entrenador> inicia(ArrayList<Entrenador> listaEntrenadores){ 
         ArrayList<Entrenador> ganadores = new ArrayList<>();
         for(int i=0 ; i < listaEntrenadores.size() ; i+=2){
             ganadores.add(batalla.enfrentamiento(listaEntrenadores.get(i),listaEntrenadores.get(i+1)));
