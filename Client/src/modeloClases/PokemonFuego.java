@@ -105,4 +105,9 @@ public final class PokemonFuego extends PokemonDecorator {
     public void hechizarTormenta() {
     	super.pokemon.vitalidad*=0.6;
     }
+    
+    @Override
+	public String toString() {
+		return super.toString()+" / "+" Elemento: Fuego";
+	}
 }

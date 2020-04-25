@@ -100,4 +100,9 @@ public final class PokemonElectrico extends PokemonDecorator {
     public void hechizarTormenta() {
     	super.pokemon.vitalidad*=0.9;
     }
+    
+    @Override
+	public String toString() {
+		return super.toString()+" / "+" Elemento: Electrico";
+	}
 }

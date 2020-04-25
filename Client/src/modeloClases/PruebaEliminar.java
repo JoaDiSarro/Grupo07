@@ -38,6 +38,9 @@ public class PruebaEliminar {
         Pokemon p10 = factory.creaPokemon("Pik", "Legendario", "Hielo");
         Pokemon p10clon = null;
         
+        Pokemon p11 = factory.creaPokemon("pikipaka", "Comun", "Hielo Recargado");
+        Pokemon p11clon = null;
+        
         System.out.println(p1.toString());
         System.out.println(p2.toString());
         System.out.println(p3.toString());
@@ -48,6 +51,7 @@ public class PruebaEliminar {
         System.out.println(p8.toString());
         System.out.println(p9.toString());
         System.out.println(p10.toString());
+        System.out.println(p11.toString());
         
         try {
 			p1clon=(Pokemon) p1.clone();
@@ -99,6 +103,11 @@ public class PruebaEliminar {
 		} catch (CloneNotSupportedException e) {
 			e.printStackTrace();
 		}
+        try {
+			p11clon=(Pokemon) p11.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
         
         //Se comentan los métodos que no se pueden clonar, es decir, pokemones legendarios
         System.out.println(p1clon.toString());
@@ -111,6 +120,7 @@ public class PruebaEliminar {
         //System.out.println(p8clon.toString());
         System.out.println(p9clon.toString());
         //System.out.println(p10clon.toString());
+        System.out.println(p11clon.toString());
         
     }
 }

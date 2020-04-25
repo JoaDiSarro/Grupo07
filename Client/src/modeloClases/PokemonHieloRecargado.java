@@ -24,7 +24,12 @@ public final class PokemonHieloRecargado extends PokemonHielo {
       */
     @Override
     public void recarga(){
-        this.fuerza = 400;
+        super.pokemon.fuerza = 400;
     }
+    
+    @Override
+	public String toString() {
+		return super.toString()+" Recargado";
+	}
 }
 

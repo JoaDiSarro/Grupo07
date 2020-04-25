@@ -9,6 +9,6 @@ public interface IClasificable {
 	/**
 	 * Método encargado de clasificar un objeto dependiendo de sus atributos.
 	 */
-	void actualizaClasificacion();
+	public void actualizaClasificacion();
 	
 }
