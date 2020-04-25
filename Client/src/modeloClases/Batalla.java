@@ -59,7 +59,7 @@ public class Batalla {
         		p1.actualizaClasificacion();
         		entrenadorA.actualizaClasificacion();
         		ganador = entrenadorA;
-        		i=99;
+        		break;
         	}
         	else {
         		if (randomCartaB) {
@@ -71,7 +71,7 @@ public class Batalla {
         			p2.actualizaClasificacion();
         			entrenadorB.actualizaClasificacion();
         			ganador= entrenadorB;
-        			i=99;
+        			break;
         		}
         	}
         }
@@ -83,8 +83,8 @@ public class Batalla {
         		ganador = entrenadorA;
         	}
         	else {
-        		p1.actualizaClasificacion();
-        		entrenadorA.actualizaClasificacion();
+        		p2.actualizaClasificacion();
+        		entrenadorB.actualizaClasificacion();
         		ganador = entrenadorB;
         	}
         		
