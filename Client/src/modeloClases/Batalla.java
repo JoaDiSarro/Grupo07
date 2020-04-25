@@ -14,14 +14,34 @@ public class Batalla {
         super();
     }
     
-    //ver el tema de los return, y agregar el reporte.
+    //ver el tema de los return, y agregar el reporte y evaluar tema del finally (despues del try / catch)
     public Entrenador enfrentamiento(Entrenador entrenadorA, Entrenador entrenadorB){
         Pokemon p1, p2;
+        boolean randomCartaA =false;
+        boolean randomCartaB =false;
         p1 = entrenadorA.eligePokemon();
         p2 = entrenadorB.eligePokemon();
-        //random de usar o no carta
-        boolean randomCartaA = new Random().nextBoolean();
-        boolean randomCartaB = new Random().nextBoolean();
+
+        try {
+        	if (entrenadorA.getCartasDisponibles() > 0) 
+        		randomCartaA = new Random().nextBoolean();
+        	else
+        		throw new SinCartasDisponiblesException("El entrenador "+entrenadorA.getNombre()+" quizo utilizar una carta y no tiene disponiles.\n");
+        }
+        catch(SinCartasDisponiblesException e) {
+        	e.getMessage();
+        }
+        
+        try {
+        	if (entrenadorB.getCartasDisponibles() > 0)
+        		randomCartaB = new Random().nextBoolean();
+        	else
+        		throw new SinCartasDisponiblesException("El entrenador "+entrenadorB.getNombre()+" quizo utilizar una carta y no tiene disponiles.\n");
+        }
+        catch(SinCartasDisponiblesException e) {
+        	e.getMessage();
+        }
+        
         for(int i=0 ; i<maxAtaques ; i++){
             if(randomCartaA)
                 entrenadorA.usarCarta(p2);

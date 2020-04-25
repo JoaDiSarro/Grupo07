@@ -99,4 +99,11 @@ public final class PokemonAgua extends PokemonDecorator {
     public void hechizarTormenta() {
     	super.pokemon.escudo*=0.8;
     }
+
+	@Override
+	public String toString() {
+		return super.toString()+" / "+" Elemento: Agua";
+	}
+    
+    
 }

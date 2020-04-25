@@ -117,4 +117,9 @@ public class PokemonHielo extends PokemonDecorator {
     	super.pokemon.vitalidad*=0.85;
     	super.pokemon.escudo*=0.85;
     }
+    
+    @Override
+	public String toString() {
+		return super.toString()+" / "+" Elemento: Hielo";
+	}
 }

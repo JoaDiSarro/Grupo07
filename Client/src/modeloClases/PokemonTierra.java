@@ -108,4 +108,9 @@ public final class PokemonTierra extends PokemonDecorator {
         else
         	super.pokemon.vitalidad-=super.pokemon.escudo;
     }
+    
+    @Override
+	public String toString() {
+		return super.toString()+" / "+" Elemento: Tierra";
+	}
 }

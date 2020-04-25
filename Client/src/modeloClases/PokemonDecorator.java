@@ -56,7 +56,7 @@ public abstract class PokemonDecorator extends Pokemon implements Cloneable{
 				"Escudo: "+this.pokemon.escudo+" / "+
 				"Fuerza: "+this.pokemon.fuerza+" / "+
 				"Experiencia: "+this.pokemon.experiencia+" / "+
-				"Nivel: "+this.pokemon.clasificacionActual;
+				"Clasificacion Actual: "+this.pokemon.clasificacionActual;
 	}
 
 	public void setPokemon(Pokemon pokemon) {
