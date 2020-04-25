@@ -10,19 +10,15 @@ import java.util.Random;
  */
 public class Entrenador implements IClasificable{
     private String nombre;
-    private int clasificacionActual;
-    private ArrayList<Pokemon> pokemones;
-    private ArrayList<ICarta> cartas;
+    private int clasificacionActual = 1;
+    private ArrayList<Pokemon> pokemones = new ArrayList<>();;
+    private ArrayList<Carta> cartas = new ArrayList<>();
     private int cartasDisponibles;
-    private int creditos;
+    private int creditos = 0;
     
     public Entrenador(String nombre, int cartasDisponibles) {
         this.nombre = nombre;
-        this.clasificacionActual = 1;
-        pokemones = new ArrayList<>();
-        cartas = new ArrayList<>();
         this.cartasDisponibles = cartasDisponibles;
-        this.creditos = 0;
     }
     //verificar el -1 indice
     public Pokemon eligePokemon(){

@@ -14,6 +14,7 @@ public class Batalla {
         super();
     }
     
+    //ver el tema de los return, y agregar el reporte.
     public Entrenador enfrentamiento(Entrenador entrenadorA, Entrenador entrenadorB){
         Pokemon p1, p2;
         p1 = entrenadorA.eligePokemon();

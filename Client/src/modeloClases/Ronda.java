@@ -20,6 +20,7 @@ public class Ronda {
         ArrayList<Entrenador> ganadores = new ArrayList<>();
         for(int i=0 ; i < listaEntrenadores.size() ; i+=2){
             ganadores.add(batalla.enfrentamiento(listaEntrenadores.get(i),listaEntrenadores.get(i+1)));
+            
         }
         return ganadores;
     }

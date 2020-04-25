@@ -12,10 +12,12 @@ public class Torneo {
     private String nombre;
     private ArrayList<Entrenador> listaEntrenadores;
     private Ronda ronda;
+    private ArrayList<Reporte> reporteResultados;
     
     public Torneo(String nombre) {
         this.nombre = nombre;
         listaEntrenadores = new ArrayList<>();
+        reporteResultados = new ArrayList<>();
     }
     
     public void agregaEntrenador(Entrenador entrenador){
@@ -27,10 +29,10 @@ public class Torneo {
     }
     
     public Entrenador comienzaTorneo() {
-        ArrayList<Entrenador> aux = listaEntrenadores;
-        while (aux.size() != 1) {
-            aux = comienzaRonda(aux);
+        ArrayList<Entrenador> listaCompetidoresActual = listaEntrenadores;
+        while (listaCompetidoresActual.size() != 1) {
+            listaCompetidoresActual = comienzaRonda(listaCompetidoresActual);
         }
-        return aux.get(0);
+        return listaCompetidoresActual.get(0);
     }
 }
