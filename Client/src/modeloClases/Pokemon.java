@@ -7,7 +7,10 @@ package modeloClases;
  * Esta clase contiene los atributos y metodos correspondientes a un Pokemon.<br>
  * Pokemon es una clase abstracta e implementa Cloneable.<br>
  */
-public abstract class Pokemon implements Cloneable,IClasificable{
+
+public abstract class Pokemon implements Cloneable,IHechizable, IClasificable{
+
+
 
     protected String nombre;
     protected double vitalidad;
@@ -143,7 +146,16 @@ public abstract class Pokemon implements Cloneable,IClasificable{
     
     public abstract void recibeDaño(double daño);
     
-   
+    //devuelve 1 si gane yo, 0 si perdi
+    //resolver el hecho de que el estadoPropio y el estadoAjeno sean iguales
+    public int comparaEstado(Pokemon pokemon){
+        double estadoPropio = (this.vitalidad+this.escudo)*this.fuerza;
+        double estadoAjeno = (pokemon.vitalidad+pokemon.escudo)*pokemon.fuerza;
+        if(estadoPropio>estadoAjeno)
+            return 1;
+        else
+            return 0;
+    }
     
 
 }
