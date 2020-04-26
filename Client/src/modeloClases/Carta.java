@@ -1,5 +1,8 @@
 package modeloClases;
 
+import interfaces.ICarta;
+import interfaces.IHechizable;
+
 /**
  * @author Frangolini,Luciano.<br>
  * Clase que representa una carta utilizada por participantes de un torneo pokémon.

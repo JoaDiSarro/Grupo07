@@ -24,7 +24,7 @@ public final class PokemonAgua extends PokemonDecorator {
      * <b>Post:</b> El pokemon setea su fuerza a 120 por defecto.
      */
     public void terminaCansancio(){
-        super.pokemon.fuerza = 120;
+        this.pokemon.fuerza = 120;
     }
 
     /**
@@ -32,8 +32,8 @@ public final class PokemonAgua extends PokemonDecorator {
      * <b>Post:</b> Su fuerza aumenta un 10%. Su vitalidad aumenta un 10%.
      */
     public void recarga(){
-    	super.pokemon.fuerza *= 1.1;
-    	super.pokemon.vitalidad *= 1.1;
+    	this.pokemon.fuerza *= 1.1;
+    	this.pokemon.vitalidad *= 1.1;
     }
 
     /**
@@ -44,8 +44,8 @@ public final class PokemonAgua extends PokemonDecorator {
      * @param pokemon de tipo Pokemon : Pokemon al cual le realizaremos daño.
      */
     public void golpeFinal(Pokemon pokemon){
-        pokemon.recibeDaño(super.pokemon.fuerza);
-        super.pokemon.fuerza *= 0.5;
+        pokemon.recibeDaño(this.pokemon.fuerza);
+        this.pokemon.fuerza *= 0.5;
     }
 
     /**
@@ -56,14 +56,14 @@ public final class PokemonAgua extends PokemonDecorator {
      * @param daño de tipo double: Valor del impacto recibido.
      */
     public void recibeDaño(double daño){
-        if(daño < super.pokemon.escudo)
-        	super.pokemon.escudo -= daño;
-        else if(super.pokemon.vitalidad > (daño-super.pokemon.escudo)){
-        	super.pokemon.vitalidad = daño - super.pokemon.escudo;
-        	super.pokemon.escudo = 0;
+        if(daño < this.pokemon.escudo)
+        	this.pokemon.escudo -= daño;
+        else if(this.pokemon.vitalidad > (daño-this.pokemon.escudo)){
+        	this.pokemon.vitalidad = daño - this.pokemon.escudo;
+        	this.pokemon.escudo = 0;
         }
         else
-        	super.pokemon.vitalidad=0;   
+        	this.pokemon.vitalidad=0;   
     }
 
     
@@ -74,9 +74,9 @@ public final class PokemonAgua extends PokemonDecorator {
      */
     @Override
     public void hechizarNiebla() {
-    	super.pokemon.fuerza*=0.93;
-    	super.pokemon.escudo*=0.93;
-    	super.pokemon.vitalidad*=0.93;
+    	this.pokemon.fuerza*=0.93;
+    	this.pokemon.escudo*=0.93;
+    	this.pokemon.vitalidad*=0.93;
     }
 
     /**
@@ -87,10 +87,10 @@ public final class PokemonAgua extends PokemonDecorator {
      */
     @Override
     public void hechizarViento() {
-    	if (super.pokemon.escudo*0.5 >= super.pokemon.fuerza)
-    		super.pokemon.fuerza=1;
+    	if (this.pokemon.escudo*0.5 >= this.pokemon.fuerza)
+    		this.pokemon.fuerza=1;
     	else
-    		super.pokemon.fuerza-= super.pokemon.escudo*0.5;
+    		this.pokemon.fuerza-= this.pokemon.escudo*0.5;
     }
 
     /**
@@ -100,7 +100,7 @@ public final class PokemonAgua extends PokemonDecorator {
      */
     @Override
     public void hechizarTormenta() {
-    	super.pokemon.escudo*=0.8;
+    	this.pokemon.escudo*=0.8;
     }
 
 	/**

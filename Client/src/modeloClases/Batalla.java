@@ -1,5 +1,7 @@
 package modeloClases;
 
+import exceptions.SinCartasDisponiblesException;
+
 import java.util.ArrayList;
 
 /**
@@ -29,6 +31,7 @@ public class Batalla {
      * @return Retorna el ganador del enfrentamiento pokémon.
      */
     public Entrenador enfrentamiento(Entrenador entrenadorA, Entrenador entrenadorB,ArrayList<Reporte> listaResultados){
+        
         Pokemon p1, p2;
         int i=0;
         Entrenador ganador=null;
@@ -36,7 +39,7 @@ public class Batalla {
         boolean randomCartaB =false;
         p1 = entrenadorA.eligePokemon();
         p2 = entrenadorB.eligePokemon();
-
+        System.out.println("\n----------------------COMIENZA LA BATALLA----------------------\n");
         try {
         	randomCartaA = entrenadorA.utilizaCarta();
         }
@@ -52,14 +55,16 @@ public class Batalla {
         }
         
         while (i<maxAtaques) {
-        	
+                i++;
         	if (randomCartaA) {
         		entrenadorA.usarCarta(p2);
+                        System.out.println("El entrenador "+entrenadorA.getNombre()+" uso una carta");
         		randomCartaA=false;
         	}
         	p1.ataca(p2);
-        	
-        	if (p2.getVitalidad()==0) {
+        	System.out.println(p2.getVitalidad());
+        	if (p2.getVitalidad()<=0) {
+                        System.out.println("\nEl pokemon del entrenador "+entrenadorB.getNombre()+" ha muerto");
         		entrenadorB.eliminaPokemon(p2);
         		p1.actualizaClasificacion();
         		entrenadorA.actualizaClasificacion();
@@ -69,11 +74,13 @@ public class Batalla {
         	else {
         		if (randomCartaB) {
         			entrenadorA.usarCarta(p1);
+                                System.out.println("El entrenador "+entrenadorB.getNombre()+" uso una carta");
         			randomCartaB=false;
         		}
         		p2.ataca(p1);
-        		
-        		if (p1.getVitalidad() == 0) {
+                        System.out.println(p1.getVitalidad());
+        		if (p1.getVitalidad() <= 0) {
+                                System.out.println("\nEl pokemon del entrenador "+entrenadorA.getNombre()+" ha muerto");
         			entrenadorA.eliminaPokemon(p1);
         			p2.actualizaClasificacion();
         			entrenadorB.actualizaClasificacion();
@@ -97,7 +104,6 @@ public class Batalla {
         		ganador = entrenadorB;
         	}  		
         }      
-        
         listaResultados.add(new Reporte(entrenadorA,p1,entrenadorB,p2,ganador));
         return ganador;
     }

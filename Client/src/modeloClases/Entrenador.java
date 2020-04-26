@@ -1,5 +1,13 @@
 package modeloClases;
 
+import com.sun.java.swing.plaf.windows.WindowsOptionPaneUI;
+
+import exceptions.SinCartasDisponiblesException;
+
+import interfaces.IClasificable;
+
+import interfaces.IHechizable;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -133,18 +141,27 @@ public class Entrenador implements IClasificable,Cloneable{
 		
 		Entrenador entrenadorClonado = null;
 		entrenadorClonado = (Entrenador) super.clone();
-		
+		ArrayList<Carta> cartasClon = new ArrayList<>();
+                ArrayList<Pokemon> pokemonClon = new ArrayList<>();
+            
 		if (this.cartas.isEmpty()==false) 
 			for (Carta itCartas : this.cartas) 
-				entrenadorClonado.cartas.add( (Carta) itCartas.clone() );
-		
+				cartasClon.add( (Carta) itCartas.clone() );
+                entrenadorClonado.setMazo(cartasClon);
+                
 		if (this.pokemones.isEmpty()==false)   
 			for (Pokemon itPokemones : this.pokemones) 
-				entrenadorClonado.pokemones.add( (Pokemon) itPokemones.clone() );
-		
+				pokemonClon.add( (Pokemon) itPokemones.clone() );
+                entrenadorClonado.setPokemones(pokemonClon);
+                
 		return entrenadorClonado;
 	}
-    
+
+
+    public void setPokemones(ArrayList<Pokemon> pokemones) {
+        this.pokemones = pokemones;
+    }
+
     /**
      * Método encargado de eliminar un pokémon de la lista de pokemones del entrenador.<br>
      * <b> Pre: </b> El parámetro pokemon debe ser distinto de null.<br>

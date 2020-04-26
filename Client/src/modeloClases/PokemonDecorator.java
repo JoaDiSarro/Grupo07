@@ -20,10 +20,12 @@ public abstract class PokemonDecorator extends Pokemon implements Cloneable{
      * @param escudo de tipo double : Escudo que se le asigna al pokémon. <br>
      */    
     public PokemonDecorator(Pokemon pokemon,double vitalidad, double fuerza, double escudo) {
-    	this.pokemon=pokemon;
+    	super(pokemon.getNombre());
+        this.pokemon=pokemon;
     	this.pokemon.vitalidad=vitalidad;
-        this.pokemon.fuerza=fuerza;
+        this.pokemon.fuerza=10000;
         this.pokemon.escudo=escudo;
+    
     	
     }
     
@@ -40,7 +42,7 @@ public abstract class PokemonDecorator extends Pokemon implements Cloneable{
     		clonElemento.setPokemon(pokemonAux);
     	}
     	catch (CloneNotSupportedException e) {
-    		e.getMessage();
+                System.out.println(e.getMessage());
     	}
 		return clonElemento;
 	}    
@@ -90,6 +92,6 @@ public abstract class PokemonDecorator extends Pokemon implements Cloneable{
     public int getClasificacion() {
     	return this.pokemon.getClasificacionActual();
     }
-    
+
 
 }

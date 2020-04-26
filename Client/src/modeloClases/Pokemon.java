@@ -1,5 +1,9 @@
 package modeloClases;
 
+import interfaces.IClasificable;
+
+import interfaces.IHechizable;
+
 import java.util.Random;
 
 /**
@@ -49,6 +53,22 @@ public abstract class Pokemon implements Cloneable,IHechizable, IClasificable{
 
     public int getExperiencia() {
         return experiencia;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setEscudo(double escudo) {
+        this.escudo = escudo;
+    }
+
+    public void setExperiencia(int experiencia) {
+        this.experiencia = experiencia;
+    }
+
+    public void setClasificacionActual(int clasificacionActual) {
+        this.clasificacionActual = clasificacionActual;
     }
 
     public double getFuerza() {
@@ -124,6 +144,7 @@ public abstract class Pokemon implements Cloneable,IHechizable, IClasificable{
      * @param pokemon  de tipo Pokemon : Pokemon al que se le hara daño.<br>
      */
     public void ataca(Pokemon pokemon){
+        System.out.println("\n"+this.nombre+" ataca a "+pokemon.getNombre());
         golpeInicial(pokemon);
         recarga();
         golpeFinal(pokemon);

@@ -1,4 +1,4 @@
-package modeloClases;
+package exceptions;
 
 /**
  * @author Frangolini, Luciano.

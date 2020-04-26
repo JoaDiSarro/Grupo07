@@ -11,24 +11,22 @@ import java.util.ArrayList;
  */
 public class Torneo {
     
-    private ArrayList<Entrenador> listaEntrenadores;
-    private Ronda ronda;
-    private ArrayList<Reporte> reporteResultados;
+    private ArrayList<Entrenador> listaEntrenadores = new ArrayList<>();
+    private Ronda ronda = new Ronda();
+    private ArrayList<Reporte> reporteResultados = new ArrayList<>();
     private static Torneo instance;
 
     /**
      * Constructor sin parametros
      */
     private Torneo() {
-        listaEntrenadores = new ArrayList<>();
-        reporteResultados = new ArrayList<>();
     }
 
     /**
      * Metodo que devuelve la unica instancia existe del torneo en el sistema.<br>
      * @return : instancia unica del Torneo
      */
-    public Torneo getInstance(){
+    public static Torneo getInstance(){
         if(instance == null)
             instance = new Torneo();
         return instance;
