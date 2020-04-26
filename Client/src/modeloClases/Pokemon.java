@@ -7,12 +7,10 @@ import java.util.Random;
  * @version 1.0
  * <br>
  * Esta clase contiene los atributos y metodos correspondientes a un Pokemon.<br>
- * Pokemon es una clase abstracta e implementa Cloneable.<br>
+ * Pokemon es una clase abstracta e implementa las interfaces Cloneable, IHechizable,IClasificable.<br>
  */
 
 public abstract class Pokemon implements Cloneable,IHechizable, IClasificable{
-
-
 
     protected String nombre;
     protected double vitalidad;
@@ -81,6 +79,7 @@ public abstract class Pokemon implements Cloneable,IHechizable, IClasificable{
     
     /**
      *Método encargado de sumar experiencia a un pokémon cuando gana una batalla.<br>
+     * <b>Post:</b> Se aumenta la experiencia del Pokemon en 3 puntos.<br>
      */
     public void ganaBatalla() {
     	this.experiencia+=3;
@@ -88,6 +87,7 @@ public abstract class Pokemon implements Cloneable,IHechizable, IClasificable{
     
     /**
      * Método encargado de sumar experiencia a un pokémon cuando pierde una batalla.<br>
+     * <b>Post:</b> Se aumenta la experiencia del Pokemon en 1 puntos.<br>
      */
     public void pierdeBatalla() {
     	this.experiencia+=1;
@@ -121,7 +121,7 @@ public abstract class Pokemon implements Cloneable,IHechizable, IClasificable{
      * Metodo para atacar a otro Pokemon. Se realiza una secuencia de acciones.<br>
      * <b>Pre:</b> El parametro pokemon debe ser distinto de null.<br>
      * <b>Post:</b> Se genera el ataque al pokemon pasado como parametro.<br>
-     * @param pokemon  de tipo Pokemon : Pokemon al que se le hara daño.
+     * @param pokemon  de tipo Pokemon : Pokemon al que se le hara daño.<br>
      */
     public void ataca(Pokemon pokemon){
         golpeInicial(pokemon);
@@ -133,7 +133,7 @@ public abstract class Pokemon implements Cloneable,IHechizable, IClasificable{
      * Metodo donde se le realiza un golpe inicial al pokemon pasado como parametro. Una vez realizado el daño, el Pokemon actual se cansa disminuyendo asi su fuerza en un 50%.
      * <b>Pre:</b> El parametro pokemon debe ser distinto de null.<br>
      * <b>Post:</b> Se le realiza un golpe al objeto pasado como parametro, y el pokemon actual disminuye su fuerza.<br>
-     * @param pokemon de tipo Pokemon: Pokemon al que se le hara daño.
+     * @param pokemon de tipo Pokemon: Pokemon al que se le hara daño.<br>
      */
     public void golpeInicial(Pokemon pokemon){
         pokemon.recibeDaño(this.fuerza);
@@ -146,22 +146,24 @@ public abstract class Pokemon implements Cloneable,IHechizable, IClasificable{
     public abstract void hechizarTormenta();
 
     public abstract void hechizarViento();
-    
-    
-    //estos metodos son para poder utilizar el gancho con cada elemento
-    
+
     public abstract void terminaCansancio();
     
     public abstract  void recarga();
     
     public abstract void golpeFinal(Pokemon pokemon);
-    
-    //Evaluar que sucede si el pokemon muere
-    
+
     public abstract void recibeDaño(double daño);
     
     //devuelve 1 si gane yo, 0 si perdi
     //resolver el hecho de que el estadoPropio y el estadoAjeno sean iguales
+
+    /**
+     * Metodo que se encarga de comprar el estado entre dos Pokemones.<br>
+     * Decide cual de los dos pokemones tiene un Mejor estado.<br>
+     * @param pokemon  de tipo Pokemon: pokemon con el cual compararemos a nuestro Pokemon.<br>
+     * @return  devuelve un int, el cual puede ser 1 si nuestro pokemon es mejor que el pasado como parametro, o 0 si es peor.<br>
+     */
     public int comparaEstado(Pokemon pokemon){
     	int auxRetorno;
         double estadoPropio = (this.vitalidad+this.escudo)*this.fuerza;
