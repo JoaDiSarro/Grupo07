@@ -88,44 +88,4 @@ public abstract class PokemonDecorator extends Pokemon implements Cloneable{
     }
     
 
-	@Override
-	public void hechizarNiebla() {
-	}
-
-
-
-	@Override
-	public void hechizarTormenta() {
-	}
-
-
-
-	@Override
-	public void hechizarViento() {
-	}
-
-
-
-	@Override
-	public void terminaCansancio() {
-	}
-
-
-
-	@Override
-	public void recarga() {
-	}
-
-
-
-	@Override
-	public void golpeFinal(Pokemon pokemon) {
-	}
-
-
-
-	@Override
-	public void recibeDaño(double daño) {
-	}
-
 }

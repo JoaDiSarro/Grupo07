@@ -59,8 +59,8 @@ public final class PokemonTierra extends PokemonDecorator {
         else if(super.pokemon.vitalidad > (daño-super.pokemon.escudo)){
         	super.pokemon.vitalidad = daño - super.pokemon.escudo;
         	super.pokemon.escudo = 0;
-        }//else
-            //Reveer que sucede si muere      
+        }else
+            super.pokemon.vitalidad = 0;   
     }
 
     

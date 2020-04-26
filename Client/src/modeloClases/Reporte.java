@@ -17,10 +17,10 @@ public class Reporte {
         this.pokemonA = pokemonA;
         this.entrenadorB = entrenadorB;
         this.pokemonB = pokemonB;
-        this.resultado = "-Ganador del encuentro: "+ganador.getNombre(); //Le cambie esto y puse ganador.getNombre(); 
+        this.resultado = "-Ganador del encuentro: "+ganador.getNombre();
     }
 
-	@Override //Escribir el metodo toString
+	@Override
 	public String toString() {
 		return "Batalla: <"+this.entrenadorA.getNombre()+" junto a "+pokemonA.getNombre()+"> vs <"+
 				this.entrenadorB.getNombre()+" junto a "+pokemonB.getNombre()+">\n"+

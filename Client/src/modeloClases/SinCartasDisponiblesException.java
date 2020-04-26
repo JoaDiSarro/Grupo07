@@ -1,6 +1,6 @@
 package modeloClases;
 
-@SuppressWarnings("serial")
+@SuppressWarnings({ "serial", "oracle.jdeveloper.java.serialversionuid-field-missing" })
 public class SinCartasDisponiblesException extends Exception {
 
 	public SinCartasDisponiblesException(String msj) {
