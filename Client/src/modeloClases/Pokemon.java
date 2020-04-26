@@ -1,5 +1,7 @@
 package modeloClases;
 
+import java.util.Random;
+
 /**
  * @author DiSarro,Joaquina.
  * @version 1.0
@@ -161,12 +163,25 @@ public abstract class Pokemon implements Cloneable,IHechizable, IClasificable{
     //devuelve 1 si gane yo, 0 si perdi
     //resolver el hecho de que el estadoPropio y el estadoAjeno sean iguales
     public int comparaEstado(Pokemon pokemon){
+    	int auxRetorno;
         double estadoPropio = (this.vitalidad+this.escudo)*this.fuerza;
         double estadoAjeno = (pokemon.vitalidad+pokemon.escudo)*pokemon.fuerza;
+        
         if(estadoPropio>estadoAjeno)
-            return 1;
+            auxRetorno = 1;
         else
-            return 0;
+            if (estadoPropio<estadoAjeno)
+            	auxRetorno = 0;
+            else
+            	if (this.experiencia>pokemon.getExperiencia())
+            		auxRetorno = 1;
+            	else
+            		if (this.experiencia<pokemon.getExperiencia())
+            			auxRetorno = 0;
+            		else
+            			auxRetorno = new Random().nextInt(2);
+        
+        return auxRetorno;
     }
     
 
