@@ -25,8 +25,7 @@ public class Torneo {
     }
 
     /**
-     * Metodo que devuelve la unica instancia existe del torneo en el sistema.
-     * <b>Post:</b> Retorna la instancia del torneo.
+     * Metodo que devuelve la unica instancia existe del torneo en el sistema.<br>
      * @return : instancia unica del Torneo
      */
     public Torneo getInstance(){
@@ -36,9 +35,9 @@ public class Torneo {
     }
 
     /**
-     * Metodo el cual se encarga de agregar entrenadores a la Lista de Entrenadores del Torneo
-     * <b>Pre:</b> El entrenador debe ser distinto de null.
-     * <b>Post:</b> Se agrega un entrenador a la lista de Entrenadores.
+     * Metodo el cual se encarga de agregar entrenadores a la Lista de Entrenadores del Torneo.<br>
+     * <b>Pre:</b> El entrenador debe ser distinto de null.<br>
+     * <b>Post:</b> Se agrega un entrenador a la lista de Entrenadores.<br>
      * @param entrenador de tipo Entrenador: sera el nuevo entrenador que participara en el Torneo.
      */
     public void agregaEntrenador(Entrenador entrenador){
@@ -47,9 +46,9 @@ public class Torneo {
 
     /**
      * Metodo el cual comienza una ronda dentro del Torneo.<br>
-     * Se inicia la ronda, pasando los datos de los entrenadores y obteniendo el reporte de los resultados.
-     * <b>Pre:</b> La lista de entrenadores debe ser distinta de null.
-     * <b>Post:</b> Se ejecuta la ronda y se obtienen los Entrenadores ganadores de la misma.
+     * Se inicia la ronda, pasando los datos de los entrenadores y obteniendo el reporte de los resultados.<br>
+     * <b>Pre:</b> La lista de entrenadores debe ser distinta de null.<br>
+     * <b>Post:</b> Se ejecuta la ronda y se obtienen los Entrenadores ganadores de la misma.<br>
      * @param entrenadores de tipo ArrayList Entrenador: tiene los datos de todos los entrenadores que participan en la Ronda. 
      * @return : devuelve un ArrayList de Entrenadores con los ganadores de esa Ronda.
      */
@@ -58,7 +57,7 @@ public class Torneo {
     }
 
     /**
-     * Metodo el cual muestra todos los entrenadores que participaron en el Torneo
+     * Metodo el cual muestra todos los entrenadores que participaron en el Torneo.<br>
      * <b>Post:</b> Se listan los entrenadores por consola.
      */
     public void muestraEntrenadores(){
@@ -69,8 +68,8 @@ public class Torneo {
     }
 
     /**
-     * Metodo el cual muestra todos los datos de cada Reporte perteneciente a cada Batalla del Torneo.
-     * <b>Post:</b> Se listan los reportes de cada batalla por consola.
+     * Metodo el cual muestra todos los datos de cada Reporte perteneciente a cada Batalla del Torneo.<br>
+     * <b>Post:</b> Se listan los reportes de cada batalla por consola.<br>
      */
     public void muestraReporte(){
         System.out.println("\nEnfrentamientos:\n");
