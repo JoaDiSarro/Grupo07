@@ -66,8 +66,8 @@ public final class PokemonFuego extends PokemonDecorator {
         }
         if((daño*0.5 + aux) < super.pokemon.vitalidad)     
         	super.pokemon.vitalidad -= daño*0.5 + aux;
-        //else
-            //Reveer que sucede si muere
+        else
+            super.pokemon.vitalidad = 0;
     }
 
   
