@@ -108,19 +108,19 @@ public class Entrenador implements IClasificable,Cloneable{
 		int auxClasificacion = 0;
 
 		for (Pokemon itPokemones : this.pokemones) 
-			auxClasificacion += itPokemones.clasificacionActual;
+			auxClasificacion += itPokemones.getClasificacionActual();
 		
-		if (auxClasificacion>25) {
+		if (auxClasificacion>20) {
 			this.clasificacionActual=3;
 			for (Pokemon itPokemones : this.pokemones) 
-				itPokemones.fuerza+=100;
+				itPokemones.setFuerza(itPokemones.getFuerza()+100);
 		}
 		
 		else
 			if (auxClasificacion>10) {
 				this.clasificacionActual=2;
 				for (Pokemon itPokemones : this.pokemones) 
-					itPokemones.vitalidad+=200;
+					itPokemones.setVitalidad(itPokemones.getVitalidad()+200);
 			}
 	}
     

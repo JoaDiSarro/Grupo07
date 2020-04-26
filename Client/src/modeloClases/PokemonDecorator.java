@@ -87,5 +87,9 @@ public abstract class PokemonDecorator extends Pokemon implements Cloneable{
         return this.pokemon.getExperiencia();
     }
     
+    public int getClasificacion() {
+    	return this.pokemon.getClasificacionActual();
+    }
+    
 
 }
