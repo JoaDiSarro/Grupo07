@@ -1,22 +1,33 @@
 package modeloClases;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * @author DiSarro,Joaquina.
  * @version 1.0
  * <br>
+ * Clase que representa una batalla en un torneo pokemon.<br>
+ * Se encarga de hacer batallar objetos de tipo Entrenador.
  */
 public class Batalla {
 	
     private final int maxAtaques = 3;
     
+    /**
+     * Constructor por defecto de la clase Batalla.
+     */
     public Batalla() {
         super();
     }
     
-    //Agregar el reporte y evaluar tema del finally con un prueba(despues del try / catch)
+    /**
+     * Método encargado de enfrentar 2 entrenadores en una batalla pokémon y decidir un ganador.<br>
+     * <b> Pre: </b> Los parámetros entrenadorA, entrenadorB y listaResultados deben ser distintos de null.<br>
+     * @param entrenadorA  de tipo Entrenador : Representa uno de los dos entrenadores en el enfrentamiento pokémon.<br>
+     * @param entrenadorB  de tipo Entrenador : Representa uno de los dos entrenadores en el enfrentamiento pokémon.<br>
+     * @param listaResultados  de tipo ArrayList<Reporte> : Representa una lista con los resultados de cada enfrentamiento.<br>
+     * @return Retorna el ganador del enfrentamiento pokémon.
+     */
     public Entrenador enfrentamiento(Entrenador entrenadorA, Entrenador entrenadorB,ArrayList<Reporte> listaResultados){
         Pokemon p1, p2;
         int i=0;
@@ -26,36 +37,30 @@ public class Batalla {
         p1 = entrenadorA.eligePokemon();
         p2 = entrenadorB.eligePokemon();
 
-        //Me parece que hay que hacer el finally, entonces... quedaria mejor hacer una funcion analizaCartas(..) que se encargue de asignar la carta o tirar la excepcion
-        //Y aca solo poner try{analizaCartas(entrenadorA);  analizaCartas(entrenadorB)} catch { e.getMessage()} finally {etc}
-        //La funcion estaria en esta misma clase, no se si les parece bien la idea. Creeria que tiene que funcionar
         try {
-        	if (entrenadorA.getCartasDisponibles() > 0) 
-        		randomCartaA = new Random().nextBoolean();
-        	else
-        		throw new SinCartasDisponiblesException("El entrenador "+entrenadorA.getNombre()+" quizo utilizar una carta y no tiene disponibles.\n");
+        	randomCartaA = entrenadorA.utilizaCarta();
         }
         catch(SinCartasDisponiblesException e) {
-        	e.getMessage();
+        	System.out.println(e.getMessage());
         }
         
         try {
-        	if (entrenadorB.getCartasDisponibles() > 0)
-        		randomCartaB = new Random().nextBoolean();
-        	else
-        		throw new SinCartasDisponiblesException("El entrenador "+entrenadorB.getNombre()+" quizo utilizar una carta y no tiene disponibles.\n");
+        	randomCartaB = entrenadorB.utilizaCarta();
         }
         catch(SinCartasDisponiblesException e) {
-        	e.getMessage();
+           	System.out.println(e.getMessage());
         }
         
         while (i<maxAtaques) {
+        	
         	if (randomCartaA) {
         		entrenadorA.usarCarta(p2);
         		randomCartaA=false;
         	}
         	p1.ataca(p2);
+        	
         	if (p2.getVitalidad()==0) {
+        		entrenadorB.eliminaPokemon(p2);
         		p1.actualizaClasificacion();
         		entrenadorA.actualizaClasificacion();
         		ganador = entrenadorA;
@@ -67,26 +72,32 @@ public class Batalla {
         			randomCartaB=false;
         		}
         		p2.ataca(p1);
+        		
         		if (p1.getVitalidad() == 0) {
+        			entrenadorA.eliminaPokemon(p1);
         			p2.actualizaClasificacion();
         			entrenadorB.actualizaClasificacion();
         			ganador= entrenadorB;
         			break;
         		}
         	}
+        	
         }    
         if (ganador==null) {
         	if (p1.comparaEstado(p2)== 1) {
         		p1.actualizaClasificacion();
         		entrenadorA.actualizaClasificacion();
+        		entrenadorA.obtienePremio();
         		ganador = entrenadorA;
         	}
         	else {
         		p2.actualizaClasificacion();
         		entrenadorB.actualizaClasificacion();
+        		entrenadorB.obtienePremio();
         		ganador = entrenadorB;
         	}  		
         }      
+        
         listaResultados.add(new Reporte(entrenadorA,p1,entrenadorB,p2,ganador));
         return ganador;
     }
