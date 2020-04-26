@@ -21,11 +21,11 @@ public class Batalla {
     }
     
     /**
-     * Método encargado de enfrentar 2 entrenadores en una batalla pokémon y decidir un ganador.
-     * <b> Pre: </b> Los parámetros entrenadorA, entrenadorB y listaResultados deben ser distintos de null.
-     * @param entrenadorA, de tipo Entrenador : Representa uno de los dos entrenadores en el enfrentamiento pokémon.
-     * @param entrenadorB, de tipo Entrenador : Representa uno de los dos entrenadores en el enfrentamiento pokémon.
-     * @param listaResultados, de tipo ArrayList<Reporte> : Representa una lista con los resultados de cada enfrentamiento.
+     * Método encargado de enfrentar 2 entrenadores en una batalla pokémon y decidir un ganador.<br>
+     * <b> Pre: </b> Los parámetros entrenadorA, entrenadorB y listaResultados deben ser distintos de null.<br>
+     * @param entrenadorA  de tipo Entrenador : Representa uno de los dos entrenadores en el enfrentamiento pokémon.<br>
+     * @param entrenadorB  de tipo Entrenador : Representa uno de los dos entrenadores en el enfrentamiento pokémon.<br>
+     * @param listaResultados  de tipo ArrayList<Reporte> : Representa una lista con los resultados de cada enfrentamiento.<br>
      * @return Retorna el ganador del enfrentamiento pokémon.
      */
     public Entrenador enfrentamiento(Entrenador entrenadorA, Entrenador entrenadorB,ArrayList<Reporte> listaResultados){
