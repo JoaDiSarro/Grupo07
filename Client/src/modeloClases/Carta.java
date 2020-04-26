@@ -12,6 +12,9 @@ public abstract class Carta implements ICarta,Cloneable{
 	 */
 	public abstract void hechizar(IHechizable hechizable);
 
+	/**
+	 *Sobreescritura del método clone. Permite la clonación de objetos de tipo Carta.
+	 */
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
 		return super.clone();
