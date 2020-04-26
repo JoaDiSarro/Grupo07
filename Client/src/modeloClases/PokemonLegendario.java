@@ -28,39 +28,60 @@ public class PokemonLegendario extends Pokemon implements Cloneable {
 		throw new CloneNotSupportedException("No se puede clonar un pokemon legendario");
 	}
 
+    /**
+     *Método encargado de terminar el cansancio de un pokémon. Este método se encuentra vacío porque nunca se va a ejecutar.<br>
+     *Esto sucede ya que al momento de crearse un pokémon, se lo decora con un elemento : Agua, Tierra, Fuego, Hielo, Hielo Recargado o Eléctrico.<br>
+     *Por lo tanto, el método terminaCansancio estará implementado por el elemento al que pertenezca el pokémon.<br>
+     */
     @Override
-    public void terminaCansancio() {
-        // TODO Implement this method
-    }
+    public void terminaCansancio() {}
 
+    /**
+     *Método encargado de realizar la recarga de un pokémon. Este método se encuentra vacío porque nunca se va a ejecutar.<br>
+     *Esto sucede ya que al momento de crearse un pokémon, se lo decora con un elemento : Agua, Tierra, Fuego, Hielo, Hielo Recargado o Eléctrico.<br>
+     *Por lo tanto, el método recarga estará implementado por el elemento al que pertenezca el pokémon.<br>
+     */
     @Override
-    public void recarga() {
-        // TODO Implement this method
-    }
+    public void recarga() {}
 
+    /**
+     *Método encargado de realizar el golpe final de un pokémon. Este método se encuentra vacío porque nunca se va a ejecutar.<br>
+     *Esto sucede ya que al momento de crearse un pokémon, se lo decora con un elemento : Agua, Tierra, Fuego, Hielo, Hielo Recargado o Eléctrico.<br>
+     *Por lo tanto, el método golpeFinal estará implementado por el elemento al que pertenezca el pokémon.<br>
+     */
     @Override
-    public void golpeFinal(Pokemon pokemon) {
-        // TODO Implement this method
-    }
+    public void golpeFinal(Pokemon pokemon) {}
 
+    /**
+     *Método encargado de hacer recibir daño a un pokémon. Este método se encuentra vacío porque nunca se va a ejecutar.<br>
+     *Esto sucede ya que al momento de crearse un pokémon, se lo decora con un elemento : Agua, Tierra, Fuego, Hielo, Hielo Recargado o Eléctrico.<br>
+     *Por lo tanto, el método recibeDaño estará implementado por el elemento al que pertenezca el pokémon.<br>
+     */
     @Override
-    public void recibeDaño(double daño) {
-        // TODO Implement this method
-    }
+    public void recibeDaño(double daño) {}
     
-    //@Override
-    public void hechizarNiebla() {
-        // TODO Implement this method
-    }
+    /**
+     *Método encargado de hechizar un pokémon con el efecto de niebla. Este método se encuentra vacío porque nunca se va a ejecutar.<br>
+     *Esto sucede ya que al momento de crearse un pokémon, se lo decora con un elemento : Agua, Tierra, Fuego, Hielo, Hielo Recargado o Eléctrico.<br>
+     *Por lo tanto, el método hechizarNiebla estará implementado por el elemento al que pertenezca el pokémon.<br>
+     */
+    @Override
+    public void hechizarNiebla() {}
 
-    //@Override
-    public void hechizarViento() {
-        // TODO Implement this method
-    }
+    /**
+     *Método encargado de hechizar un pokémon con el efecto de viento. Este método se encuentra vacío porque nunca se va a ejecutar.<br>
+     *Esto sucede ya que al momento de crearse un pokémon, se lo decora con un elemento : Agua, Tierra, Fuego, Hielo, Hielo Recargado o Eléctrico.<br>
+     *Por lo tanto, el método hechizarViento estará implementado por el elemento al que pertenezca el pokémon.<br>
+     */
+    @Override
+    public void hechizarViento() {}
 
-    //@Override
-    public void hechizarTormenta() {
-        // TODO Implement this method
-    }
+    /**
+     *Método encargado de hechizar un pokémon con el efecto de Tormenta. Este método se encuentra vacío porque nunca se va a ejecutar.<br>
+     *Esto sucede ya que al momento de crearse un pokémon, se lo decora con un elemento : Agua, Tierra, Fuego, Hielo, Hielo Recargado o Eléctrico.<br>
+     *Por lo tanto, el método hechizarTormenta estará implementado por el elemento al que pertenezca el pokémon.<br>
+     */
+    @Override
+    public void hechizarTormenta() {}
 }
 
