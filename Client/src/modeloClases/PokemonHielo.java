@@ -75,6 +75,7 @@ public class PokemonHielo extends PokemonDecorator {
      *Las estadísticas de combate se reducen un 30% de la fuerza actual. <br>
      *Si el porcentaje de fuerza es mayor al escudo, éste se vuelve 0.<br>
      *Si el porcentaje de fuerza es mayor o igual a la vitalidad, ésta se vuelve 1.<br>
+     * <b>Post:</b> El Pokemon de Hielo se hechiza por la carta Niebla.
      */
     @Override
     public void hechizarNiebla() {
@@ -96,6 +97,7 @@ public class PokemonHielo extends PokemonDecorator {
      *Método que aplica el efecto de la carta de viento al pokémon de hielo.<br>
      *Reduce la fuerza un 10% de la vitalidad mas un 10 % del escudo actuales. <br>
      *En caso de ser menor o igual la fuerza que la suma de estos valores, se vuelve 1.<br>
+     * <b>Post:</b> El Pokemon de Hielo se hechiza por la carta Viento.
      */
     @Override
     public void hechizarViento() {
@@ -111,6 +113,7 @@ public class PokemonHielo extends PokemonDecorator {
     /**
      *Método que aplica el efecto de la carta de tormenta al pokémon de hielo.<br>
      *Disminuye la vitalidad y el escudo actuales en un 15%.<br>
+     * <b>Post:</b> El Pokemon de Hielo se hechiza por la carta Tormenta.
      */
     @Override
     public void hechizarTormenta() {

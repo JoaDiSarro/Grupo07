@@ -69,6 +69,7 @@ public final class PokemonElectrico extends PokemonDecorator {
     /**
      *Método que aplica el efecto de la carta de niebla al pokémon eléctrico.<br>
      *Disminuye las estadísticas actuales en un 15%.<br>
+     * <b>Post:</b> El Pokemon Electrico se hechiza por la carta Niebla.
      */
     @Override
     public void hechizarNiebla() {
@@ -82,6 +83,7 @@ public final class PokemonElectrico extends PokemonDecorator {
      *Método que aplica el efecto de la carta de viento al pokémon eléctrico.<br>
      *Reduce la fuerza un 20% del escudo actual.<br>
      *En caso de ser mayor o igual esa cantidad de escudo a la fuerza, la deja en 1.<br>
+     * <b>Post:</b> El Pokemon Electrico se hechiza por la carta Viento.
      */
     @Override
     public void hechizarViento() {
@@ -95,6 +97,7 @@ public final class PokemonElectrico extends PokemonDecorator {
     /**
      *Método que aplica el efecto de la carta de tormenta al pokémon eléctrico.<br>
      *Reduce la vitalidad en un 10%.<br>
+     * <b>Post:</b> El Pokemon Electrico se hechiza por la carta Tormenta.
      */
     @Override
     public void hechizarTormenta() {

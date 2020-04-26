@@ -55,7 +55,19 @@ public abstract class Pokemon implements Cloneable,IHechizable, IClasificable{
         return fuerza;
     }
     
-    /**
+    public int getClasificacionActual() {
+		return clasificacionActual;
+	}
+
+	public void setVitalidad(double vitalidad) {
+		this.vitalidad = vitalidad;
+	}
+
+	public void setFuerza(double fuerza) {
+		this.fuerza = fuerza;
+	}
+
+	/**
      *Método encargado de clonar un pokémon.<br>
      *@return Retorna un clon del pokémon.<br>
      */

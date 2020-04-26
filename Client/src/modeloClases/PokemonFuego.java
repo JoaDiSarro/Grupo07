@@ -74,6 +74,7 @@ public final class PokemonFuego extends PokemonDecorator {
     /**
      *Método que aplica el efecto de la carta de niebla al pokémon de fuego.<br>
      *Disminuye las estadísticas de combate un 10%.<br>
+     * <b>Post:</b> El Pokemon de Fuego se hechiza por la carta Niebla.
      */
     @Override
     public void hechizarNiebla() {
@@ -87,6 +88,8 @@ public final class PokemonFuego extends PokemonDecorator {
      *Método que aplica el efecto de la carta de viento al pokémon de fuego.<br>
      *Reduce la fuerza un 10% de la vitalidad actual.<br>
      *En caso de ser mayor o igual la vitalidad actual al 10% de la fuerza, la fuerza se vuelve 1.<br>
+     * <b>Post:</b> El Pokemon de Fuego se hechiza por la carta Viento.
+     * 
      */
     @Override
     public void hechizarViento() {
@@ -100,6 +103,7 @@ public final class PokemonFuego extends PokemonDecorator {
     /**
      *Método que aplica el efecto de la carta de tormenta al pokémon de fuego.<br>
      *Disminuye la vitalidad en un 40%. <br>
+     * <b>Post:</b> El Pokemon de Fuego se hechiza por la carta Tormenta.
      */
     @Override
     public void hechizarTormenta() {

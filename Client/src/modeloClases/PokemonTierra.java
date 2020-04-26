@@ -69,6 +69,7 @@ public final class PokemonTierra extends PokemonDecorator {
      *Reduce las estadísticas de combate un 20% de su vitalidad actual.<br>
      *Si el porcentaje de vitalidad es mayor al escudo, éste se vuelve 0.<br>
      *Si el porcentaje de vitalidad es mayor o igual a la fuerza, ésta se vuelve 1.<br>
+     * <b>Post:</b> El Pokemon de Tierra se hechiza por la carta Niebla.
      */
     @Override
     public void hechizarNiebla() {
@@ -89,6 +90,7 @@ public final class PokemonTierra extends PokemonDecorator {
     /**
      *Método que aplica el efecto de la carta de viento al pokémon de tierra.<br>
      *Reduce la fuerza actual un 20%.<br>
+     * <b>Post:</b> El Pokemon de Tierra se hechiza por la carta Viento.
      */
     @Override
     public void hechizarViento() {
@@ -100,6 +102,7 @@ public final class PokemonTierra extends PokemonDecorator {
      *Método que aplica el efecto de la carta de tormenta al pokémon de tierra.<br>
      *Resta de la vitalidad la cantidad actual de escudo.<br>
      *Si el escudo es mayor o igual a la vitalidad, ésta se vuelve 1.<br>
+     * <b>Post:</b> El Pokemon de Tierra se hechiza por la carta Tormenta.
      */
     @Override
     public void hechizarTormenta() {
