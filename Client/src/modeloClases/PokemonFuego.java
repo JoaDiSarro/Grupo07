@@ -13,7 +13,7 @@ public final class PokemonFuego extends PokemonDecorator {
      * Por defecto los valores de vitalidad, escudo y fuerza son establecidos.<br>
      * <b>Pre:</b> El pokemon pasado por parametro debe ser distinto de null<br>
      * <b>Post:</b> Se le agrega al pokemon la funcionalidad del elemento fuego.<br>
-     * @param pokemon : Pokemon al que se lo decora con el elemento fuego<br>
+     * @param pokemon de tipo Pokemon: Pokemon al que se lo decora con el elemento fuego<br>
      */
     public PokemonFuego(Pokemon pokemon) {
     	super(pokemon,530,80,200);
@@ -42,7 +42,7 @@ public final class PokemonFuego extends PokemonDecorator {
      * Luego la fuerza se agota por completo (queda en cero)<br>
      * <b>Pre:</b> el pokemon pasado por parametro debe ser distinto de null<br>
      * <b>Post:</b> El pokemon de Fuego le realiza un daño al pokemon pasado como parametro. Luego disminuye su fuerza a cero<br>
-     * @param pokemon : pokemon al cual le realizaremos daño<br>
+     * @param pokemon de tipo Pokemon: Pokemon al cual le realizaremos daño<br>
      */
     public void golpeFinal(Pokemon pokemon){
         pokemon.recibeDaño(super.pokemon.fuerza*1.25);
@@ -54,7 +54,7 @@ public final class PokemonFuego extends PokemonDecorator {
      * El escudo y la vitalidad absorben la mitad del daño cada uno (decrementándose).<br>
      * <b>Pre:</b> El daño pasado como parametro debe ser distinto de null<br>
      * <b>Post:</b> El Pokemon de Fuego recibe cierta cantidad de daño. Existe la posibilidad de que muera<br>
-     * @param daño : valor del impacto recibido.
+     * @param daño de tipo double: Valor del impacto recibido.
      */
     public void recibeDaño(double daño){
         double aux = 0;
@@ -110,6 +110,9 @@ public final class PokemonFuego extends PokemonDecorator {
     	super.pokemon.vitalidad*=0.6;
     }
     
+    /**
+     *Sobreescritura del metodo toString. Se utiliza para mostrar los atributos de un pokémon de fuego.
+     */
     @Override
 	public String toString() {
 		return super.toString()+" / "+" Elemento: Fuego";

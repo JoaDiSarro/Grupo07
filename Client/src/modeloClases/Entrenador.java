@@ -22,8 +22,8 @@ public class Entrenador implements IClasificable,Cloneable{
     /**
      * Constructor de la clase Entrenador.<br>
      * <b> Pre : </b> Los parametros deben ser distintos de null y no deben estar vacíos. El parámetro cartasDisponibles debe ser mayor o igual a 0.<br>
-     * @param nombre, de tipo String : Representa el nombre del entrenador.<br>
-     * @param cartasDisponibles, de tipo int : Representa la cantidad de cartas disponibles que puede usar el entrenador durante el torneo.
+     * @param nombre  de tipo String : Representa el nombre del entrenador.<br>
+     * @param cartasDisponibles  de tipo int : Representa la cantidad de cartas disponibles que puede usar el entrenador durante el torneo.
      */
     public Entrenador(String nombre, int cartasDisponibles) {
         this.nombre = nombre;
@@ -34,7 +34,7 @@ public class Entrenador implements IClasificable,Cloneable{
      *  Método encargado de otorgarle cartas a un entrenador.<br>
      * <b> Pre: </b> El parámetro listaCartas debe ser distinto de null.<br>
      * <b> Post: </b> Se setea la lista de cartas del entrenador.<br>
-     * @param listaCartas, de tipo ArrayList<Carta> : Representa la lista de cartas que se le añade al entrenador.
+     * @param listaCartas  de tipo ArrayList<Carta> : Representa la lista de cartas que se le añade al entrenador.
      */
     public void setMazo(ArrayList<Carta> listaCartas) {
     	this.cartas = listaCartas;
@@ -44,7 +44,7 @@ public class Entrenador implements IClasificable,Cloneable{
      * Método encargado de agregar un objeto de tipo Pokemon a la lista pokemones.<br>
      * <b> Pre: </b> El parámetro de tipo Pokemon debe ser distinto de null.<br>
      * <b> Post: </b> Se agrega un pokemon a la lista.<br>
-     * @param pokemon, de tipo Pokemon: Representa el pokemon a añadir en la lista de pokemones.
+     * @param pokemon  de tipo Pokemon: Representa el pokemon a añadir en la lista de pokemones.
      */
     public void agregaPokemon(Pokemon pokemon) {
     	this.pokemones.add(pokemon);
@@ -82,7 +82,7 @@ public class Entrenador implements IClasificable,Cloneable{
      * Método que permite a un entrenador utilizar una de sus cartas de manera aleatoria, afectando un objeto IHechizable.<br>
      * <b> Pre: </b> El parámetro pokemon debe ser distinto de null.<br>
      * <b> Post: </b> El IHechizable parámetro será hechizado por una carta y el Entrenador tendrá 1 carta menos para utilizar.<br>
-     * @param pokemon, de tipo IHechizable : Representa el objeto a hechizar con una carta.
+     * @param pokemon  de tipo IHechizable : Representa el objeto a hechizar con una carta.
      */
     public void usarCarta(IHechizable pokemon){
         int randomCarta = new Random().nextInt(cartas.size()-1);
@@ -150,7 +150,7 @@ public class Entrenador implements IClasificable,Cloneable{
      * Método encargado de eliminar un pokémon de la lista de pokemones del entrenador.<br>
      * <b> Pre: </b> El parámetro pokemon debe ser distinto de null.<br>
      * <b> Post: </b> En caso de existir, se elimina el elemento pokemon de la lista de pokemones.<br>
-     * @param pokemon, de tipo Pokemon : Representa el pokémon a eliminar de la lista.
+     * @param pokemon  de tipo Pokemon : Representa el pokémon a eliminar de la lista.
      */
     public void eliminaPokemon(Pokemon pokemon) {
     	if (this.pokemones.contains(pokemon))

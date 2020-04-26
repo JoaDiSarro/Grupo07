@@ -13,7 +13,7 @@ public final class PokemonAgua extends PokemonDecorator {
      * Por defecto los valores de vitalidad, escudo y fuerza son establecidos.<br>
      * <b>Pre:</b> El pokemon pasado por parametro debe ser distinto de null.<br>
      * <b>Post:</b> Se le agrega al pokemon la funcionalidad del elemento agua.<br>
-     * @param pokemon : Pokemon al que se lo decora con el elemento agua.
+     * @param pokemon de tipo Pokemon: Pokemon al que se lo decora con el elemento agua.
      */
     public PokemonAgua(Pokemon pokemon) {
     	super(pokemon,500,120,100);
@@ -41,7 +41,7 @@ public final class PokemonAgua extends PokemonDecorator {
      * Luego su fuerza se reduce a la mitad.<br>
      * <b>Pre:</b> el pokemon pasado por parametro debe ser distinto de null.<br>
      * <b>Post:</b> El pokemon de Agua le realiza un daño al pokemon pasado como parametro. Luego disminuye su fuerza un 50%.<br>
-     * @param pokemon : pokemon al cual le realizaremos daño.
+     * @param pokemon de tipo Pokemon : Pokemon al cual le realizaremos daño.
      */
     public void golpeFinal(Pokemon pokemon){
         pokemon.recibeDaño(super.pokemon.fuerza);
@@ -53,7 +53,7 @@ public final class PokemonAgua extends PokemonDecorator {
      * El escudo es el encargado de absorver todo el daño y solo cuando este se agota, comienza a decrementarse la vitalidad.<br>
      * <b>Pre:</b> El daño pasado como parametro debe ser distinto de null.<br>
      * <b>Post:</b> El Pokemon de Agua recibe cierta cantidad de daño. Existe la posibilidad de que muera.<br>
-     * @param daño : valor del impacto recibido.
+     * @param daño de tipo double: Valor del impacto recibido.
      */
     public void recibeDaño(double daño){
         if(daño < super.pokemon.escudo)
@@ -103,6 +103,9 @@ public final class PokemonAgua extends PokemonDecorator {
     	super.pokemon.escudo*=0.8;
     }
 
+	/**
+	 *Sobreescritura del metodo toString. Se utiliza para mostrar los atributos de un pokémon de agua.
+	 */
 	@Override
 	public String toString() {
 		return super.toString()+" / "+" Elemento: Agua";

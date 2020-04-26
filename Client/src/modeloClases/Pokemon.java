@@ -29,7 +29,7 @@ public abstract class Pokemon implements Cloneable,IHechizable, IClasificable{
      * Por defecto su experiencia comienza con valor = 0<br>
      * <b>Pre:</b>El parametro nombre debe ser distinto de null.<br>
      * <b>Post:</b>Se genera un nuevo Pokemon.<br>
-     * @param nombre : Nombre del Pokemon.<br>
+     * @param nombre  de tipo String: Nombre del Pokemon.<br>
      */
     public Pokemon(String nombre){
         this.nombre = nombre;
@@ -119,7 +119,7 @@ public abstract class Pokemon implements Cloneable,IHechizable, IClasificable{
      * Metodo para atacar a otro Pokemon. Se realiza una secuencia de acciones.<br>
      * <b>Pre:</b> El parametro pokemon debe ser distinto de null.<br>
      * <b>Post:</b> Se genera el ataque al pokemon pasado como parametro.<br>
-     * @param pokemon : Pokemon al que se le hara daño.
+     * @param pokemon  de tipo Pokemon : Pokemon al que se le hara daño.
      */
     public void ataca(Pokemon pokemon){
         golpeInicial(pokemon);
@@ -131,7 +131,7 @@ public abstract class Pokemon implements Cloneable,IHechizable, IClasificable{
      * Metodo donde se le realiza un golpe inicial al pokemon pasado como parametro. Una vez realizado el daño, el Pokemon actual se cansa disminuyendo asi su fuerza en un 50%.
      * <b>Pre:</b> El parametro pokemon debe ser distinto de null.<br>
      * <b>Post:</b> Se le realiza un golpe al objeto pasado como parametro, y el pokemon actual disminuye su fuerza.<br>
-     * @param pokemon : Pokemon al que se le hara daño.
+     * @param pokemon de tipo Pokemon: Pokemon al que se le hara daño.
      */
     public void golpeInicial(Pokemon pokemon){
         pokemon.recibeDaño(this.fuerza);

@@ -10,16 +10,16 @@ public final class PokemonHieloRecargado extends PokemonHielo {
     
     /**
      * Metodo constructor parametrizado<br>
-     * <b>Pre:</b> El pokemon pasado por parametro debe ser distinto de null.
-     * <b>Post:</b> Se le agrega al pokemon la funcionalidad del elemento hielo recargado.
-     * @param pokemon : Pokemon al que se lo decora con el elemento hielo recargado.
+     * <b>Pre:</b> El pokemon pasado por parametro debe ser distinto de null.<br>
+     * <b>Post:</b> Se le agrega al pokemon la funcionalidad del elemento hielo recargado.<br>
+     * @param pokemon de tipo Pokemon: Pokemon al que se lo decora con el elemento hielo recargado.<br>
      */
     public PokemonHieloRecargado(Pokemon pokemon) {
         super(pokemon);
     }
     
      /**
-      * Metodo por el cual el Pokemon de Hielo Recargado realiza una recarga de su fuerza aumentandola a un valor fijo de 400.
+      * Metodo por el cual el Pokemon de Hielo Recargado realiza una recarga de su fuerza aumentandola a un valor fijo de 400.<br>
       * <b>Post:</b> Su fuerza aumenta a 400.
       */
     @Override
@@ -27,6 +27,9 @@ public final class PokemonHieloRecargado extends PokemonHielo {
         super.pokemon.fuerza = 400;
     }
     
+    /**
+     *Sobreescritura del metodo toString para mostrar que el pokémon es de hielo recargado.
+     */
     @Override
 	public String toString() {
 		return super.toString()+" Recargado";

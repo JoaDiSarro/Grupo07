@@ -16,7 +16,7 @@ public class CartaNiebla extends Carta {
 
     /**
      *Método que se encarga de hechizar con una carta de niebla.<br>
-     *@param hechizable, de tipo IHechizable : Representa el objeto a hechizar con la carta de niebla.<br>
+     *@param hechizable  de tipo IHechizable : Representa el objeto a hechizar con la carta de niebla.<br>
      *<b> Pre: </b> El parámetro hechizable debe ser distinto de null.<br>
      *<b> Post: </b> El objeto queda hechizado por una carta de niebla.<br>
      */

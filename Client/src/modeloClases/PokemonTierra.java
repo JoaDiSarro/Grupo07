@@ -13,7 +13,7 @@ public final class PokemonTierra extends PokemonDecorator {
      * Por defecto los valores de vitalidad, escudo y fuerza son establecidos.<br>
      * <b>Pre:</b> El pokemon pasado por parametro debe ser distinto de null.<br>
      * <b>Post:</b> Se le agrega al pokemon la funcionalidad del elemento tierra.<br>
-     * @param pokemon : Pokemon al que se lo decora con el elemento tierra.<br>
+     * @param pokemon de tipo Pokemon: Pokemon al que se lo decora con el elemento tierra.<br>
      */
     public PokemonTierra(Pokemon pokemon) {
     	super(pokemon,600,40,120);
@@ -40,7 +40,7 @@ public final class PokemonTierra extends PokemonDecorator {
      * Conserva su fuerza.<br>
      * <b>Pre:</b> el pokemon pasado por parametro debe ser distinto de null.<br>
      * <b>Post:</b> El pokemon de tierra le realiza un daño al pokemon pasado como parametro.<br>
-     * @param pokemon : pokemon al cual le realizaremos daño.<br>
+     * @param pokemon de tipo Pokemon: Pokemon al cual le realizaremos daño.<br>
      */
     public void golpeFinal(Pokemon pokemon){
         pokemon.recibeDaño(super.pokemon.fuerza*1.4);
@@ -51,7 +51,7 @@ public final class PokemonTierra extends PokemonDecorator {
      * El escudo es el encargado de absorver todo el daño y solo cuando este se agota, comienza a decrementarse la vitalidad.<br>
      * <b>Pre:</b> El daño pasado como parametro debe ser distinto de null.<br>
      * <b>Post:</b> El Pokemon de Tierra recibe cierta cantidad de daño. Existe la posibilidad de que muera.<br>
-     * @param daño : valor del impacto recibido.<br>
+     * @param daño de tipo double: Valor del impacto recibido.<br>
      */
     public void recibeDaño(double daño){
         if(daño < super.pokemon.escudo)
@@ -112,6 +112,9 @@ public final class PokemonTierra extends PokemonDecorator {
         	super.pokemon.vitalidad-=super.pokemon.escudo;
     }
     
+    /**
+     *Sobreescritura del metodo toString. Se utiliza para mostrar los atributos de un pokémon de tierra.
+     */
     @Override
 	public String toString() {
 		return super.toString()+" / "+" Elemento: Tierra";

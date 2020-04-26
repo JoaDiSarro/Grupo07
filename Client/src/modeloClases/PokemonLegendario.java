@@ -13,7 +13,7 @@ public class PokemonLegendario extends Pokemon implements Cloneable {
      * Constructor parametrizado.<br>
      * <b>Pre:</b> El parametro nombre debe ser distinto de null y distinto de vacio.<br>
      * <b>Post:</b> Se crea un objeto de tipo Pokemon Legendario.<br>
-     * @param nombre : nombre que se le asignara al Pokemon.
+     * @param nombre de tipo String: Nombre que se le asignara al Pokemon.
      */
     public PokemonLegendario(String nombre) {
         super(nombre);

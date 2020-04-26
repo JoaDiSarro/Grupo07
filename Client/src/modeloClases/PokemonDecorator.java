@@ -14,10 +14,10 @@ public abstract class PokemonDecorator extends Pokemon implements Cloneable{
     /**
      * Constructor parametrizado.<br>
      * <b>Post:</b> Se decora un pokemon con un elemento especifico.<br>
-     * @param pokemon, de tipo Pokemon : Se encarga de guardar la referencia a memoria de un Pokemon base.<br>
-     * @param vitalidad, de tipo double : Vitalidad que se le asigna al pokémon.<br>
-     * @param fuerza, de tipo double : Fuerza que se le asigna al pokémon.<br>
-     * @param escudo, de tipo double : Escudo que se le asigna al pokémon. <br>
+     * @param pokemon de tipo Pokemon : Se encarga de guardar la referencia a memoria de un Pokemon base.<br>
+     * @param vitalidad de tipo double : Vitalidad que se le asigna al pokémon.<br>
+     * @param fuerza de tipo double : Fuerza que se le asigna al pokémon.<br>
+     * @param escudo de tipo double : Escudo que se le asigna al pokémon. <br>
      */    
     public PokemonDecorator(Pokemon pokemon,double vitalidad, double fuerza, double escudo) {
     	this.pokemon=pokemon;
