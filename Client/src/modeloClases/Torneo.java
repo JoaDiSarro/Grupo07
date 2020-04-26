@@ -24,14 +24,14 @@ public class Torneo {
         this.listaEntrenadores.add(entrenador);
     }
     
-    public ArrayList<Entrenador> comienzaRonda(ArrayList<Entrenador> entrenadores){ //Entra con el parametro reporteResultados y lo pasa a inicia
-        return ronda.inicia(entrenadores);
+    public ArrayList<Entrenador> comienzaRonda(ArrayList<Entrenador> entrenadores){
+        return ronda.inicia(entrenadores,reporteResultados);
     }
     
     public Entrenador comienzaTorneo() {
         ArrayList<Entrenador> listaCompetidoresActual = listaEntrenadores;
         while (listaCompetidoresActual.size() != 1) {
-            listaCompetidoresActual = comienzaRonda(listaCompetidoresActual); //ComienzaRonda deberia llevar el parametro reporteResultados
+            listaCompetidoresActual = comienzaRonda(listaCompetidoresActual);
         }
         return listaCompetidoresActual.get(0);
     }
