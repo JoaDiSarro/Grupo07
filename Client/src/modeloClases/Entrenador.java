@@ -156,6 +156,15 @@ public class Entrenador implements IClasificable,Cloneable{
     	if (this.pokemones.contains(pokemon))
     		this.pokemones.remove(pokemon);
     }
+    
+    public boolean utilizaCarta() throws SinCartasDisponiblesException {
+    	boolean auxRandom;
+    	if (this.cartasDisponibles>0)
+    		auxRandom = new Random().nextBoolean();
+    	else
+    		throw new SinCartasDisponiblesException("El entrenador "+this.nombre+" quizo utilizar una carta, pero ya agotó su cantidad de usos.\n");
+		return auxRandom;
+    }
 
     /**
 	 *Sobreescritura del metodo toString. Se utiliza para mostrar los atributos de un entrenador.
