@@ -22,7 +22,7 @@ public class Entrenador implements IClasificable,Cloneable{
     /**
      * Constructor de la clase Entrenador.<br>
      * <b> Pre : </b> Los parametros deben ser distintos de null y no deben estar vacíos. El parámetro cartasDisponibles debe ser mayor o igual a 0.<br>
-     * @param nombre, de tipo String : Representa el nombre del entrenador.
+     * @param nombre, de tipo String : Representa el nombre del entrenador.<br>
      * @param cartasDisponibles, de tipo int : Representa la cantidad de cartas disponibles que puede usar el entrenador durante el torneo.
      */
     public Entrenador(String nombre, int cartasDisponibles) {
@@ -147,13 +147,28 @@ public class Entrenador implements IClasificable,Cloneable{
 	}
     
     /**
-     * Método encargado de eliminar un pokémon de la lista de pokemones del entrenador.
-     * <b> Pre: </b> El parámetro pokemon debe ser distinto de null.
-     * <b> Post: </b> En caso de existir, se elimina el elemento pokemon de la lista de pokemones.
+     * Método encargado de eliminar un pokémon de la lista de pokemones del entrenador.<br>
+     * <b> Pre: </b> El parámetro pokemon debe ser distinto de null.<br>
+     * <b> Post: </b> En caso de existir, se elimina el elemento pokemon de la lista de pokemones.<br>
      * @param pokemon, de tipo Pokemon : Representa el pokémon a eliminar de la lista.
      */
     public void eliminaPokemon(Pokemon pokemon) {
     	if (this.pokemones.contains(pokemon))
     		this.pokemones.remove(pokemon);
     }
+
+    /**
+	 *Sobreescritura del metodo toString. Se utiliza para mostrar los atributos de un entrenador.
+	 */
+	@Override
+	public String toString() {
+		return "Entrenador: " + nombre + " / ClasificacionActual: " + clasificacionActual + " / Creditos: "+ creditos + "\n";
+	}
+
+	
+	
+	
+	
+    
+    
 }
