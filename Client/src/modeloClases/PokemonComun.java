@@ -36,7 +36,7 @@ public class PokemonComun extends Pokemon implements Cloneable {
 		}
 		return clon;
 	}
-    
+
     @Override
     public void terminaCansancio() {
         // TODO Implement this method

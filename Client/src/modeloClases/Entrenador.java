@@ -66,14 +66,13 @@ public class Entrenador implements IClasificable,Cloneable{
 		return creditos;
 	}
 
-	//verificar el -1 indice
     /**
      *Método encargado de elegir un pokémon al azar de la lista.<br>
      *<b> Pre: </b> La lista pokemones no debe estar vacía.<br>
      * @return Retorna un pokemon al azar. 
      */
     public Pokemon eligePokemon(){
-        int indiceRandom = new Random().nextInt(pokemones.size()-1);
+        int indiceRandom = new Random().nextInt(pokemones.size());
         return pokemones.get(indiceRandom);
     }
     
@@ -85,7 +84,7 @@ public class Entrenador implements IClasificable,Cloneable{
      * @param pokemon  de tipo IHechizable : Representa el objeto a hechizar con una carta.
      */
     public void usarCarta(IHechizable pokemon){
-        int randomCarta = new Random().nextInt(cartas.size()-1);
+        int randomCarta = new Random().nextInt(cartas.size());
         cartas.get(randomCarta).hechizar(pokemon);
         this.cartasDisponibles--;
         
@@ -94,7 +93,7 @@ public class Entrenador implements IClasificable,Cloneable{
     /**
      * Método encargado de otorgarle créditos al Entrenador cuando gana una batalla.
      */
-    public void obtienePremio(){ //recordar añadirlo a batalla
+    public void obtienePremio(){
         this.creditos +=1000;
     }
 
