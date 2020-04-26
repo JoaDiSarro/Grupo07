@@ -1,5 +1,6 @@
 package modeloClases;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -16,8 +17,7 @@ public class Batalla {
     }
     
     //Agregar el reporte y evaluar tema del finally con un prueba(despues del try / catch)
-    //Si ronda llama a enfrentamiento, deberia traer la listaReportes desde la ronda como parametro. Al final del metodo se utiliza.
-    public Entrenador enfrentamiento(Entrenador entrenadorA, Entrenador entrenadorB){
+    public Entrenador enfrentamiento(Entrenador entrenadorA, Entrenador entrenadorB,ArrayList<Reporte> listaResultados){
         Pokemon p1, p2;
         int i=0;
         Entrenador ganador=null;
@@ -74,8 +74,7 @@ public class Batalla {
         			break;
         		}
         	}
-        }
-        
+        }    
         if (ganador==null) {
         	if (p1.comparaEstado(p2)== 1) {
         		p1.actualizaClasificacion();
@@ -86,12 +85,9 @@ public class Batalla {
         		p2.actualizaClasificacion();
         		entrenadorB.actualizaClasificacion();
         		ganador = entrenadorB;
-        	}
-        		
-        }
-        
-        // Se crea un reporte : listaReportes.add(new Reporte(entrenadorA,p1,entrenadorB,p2,ganador);
-        
+        	}  		
+        }      
+        listaResultados.add(new Reporte(entrenadorA,p1,entrenadorB,p2,ganador));
         return ganador;
     }
     
