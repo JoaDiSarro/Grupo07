@@ -50,7 +50,7 @@ public class Torneo {
      * <b>Pre:</b> La lista de entrenadores debe ser distinta de null.<br>
      * <b>Post:</b> Se ejecuta la ronda y se obtienen los Entrenadores ganadores de la misma.<br>
      * @param entrenadores de tipo ArrayList Entrenador: tiene los datos de todos los entrenadores que participan en la Ronda. 
-     * @return : devuelve un ArrayList de Entrenadores con los ganadores de esa Ronda.
+     * @return  Devuelve un ArrayList de Entrenadores con los ganadores de esa Ronda.
      */
     public ArrayList<Entrenador> comienzaRonda(ArrayList<Entrenador> entrenadores){
         return ronda.inicia(entrenadores,reporteResultados);

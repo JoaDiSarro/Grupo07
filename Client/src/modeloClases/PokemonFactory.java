@@ -21,12 +21,12 @@ public final class PokemonFactory {
      * Metodo que crea un pokemon dependiendo de los parametros de entrada.<br>
      * Se debe de ingresar el nombre, el tipo (Comun o Legendario) y el elemento (Hielo, Hielo Recargado, Agua, Fuego, Tierra o Electrico).
      * En caso contrario, devolvera un null.<br>
-     * <b>Pre:</b> Los parametros nombre,tipo y elemento deben ser distintos de null y de vacio. 
-     * <b>Post:</b> Se genera un Pokemon con su respectivo nombre, tipo y elemento. En caso que alguno de los parametros de entrada sean incorrectos, se devolvera un null.
-     * @param nombre : nombre que se le asiganara al Pokemon.
-     * @param tipo : puede ser Comun o Legendario.
-     * @param elemento : puede ser Hielo, Hielo Recargado, Agua, Fuego, Tierra o Electrico
-     * @return devuelve un Pokemon.
+     * <b>Pre:</b> Los parametros nombre,tipo y elemento deben ser distintos de null y de vacio. <br>
+     * <b>Post:</b> Se genera un Pokemon con su respectivo nombre, tipo y elemento. En caso que alguno de los parametros de entrada sean incorrectos, se devolvera un null.<br>
+     * @param nombre de tipo String: Nombre que se le asiganara al Pokemon.<br>
+     * @param tipo de tipo String: Puede ser Comun o Legendario.<br>
+     * @param elemento de tipo String: Puede ser Hielo, Hielo Recargado, Agua, Fuego, Tierra o Electrico<br>
+     * @return Devuelve un Pokemon.
      */
     public Pokemon creaPokemon(String nombre, String tipo, String elemento){
         Pokemon pokemonTipo;

@@ -8,7 +8,7 @@ public abstract class Carta implements ICarta,Cloneable{
 
 	/**
 	 *Método encargado de hechizar un objeto de tipo IHechizable.<br>
-	 *@param hechizable, de tipo IHechizable : Objeto a hechizar.<br>
+	 *@param hechizable  de tipo IHechizable : Objeto a hechizar.<br>
 	 */
 	public abstract void hechizar(IHechizable hechizable);
 

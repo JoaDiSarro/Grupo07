@@ -10,7 +10,7 @@ public class SinCartasDisponiblesException extends Exception {
 
 	/**
 	 * Constructor parametrizado de la clase SinCartasDisponiblesException
-	 * @param msj, de tipo String : Este parámetro se encarga de proveer el mensaje que se mostrará cuando se emite una excepción de este tipo.
+	 * @param msj de tipo String : Este parámetro se encarga de proveer el mensaje que se mostrará cuando se emite una excepción de este tipo.
 	 */
 	public SinCartasDisponiblesException(String msj) {
 		super(msj);

@@ -13,7 +13,7 @@ public class PokemonHielo extends PokemonDecorator {
      * Por defecto los valores de vitalidad, escudo y fuerza son establecidos.<br>
      * <b>Pre:</b> El pokemon pasado por parametro debe ser distinto de null.<br>
      * <b>Post:</b> Se le agrega al pokemon la funcionalidad del elemento hielo.<br>
-     * @param pokemon : Pokemon al que se lo decora con el elemento hielo.<br>
+     * @param pokemon de tipo Pokemon: Pokemon al que se lo decora con el elemento hielo.<br>
      */
     public PokemonHielo(Pokemon pokemon) {
     	super(pokemon,500,100,120);
@@ -41,7 +41,7 @@ public class PokemonHielo extends PokemonDecorator {
      * Conserva la misma fuerza original.<br>
      * <b>Pre:</b> el pokemon pasado por parametro debe ser distinto de null.<br>
      * <b>Post:</b> El pokemon de Hielo le realiza un daño al pokemon pasado como parametro.<br>
-     * @param pokemon : pokemon al cual le realizaremos daño.
+     * @param pokemon de tipo Pokemon: Pokemon al cual le realizaremos daño.
      */
     public void golpeFinal(Pokemon pokemon){
         pokemon.recibeDaño(super.pokemon.fuerza*0.90);    
@@ -52,7 +52,7 @@ public class PokemonHielo extends PokemonDecorator {
      * El escudo absorbe el 75% del daño y la vitalidad el otro 25%.<br>
      * <b>Pre:</b> El daño pasado como parametro debe ser distinto de null.<br>
      * <b>Post:</b> El Pokemon de Hielo recibe cierta cantidad de daño. Existe la posibilidad de que muera.<br>
-     * @param daño : valor del impacto recibido.<br>
+     * @param daño de tipo double: Valor del impacto recibido.<br>
      */
     public void recibeDaño(double daño){
         double aux = 0;
@@ -121,6 +121,9 @@ public class PokemonHielo extends PokemonDecorator {
     	super.pokemon.escudo*=0.85;
     }
     
+    /**
+     *Sobreescritura del metodo toString. Se utiliza para mostrar los atributos de un pokémon de hielo.
+     */
     @Override
 	public String toString() {
 		return super.toString()+" / "+" Elemento: Hielo";
