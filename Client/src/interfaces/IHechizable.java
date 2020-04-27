@@ -1,4 +1,4 @@
-package modeloClases;
+package interfaces;
 
 /**
  * @author Frangolini, Luciano.<br>

@@ -24,7 +24,7 @@ public final class PokemonTierra extends PokemonDecorator {
      * <b>Post:</b> El pokemon setea su fuerza a 40 por defecto.<br>
      */
     public void terminaCansancio(){
-    	super.pokemon.fuerza = 40;    
+    	this.fuerza = 40;    
     }
     
     /**
@@ -32,7 +32,7 @@ public final class PokemonTierra extends PokemonDecorator {
      * <b>Post:</b> Su fuerza aumenta a 40.<br>
      */
     public void recarga(){
-    	super.pokemon.fuerza = 40;    
+    	this.fuerza = 40;    
     }
     
     /**
@@ -43,7 +43,7 @@ public final class PokemonTierra extends PokemonDecorator {
      * @param pokemon de tipo Pokemon: Pokemon al cual le realizaremos daño.<br>
      */
     public void golpeFinal(Pokemon pokemon){
-        pokemon.recibeDaño(super.pokemon.fuerza*1.4);
+        pokemon.recibeDaño(this.fuerza*1.4);
     }
     
     /**
@@ -54,13 +54,13 @@ public final class PokemonTierra extends PokemonDecorator {
      * @param daño de tipo double: Valor del impacto recibido.<br>
      */
     public void recibeDaño(double daño){
-        if(daño < super.pokemon.escudo)
-        	super.pokemon.escudo -= daño;
-        else if(super.pokemon.vitalidad > (daño-super.pokemon.escudo)){
-        	super.pokemon.vitalidad = daño - super.pokemon.escudo;
-        	super.pokemon.escudo = 0;
+        if(daño < this.escudo)
+        	this.escudo -= daño;
+        else if(this.vitalidad > (daño-this.escudo)){
+        	this.vitalidad = daño - this.escudo;
+        	this.escudo = 0;
         }else
-            super.pokemon.vitalidad = 0;   
+            this.vitalidad = 0;   
     }
 
     
@@ -73,17 +73,17 @@ public final class PokemonTierra extends PokemonDecorator {
      */
     @Override
     public void hechizarNiebla() {
-    	double auxVitalidad = super.pokemon.vitalidad*0.2;
+    	double auxVitalidad = this.vitalidad*0.2;
     	
-        if (auxVitalidad>=super.pokemon.fuerza)
-        	super.pokemon.fuerza=1;
+        if (auxVitalidad>=this.fuerza)
+        	this.fuerza=1;
         else
-        	super.pokemon.fuerza-=auxVitalidad;
-        if (auxVitalidad>super.pokemon.escudo)
-        	super.pokemon.escudo=0;
+        	this.fuerza-=auxVitalidad;
+        if (auxVitalidad>this.escudo)
+        	this.escudo=0;
         else
-        	super.pokemon.escudo-=auxVitalidad;
-        super.pokemon.vitalidad-=auxVitalidad;
+        	this.escudo-=auxVitalidad;
+        this.vitalidad-=auxVitalidad;
     }
 
     
@@ -94,7 +94,7 @@ public final class PokemonTierra extends PokemonDecorator {
      */
     @Override
     public void hechizarViento() {
-    	super.pokemon.fuerza*=0.8;
+    	this.fuerza*=0.8;
     }
 
     
@@ -106,10 +106,10 @@ public final class PokemonTierra extends PokemonDecorator {
      */
     @Override
     public void hechizarTormenta() {
-        if (super.pokemon.escudo>=super.pokemon.vitalidad)
-        	super.pokemon.vitalidad=1;
+        if (this.escudo>=this.vitalidad)
+        	this.vitalidad=1;
         else
-        	super.pokemon.vitalidad-=super.pokemon.escudo;
+        	this.vitalidad-=this.escudo;
     }
     
     /**

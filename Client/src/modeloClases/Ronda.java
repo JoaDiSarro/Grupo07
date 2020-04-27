@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class Ronda {
     
-    private Batalla batalla;
+    private Batalla batalla = new Batalla();
 
     /**
      * Constructor por defecto.

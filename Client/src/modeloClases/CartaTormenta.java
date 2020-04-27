@@ -1,10 +1,12 @@
 package modeloClases;
 
+import interfaces.IHechizable;
+
 /**
  * @author Frangolini,Luciano.<br>
  * Clase que representa una carta de tormenta. Esta carta será utilizada por los participantes de un torneo pokémon.<br>
  */
-public class CartaTormenta extends Carta{
+public class CartaTormenta extends Carta {
 	
 	
     /**

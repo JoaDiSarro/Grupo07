@@ -1,5 +1,7 @@
 package modeloClases;
 
+import interfaces.IHechizable;
+
 /**
  * @author Frangolini,Luciano.<br>
  * Clase que representa una carta de niebla. Esta carta será utilizada por los participantes de un torneo pokémon.<br>
@@ -23,4 +25,6 @@ public class CartaNiebla extends Carta {
     public void hechizar(IHechizable hechizable) {
         hechizable.hechizarNiebla();
     }
+    
+    
 }

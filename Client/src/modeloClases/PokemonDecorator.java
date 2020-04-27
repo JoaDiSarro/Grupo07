@@ -13,22 +13,21 @@ public abstract class PokemonDecorator extends Pokemon implements Cloneable{
 
     /**
      * Constructor parametrizado.<br>
+     * <b>Pre:</b> El parametro pokemon debe ser distinto de null. Ademas, vitalidad, fuerza y escudo deben ser distinto de null y mayores a 0.<br>
      * <b>Post:</b> Se decora un pokemon con un elemento especifico.<br>
-     * @param pokemon de tipo Pokemon : Se encarga de guardar la referencia a memoria de un Pokemon base.<br>
-     * @param vitalidad de tipo double : Vitalidad que se le asigna al pokémon.<br>
-     * @param fuerza de tipo double : Fuerza que se le asigna al pokémon.<br>
-     * @param escudo de tipo double : Escudo que se le asigna al pokémon. <br>
+     * @param pokemon  de tipo Pokemon : Se encarga de guardar la referencia a memoria de un Pokemon base.<br>
+     * @param vitalidad  de tipo double : Vitalidad que se le asigna al pokémon.<br>
+     * @param fuerza  de tipo double : Fuerza que se le asigna al pokémon.<br>
+     * @param escudo  de tipo double : Escudo que se le asigna al pokémon. <br>
      */    
     public PokemonDecorator(Pokemon pokemon,double vitalidad, double fuerza, double escudo) {
-    	this.pokemon=pokemon;
-    	this.pokemon.vitalidad=vitalidad;
-        this.pokemon.fuerza=fuerza;
-        this.pokemon.escudo=escudo;
-    	
+    	super(pokemon.getNombre(), vitalidad, fuerza, escudo);
+        this.pokemon = pokemon;
     }
     
     /**
      *Método encargado de clonar un pokémon de cualquier elemento.
+     * <b>Post:</b> Se clona el objeto.<br>
      */
     @Override
 	public Object clone() {
@@ -40,7 +39,7 @@ public abstract class PokemonDecorator extends Pokemon implements Cloneable{
     		clonElemento.setPokemon(pokemonAux);
     	}
     	catch (CloneNotSupportedException e) {
-    		e.getMessage();
+                System.out.println(e.getMessage());
     	}
 		return clonElemento;
 	}    
@@ -51,12 +50,12 @@ public abstract class PokemonDecorator extends Pokemon implements Cloneable{
 	 */
 	@Override
 	public String toString() {
-		return "Nombre: "+this.pokemon.nombre+" / "+
-				"Vitalidad: "+this.pokemon.vitalidad+" / "+
-				"Escudo: "+this.pokemon.escudo+" / "+
-				"Fuerza: "+this.pokemon.fuerza+" / "+
-				"Experiencia: "+this.pokemon.experiencia+" / "+
-				"Clasificacion Actual: "+this.pokemon.clasificacionActual;
+		return "Nombre: "+this.nombre+" / "+
+				"Vitalidad: "+this.vitalidad+" / "+
+				"Escudo: "+this.escudo+" / "+
+				"Fuerza: "+this.fuerza+" / "+
+				"Experiencia: "+this.experiencia+" / "+
+				"Clasificacion Actual: "+this.clasificacionActual;
 	}
 
 	public void setPokemon(Pokemon pokemon) {
@@ -67,29 +66,8 @@ public abstract class PokemonDecorator extends Pokemon implements Cloneable{
         return pokemon;
     }
     
-    public String getNombre(){
-        return this.pokemon.getNombre();
-    }
-    
-    public double getFuerza(){
-        return this.pokemon.getFuerza();
-    }
-    
-    public double getVitalidad(){
-        return this.pokemon.getVitalidad();
-    }
-    
-    public double getEscudo(){
-        return this.pokemon.getEscudo();
-    }
-    
-    public int getExperiencia(){
-        return this.pokemon.getExperiencia();
-    }
-    
     public int getClasificacion() {
-    	return this.pokemon.getClasificacionActual();
+    	return this.getClasificacionActual();
     }
-    
 
 }
