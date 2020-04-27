@@ -24,7 +24,7 @@ public final class PokemonElectrico extends PokemonDecorator {
      * <b>Post:</b> El pokemon setea su fuerza a 200 por defecto.<br>
      */
     public void terminaCansancio(){
-    	this.pokemon.fuerza = 200;
+    	this.fuerza = 200;
     }
     
     /**
@@ -32,8 +32,8 @@ public final class PokemonElectrico extends PokemonDecorator {
      * <b>Post:</b> Su fuerza aumenta un 10%. Su vitalidad aumenta un 50%.<br>
      */
     public void recarga(){
-    	this.pokemon.vitalidad *=1.5;
-    	this.pokemon.fuerza *=1.1;
+    	this.vitalidad *=1.2;
+    	this.fuerza *=1.1;
     }
     
     /**
@@ -44,8 +44,8 @@ public final class PokemonElectrico extends PokemonDecorator {
      * @param pokemon de tipo Pokemon: Pokemon al cual le realizaremos daño.<br>
      */
     public void golpeFinal(Pokemon pokemon){
-        pokemon.recibeDaño(this.pokemon.fuerza);
-        this.pokemon.fuerza *= 0.9;
+        pokemon.recibeDaño(this.fuerza);
+        this.fuerza *= 0.9;
     }
     
     /**
@@ -56,13 +56,13 @@ public final class PokemonElectrico extends PokemonDecorator {
      * @param daño de tipo double: Valor del impacto recibido.<br>
      */
     public void recibeDaño(double daño){
-        if(daño < this.pokemon.escudo)
-        	this.pokemon.escudo -= daño;
-        else if(this.pokemon.getVitalidad() > (daño-this.pokemon.getEscudo())){
-        	this.pokemon.setVitalidad( daño - this.pokemon.getEscudo());
-        	this.pokemon.setEscudo(0);
+        if(daño < this.escudo)
+        	this.escudo -= daño;
+        else if(this.getVitalidad() > (daño-this.getEscudo())){
+        	this.setVitalidad( daño - this.getEscudo());
+        	this.setEscudo(0);
         }else
-            this.pokemon.setVitalidad(0);
+            this.setVitalidad(0);
     }
 
     
@@ -73,9 +73,9 @@ public final class PokemonElectrico extends PokemonDecorator {
      */
     @Override
     public void hechizarNiebla() {
-    	this.pokemon.escudo*=0.85;
-    	this.pokemon.fuerza*=0.85;
-    	this.pokemon.vitalidad*=0.85;
+    	this.escudo*=0.85;
+    	this.fuerza*=0.85;
+    	this.vitalidad*=0.85;
     }
 
     
@@ -87,10 +87,10 @@ public final class PokemonElectrico extends PokemonDecorator {
      */
     @Override
     public void hechizarViento() {
-    	if (this.pokemon.escudo*0.2>=this.pokemon.fuerza)
-    		this.pokemon.fuerza=1;
+    	if (this.escudo*0.2>=this.fuerza)
+    		this.fuerza=1;
     	else
-    		this.pokemon.fuerza-= this.pokemon.escudo*0.2;
+    		this.fuerza-= this.escudo*0.2;
     }
 
     
@@ -101,7 +101,7 @@ public final class PokemonElectrico extends PokemonDecorator {
      */
     @Override
     public void hechizarTormenta() {
-    	this.pokemon.vitalidad*=0.9;
+    	this.vitalidad*=0.9;
     }
     
     /**

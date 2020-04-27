@@ -24,7 +24,7 @@ public class PokemonHielo extends PokemonDecorator {
      * <b>Post:</b> El pokemon setea su fuerza a 100 por defecto.
      */
     public void terminaCansancio(){
-    	this.pokemon.fuerza = 100;    
+    	this.fuerza = 100;    
     }
     
     /**
@@ -32,8 +32,8 @@ public class PokemonHielo extends PokemonDecorator {
      * <b>Post:</b> Su fuerza aumenta un 10%. Su vitalidad aumenta un 10%
      */
     public void recarga(){
-    	this.pokemon.fuerza *= 1.1;
-    	this.pokemon.vitalidad *= 1.1;    
+    	this.fuerza *= 1.1;
+    	this.vitalidad *= 1.1;    
     }
     
     /**
@@ -44,7 +44,7 @@ public class PokemonHielo extends PokemonDecorator {
      * @param pokemon de tipo Pokemon: Pokemon al cual le realizaremos daño.
      */
     public void golpeFinal(Pokemon pokemon){
-        pokemon.recibeDaño(this.pokemon.fuerza*0.90);    
+        pokemon.recibeDaño(this.fuerza*0.90);    
     }
     
     /**
@@ -56,17 +56,17 @@ public class PokemonHielo extends PokemonDecorator {
      */
     public void recibeDaño(double daño){
         double aux = 0;
-        if(daño*0.75 < this.pokemon.escudo)
-        	this.pokemon.escudo -= daño*0.75;
+        if(daño*0.75 < this.escudo)
+        	this.escudo -= daño*0.75;
         else{
             aux = daño*0.75 - escudo;
-            this.pokemon.escudo = 0;
+            this.escudo = 0;
         }
         
-        if((daño*0.25 + aux) < this.pokemon.vitalidad)     
-        	this.pokemon.vitalidad -= daño*0.25 + aux;
+        if((daño*0.25 + aux) < this.vitalidad)     
+        	this.vitalidad -= daño*0.25 + aux;
         else
-            this.pokemon.vitalidad = 0;
+            this.vitalidad = 0;
     }
 
     
@@ -79,16 +79,16 @@ public class PokemonHielo extends PokemonDecorator {
      */
     @Override
     public void hechizarNiebla() {
-    	double auxFuerza = this.pokemon.fuerza*0.3;
+    	double auxFuerza = this.fuerza*0.3;
     	
-    	if (auxFuerza>this.pokemon.escudo)
-    		this.pokemon.escudo=0;
+    	if (auxFuerza>this.escudo)
+    		this.escudo=0;
     	else
-    		this.pokemon.escudo-=auxFuerza;
-    	if (auxFuerza>=this.pokemon.vitalidad)
-    		this.pokemon.vitalidad=1;
+    		this.escudo-=auxFuerza;
+    	if (auxFuerza>=this.vitalidad)
+    		this.vitalidad=1;
     	else
-    		this.pokemon.vitalidad-=auxFuerza;
+    		this.vitalidad-=auxFuerza;
     	this.pokemon.fuerza-=auxFuerza;
     }
 
@@ -101,12 +101,12 @@ public class PokemonHielo extends PokemonDecorator {
      */
     @Override
     public void hechizarViento() {
-    	double auxValor = (this.pokemon.vitalidad*0.1) + (this.pokemon.escudo*0.1);
+    	double auxValor = (this.vitalidad*0.1) + (this.escudo*0.1);
     	
-        if (auxValor >= this.pokemon.fuerza)
-        	this.pokemon.fuerza=1;
+        if (auxValor >= this.fuerza)
+        	this.fuerza=1;
         else
-        	this.pokemon.fuerza-=auxValor;
+        	this.fuerza-=auxValor;
     }
 
     
@@ -117,8 +117,8 @@ public class PokemonHielo extends PokemonDecorator {
      */
     @Override
     public void hechizarTormenta() {
-    	this.pokemon.vitalidad*=0.85;
-    	this.pokemon.escudo*=0.85;
+    	this.vitalidad*=0.85;
+    	this.escudo*=0.85;
     }
     
     /**

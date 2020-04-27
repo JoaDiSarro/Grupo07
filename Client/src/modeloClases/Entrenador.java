@@ -59,20 +59,20 @@ public class Entrenador implements IClasificable,Cloneable{
     }
     
     public String getNombre() {
-		return nombre;
-	}
+            return nombre;
+    }
 
-	public int getCartasDisponibles() {
-		return cartasDisponibles;
-	}
+    public int getCartasDisponibles() {
+            return cartasDisponibles;
+    }
 
-	public int getClasificacionActual() {
-		return clasificacionActual;
-	}
+    public int getClasificacionActual() {
+            return clasificacionActual;
+    }
 
-	public int getCreditos() {
-		return creditos;
-	}
+    public int getCreditos() {
+            return creditos;
+    }
 
     /**
      *Método encargado de elegir un pokémon al azar de la lista.<br>
@@ -100,6 +100,7 @@ public class Entrenador implements IClasificable,Cloneable{
     
     /**
      * Método encargado de otorgarle créditos al Entrenador cuando gana una batalla.
+     * <b>Post:</b> se aumentan los creditos del Entrenador en 1000.<br>
      */
     public void obtienePremio(){
         this.creditos +=1000;
@@ -134,7 +135,7 @@ public class Entrenador implements IClasificable,Cloneable{
     /**
      *Método encargado de clonar un entrenador.<br>
      *@return Retorna un objeto clonado de tipo Entrenador.<br>
-     *@throws CloneNotSupportedException en caso que el entrenador posea un pokémon legendario, los cuales no se pueden clonar.
+     *@throws CloneNotSupportedException en caso que el entrenador posea un pokémon legendario, los cuales no se pueden clonar.<br>
      */
     @Override
 	public Object clone() throws CloneNotSupportedException {
@@ -172,13 +173,18 @@ public class Entrenador implements IClasificable,Cloneable{
     	if (this.pokemones.contains(pokemon))
     		this.pokemones.remove(pokemon);
     }
-    
-    public boolean utilizaCarta() throws SinCartasDisponiblesException {
+
+    /**
+     * Metodo por el cual un Entrenador verifica si tiene cartas disponibles para utilizar.<br>
+     * @return true en caso de poder utilizar una carta.<br>
+     * @throws SinCartasDisponiblesException se lanza en caso de no tener cartas disponibles a utilizar.
+     */
+    public boolean cartaDisponible() throws SinCartasDisponiblesException {
     	boolean auxRandom;
     	if (this.cartasDisponibles>0)
     		auxRandom = new Random().nextBoolean();
     	else
-    		throw new SinCartasDisponiblesException("El entrenador "+this.nombre+" quizo utilizar una carta, pero ya agotó su cantidad de usos.\n");
+    		throw new SinCartasDisponiblesException("\n-->El entrenador "+this.nombre+" quizo utilizar una carta, pero ya agotó su cantidad de usos.\n");
 		return auxRandom;
     }
 

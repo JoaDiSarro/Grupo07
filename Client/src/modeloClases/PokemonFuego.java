@@ -19,13 +19,12 @@ public final class PokemonFuego extends PokemonDecorator {
     	super(pokemon,530,80,200);
     }
     
-    
     /**
      * Metodo por el cual el Pokemon de Fuego recupera toda su fuerza inicial.<br>
      * <b>Post:</b> El pokemon setea su fuerza a 80 por defecto.
      */
     public void terminaCansancio(){
-    	this.pokemon.fuerza = 80;    
+    	this.fuerza = 80;    
     }
     
     /**
@@ -33,8 +32,8 @@ public final class PokemonFuego extends PokemonDecorator {
      * <b>Post:</b> Su fuerza aumenta un 10%. Su vitalidad aumenta un 10%.
      */
     public void recarga(){
-    	this.pokemon.fuerza *= 1.1;
-    	this.pokemon.vitalidad *= 1.1;    
+    	this.fuerza *= 1.1;
+    	this.vitalidad *= 1.1;    
     }
     
     /**
@@ -45,8 +44,8 @@ public final class PokemonFuego extends PokemonDecorator {
      * @param pokemon de tipo Pokemon: Pokemon al cual le realizaremos daño<br>
      */
     public void golpeFinal(Pokemon pokemon){
-        pokemon.recibeDaño(this.pokemon.fuerza*1.25);
-        this.pokemon.fuerza = 0;
+        pokemon.recibeDaño(this.fuerza*1.25);
+        this.fuerza = 0;
     }
 
     /**
@@ -58,16 +57,16 @@ public final class PokemonFuego extends PokemonDecorator {
      */
     public void recibeDaño(double daño){
         double aux = 0;
-        if(daño*0.5 < this.pokemon.escudo)
-        	this.pokemon.escudo -= daño*0.5;
+        if(daño*0.5 < this.escudo)
+        	this.escudo -= daño*0.5;
         else{
             aux = daño*0.5 - escudo;
-            this.pokemon.escudo = 0;
+            this.escudo = 0;
         }
-        if((daño*0.5 + aux) < this.pokemon.vitalidad)     
-        	this.pokemon.vitalidad -= daño*0.5 + aux;
+        if((daño*0.5 + aux) < this.vitalidad)     
+        	this.vitalidad -= daño*0.5 + aux;
         else
-            this.pokemon.vitalidad = 0;
+            this.vitalidad = 0;
     }
 
   
@@ -78,9 +77,9 @@ public final class PokemonFuego extends PokemonDecorator {
      */
     @Override
     public void hechizarNiebla() {
-    	this.pokemon.escudo*=0.9;
-    	this.pokemon.fuerza*=0.9;
-    	this.pokemon.vitalidad*=0.9;
+    	this.escudo*=0.9;
+    	this.fuerza*=0.9;
+    	this.vitalidad*=0.9;
     }
 
     
@@ -93,10 +92,10 @@ public final class PokemonFuego extends PokemonDecorator {
      */
     @Override
     public void hechizarViento() {
-    	if (this.pokemon.vitalidad*0.1>=super.pokemon.fuerza)
-    		this.pokemon.fuerza=1;
+    	if (this.vitalidad*0.1>=fuerza)
+    		this.fuerza=1;
     	else
-    		this.pokemon.fuerza-= this.pokemon.vitalidad*0.1;
+    		this.fuerza-= this.vitalidad*0.1;
     }
 
     
@@ -107,7 +106,7 @@ public final class PokemonFuego extends PokemonDecorator {
      */
     @Override
     public void hechizarTormenta() {
-    	this.pokemon.vitalidad*=0.6;
+    	this.vitalidad*=0.6;
     }
     
     /**

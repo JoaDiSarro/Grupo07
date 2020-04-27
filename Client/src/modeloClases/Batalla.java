@@ -40,50 +40,49 @@ public class Batalla {
         p1 = entrenadorA.eligePokemon();
         p2 = entrenadorB.eligePokemon();
         System.out.println("\n----------------------COMIENZA LA BATALLA----------------------\n");
+        System.out.println("Se enfrentan: \n"+entrenadorA.getNombre()+" junto a "+p1.toString()+"\n        vs\n"+entrenadorB.getNombre()+" junto a "+p2.toString());
         try {
-        	randomCartaA = entrenadorA.utilizaCarta();
+        	randomCartaA = entrenadorA.cartaDisponible();
         }
         catch(SinCartasDisponiblesException e) {
         	System.out.println(e.getMessage());
         }
         
         try {
-        	randomCartaB = entrenadorB.utilizaCarta();
+        	randomCartaB = entrenadorB.cartaDisponible();
         }
         catch(SinCartasDisponiblesException e) {
            	System.out.println(e.getMessage());
         }
-        
+        System.out.println("\nComienza el combate");
         while (i<maxAtaques) {
                 i++;
         	if (randomCartaA) {
         		entrenadorA.usarCarta(p2);
-                        System.out.println("El entrenador "+entrenadorA.getNombre()+" uso una carta");
+                        System.out.println("\n-->El entrenador "+entrenadorA.getNombre()+" uso una carta");
         		randomCartaA=false;
         	}
         	p1.ataca(p2);
-        	System.out.println(p2.getVitalidad());
+        	System.out.println(p2.getNombre() +":\n-Vida:" + p2.getVitalidad()+"  --  Escudo:"+p2.getEscudo());
         	if (p2.getVitalidad()<=0) {
-                        System.out.println("\nEl pokemon del entrenador "+entrenadorB.getNombre()+" ha muerto");
+                        System.out.println("\n"+p2.getNombre()+" ha muerto");
         		entrenadorB.eliminaPokemon(p2);
-        		p1.actualizaClasificacion();
-        		entrenadorA.actualizaClasificacion();
+        		actualizaEstado(entrenadorA, p1);;    
         		ganador = entrenadorA;
         		break;
         	}
         	else {
         		if (randomCartaB) {
         			entrenadorA.usarCarta(p1);
-                                System.out.println("El entrenador "+entrenadorB.getNombre()+" uso una carta");
+                                System.out.println("\n-->El entrenador "+entrenadorB.getNombre()+" uso una carta");
         			randomCartaB=false;
         		}
         		p2.ataca(p1);
-                        System.out.println(p1.getVitalidad());
+                        System.out.println(p1.getNombre() +":\n-Vida:" + p1.getVitalidad()+"  --  Escudo:"+p1.getEscudo());
         		if (p1.getVitalidad() <= 0) {
-                                System.out.println("\nEl pokemon del entrenador "+entrenadorA.getNombre()+" ha muerto");
+                                System.out.println("\n"+p1.getNombre()+" ha muerto");
         			entrenadorA.eliminaPokemon(p1);
-        			p2.actualizaClasificacion();
-        			entrenadorB.actualizaClasificacion();
+                                actualizaEstado(entrenadorB, p2);
         			ganador= entrenadorB;
         			break;
         		}
@@ -92,23 +91,33 @@ public class Batalla {
         }    
         if (ganador==null) {
         	if (p1.comparaEstado(p2)== 1) {
-        		p1.actualizaClasificacion();
-        		entrenadorA.actualizaClasificacion();
-        		entrenadorA.obtienePremio();
+                        p2.pierdeBatalla();
+        		actualizaEstado(entrenadorA, p1);
         		ganador = entrenadorA;
         	}
         	else {
-        		p2.actualizaClasificacion();
-        		entrenadorB.actualizaClasificacion();
-        		entrenadorB.obtienePremio();
-        		ganador = entrenadorB;
+        	    p1.pierdeBatalla();
+        	    actualizaEstado(entrenadorB, p2);
+                    ganador = entrenadorB;
         	}  		
         }      
         listaResultados.add(new Reporte(entrenadorA,p1,entrenadorB,p2,ganador));
         return ganador;
     }
-    
-    
-    
+
+    /**
+     * Metodo que se encarga de actualizar el estado de un Entrenador y su pokemon luego de ganar una batalla.<br>
+     * <b>Pre:</b> El entrenador y el pokemon deben ser distintos de null.<br>
+     * <b>Post:</b> Se actualizan los premios y estados del Entrenador y su Pokemon.<br>
+     * @param entrenador  de tipo Entrenador: Entrenador ganador de la batalla.<br>
+     * @param pokemon  de tipo Pokemon: Pokemon ganador de la batalla.<br>
+     */
+    private void actualizaEstado(Entrenador entrenador, Pokemon pokemon) {
+        pokemon.ganaBatalla();
+        pokemon.actualizaClasificacion();
+        entrenador.actualizaClasificacion();
+        entrenador.obtienePremio();
+    }
+     
 }
 

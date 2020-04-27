@@ -22,7 +22,7 @@ public class Prueba {
     public static void main(String[] args) {
         Prueba prueba = new Prueba();
     
-    /*
+
 //CREACION POKEMON
 
         Pokemon p1 = factory.creaPokemon("Pikachu", "Comun", "Agua");
@@ -144,7 +144,7 @@ public class Prueba {
                 System.out.println(p9clon.toString());
                 //System.out.println(p10clon.toString());
                 System.out.println(p11clon.toString());
-  */              
+           
 //CREACION DE CARTAS
                 
         Carta cartaNiebla = new CartaNiebla();
@@ -214,7 +214,7 @@ public class Prueba {
         generaDatosEntrenador(e15);
         generaDatosEntrenador(e16);
         
-  /*      
+     
 //CLONACION DE ENTRENADOR
         
         Entrenador entrenadorAClonar = new Entrenador("EntrenadorAClonar",4);
@@ -227,7 +227,6 @@ public class Prueba {
             } catch (CloneNotSupportedException e) {
                 System.out.println(e.getMessage());
             }
-    */
         
 //CREACION DE TORNEO
         
@@ -254,16 +253,15 @@ public class Prueba {
         
 //COMIENZA EL TORNEO
         
-        torneo.ejecutaTorneo();
+        torneo.ejecutaTorneo();        
         
-        
-    } //ES LA DEL MAIN
+} //ES LA DEL MAIN
                   
     public static void generaDatosEntrenador(Entrenador entrenador){
         entrenador.agregaPokemon(factory.creaPokemon("Pikachu1", "Comun", "tierra"));
         entrenador.agregaPokemon(factory.creaPokemon("Pikachu2", "Comun", "hielo recargado"));
-        entrenador.agregaPokemon(factory.creaPokemon("Pikachu3", "Comun", "agua"));
-        entrenador.agregaPokemon(factory.creaPokemon("Pikachu4", "Comun", "fuego"));
-        entrenador.agregaPokemon(factory.creaPokemon("Pikachu5", "Comun", "Electrico"));
+        //entrenador.agregaPokemon(factory.creaPokemon("Pikachu3", "Comun", "agua"));
+        //entrenador.agregaPokemon(factory.creaPokemon("Pikachu4", "Comun", "fuego"));
+        //entrenador.agregaPokemon(factory.creaPokemon("Pikachu5", "Comun", "Electrico"));
     }
 }

@@ -35,7 +35,31 @@ public abstract class Pokemon implements Cloneable,IHechizable, IClasificable{
      * <b>Post:</b>Se genera un nuevo Pokemon.<br>
      * @param nombre  de tipo String: Nombre del Pokemon.<br>
      */
-    public Pokemon(String nombre){
+
+    /**
+     * Metodo Constructor parametrizado.<br>
+     * Por defecto su experiencia comienza con valor = 0 y su clasificacionActual = 1.<br>
+     * <b>Pre:</b> El parametro nombre debe ser distinto de null. Ademas, vitalidad, fuerza y escudo deben ser distinto de null y mayores a 0.<br>
+     * <b>Post:</b>Se genera un nuevo Pokemon.<br>
+     * @param nombre  de tipo String: hace referencia al nombre del Pokemon a crear.<br>
+     * @param vitalidad  de tipo double: hace referencia a la vitalidad del Pokemon a crear.<br>
+     * @param fuerza  de tipo double: hace referencia a la fuerza del Pokemon a crear.<br>
+     * @param escudo  de tipo double: hace referencia al escudo del Pokemon a crear.<br>
+     */
+    public Pokemon(String nombre, double vitalidad, double fuerza, double escudo){
+        this.nombre = nombre;
+        this.vitalidad = vitalidad;
+        this.fuerza = fuerza;
+        this.escudo = escudo;
+    }
+
+    /**
+     * Constructor parametrizado
+     *  <b>Pre:</b> El parametro nombre debe ser distinto de null.<br>
+     *  <b>Post:</b>Se genera un nuevo Pokemon.<br>
+     * @param nombre  de tipo String: hace referencia al nombre del Pokemon a crear.<br>
+     */
+    public Pokemon(String nombre) {
         this.nombre = nombre;
     }
     
@@ -119,7 +143,7 @@ public abstract class Pokemon implements Cloneable,IHechizable, IClasificable{
      */
     public void actualizaClasificacion() {
     	if (this.clasificacionActual==1) {
-    		if (this.experiencia > 5) {
+    		if (this.experiencia > 3) {
     			this.clasificacionActual = 2;
     			this.escudo*=1.3;
     			this.vitalidad*=1.3;
@@ -128,7 +152,7 @@ public abstract class Pokemon implements Cloneable,IHechizable, IClasificable{
     	}
     	else
     		if (this.clasificacionActual==2){
-    			if (this.experiencia > 10) {
+    			if (this.experiencia > 6) {
     				this.clasificacionActual = 3;
     				this.escudo*=2;
     				this.fuerza*=2;
@@ -144,7 +168,7 @@ public abstract class Pokemon implements Cloneable,IHechizable, IClasificable{
      * @param pokemon  de tipo Pokemon : Pokemon al que se le hara daño.<br>
      */
     public void ataca(Pokemon pokemon){
-        System.out.println("\n"+this.nombre+" ataca a "+pokemon.getNombre());
+        System.out.println("\n-->"+this.nombre+" realiza su secuencia de ataque..\n");
         golpeInicial(pokemon);
         recarga();
         golpeFinal(pokemon);
@@ -158,7 +182,6 @@ public abstract class Pokemon implements Cloneable,IHechizable, IClasificable{
      */
     public void golpeInicial(Pokemon pokemon){
         pokemon.recibeDaño(this.fuerza);
-        //se cansa
         this.fuerza *= 0.5;
     }
     
@@ -175,9 +198,6 @@ public abstract class Pokemon implements Cloneable,IHechizable, IClasificable{
     public abstract void golpeFinal(Pokemon pokemon);
 
     public abstract void recibeDaño(double daño);
-    
-    //devuelve 1 si gane yo, 0 si perdi
-    //resolver el hecho de que el estadoPropio y el estadoAjeno sean iguales
 
     /**
      * Metodo que se encarga de comprar el estado entre dos Pokemones.<br>
