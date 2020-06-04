@@ -1,5 +1,7 @@
 package vista;
 
+import controlador.ControladorRegistroDeParticipantes;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -23,15 +25,26 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 
-public class RegistroDeParticipantes extends JFrame {
+import java.awt.event.ActionListener;
+
+import vista.interfacesVista.IVistaRegistroParticipantes;
+
+public class RegistroDeParticipantes extends JFrame implements IVistaRegistroParticipantes {
 
 
 	private static final long serialVersionUID = 1L;
 	private JPanel panelGeneral;
-
+        private ControladorRegistroDeParticipantes controlador;
+        private JButton btnAgregarEntrenador = new JButton("Agregar Entrenador");
+        private JButton btnClonaEntrenador = new JButton("Clonar Entrenador");
+        private JButton btnAgregarPokemon = new JButton("Agregar Pokemon");
+        private JButton btnClonaPokemon = new JButton("Clonar Pokemon");
+        private JButton btnIniciarTorneo = new JButton("INICIO DEL TORNEO");
+        
+/*
 	/**
 	 * Launch the application.
-	 */
+	 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -44,13 +57,12 @@ public class RegistroDeParticipantes extends JFrame {
 			}
 		});
 	}
-
+*/
 	/**
 	 * Create the frame.
 	 */
 	public RegistroDeParticipantes() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 634, 588);
 		panelGeneral = new JPanel();
 		panelGeneral.setBorder(new TitledBorder(null, "Registro de Participantes", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		setContentPane(panelGeneral);
@@ -109,36 +121,41 @@ public class RegistroDeParticipantes extends JFrame {
 		fl_panelEnvAgregaEntrenador.setVgap(25);
 		panelAgregaObjetos.add(panelEnvAgregaEntrenador);
 		
-		JButton btnAgregarEntrenador = new JButton("Agregar Entrenador");
+		//AgregarEntrenador
 		panelEnvAgregaEntrenador.add(btnAgregarEntrenador);
+                btnAgregarEntrenador.setActionCommand(AGREGARENTRENADOR);
 		
 		JPanel panelEnvClonaEntrenador = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panelEnvClonaEntrenador.getLayout();
 		flowLayout.setVgap(25);
 		panelAgregaObjetos.add(panelEnvClonaEntrenador);
 		
-		JButton btnClonaEntrenador = new JButton("Clonar Entrenador");
+		//ClonaEntrenador
 		panelEnvClonaEntrenador.add(btnClonaEntrenador);
+                btnClonaEntrenador.setActionCommand(CLONAENTRENADOR);
 		
 		JPanel panelEnvAgregaPokemon = new JPanel();
 		panelAgregaObjetos.add(panelEnvAgregaPokemon);
 		
-		JButton btnAgregarPokemon = new JButton("Agregar Pokemon");
+                //AgregarPokemon
 		panelEnvAgregaPokemon.add(btnAgregarPokemon);
+                btnAgregarPokemon.setActionCommand(AGREGARPOKEMON);
 		
 		JPanel panelEnvClonaPokemon = new JPanel();
 		panelAgregaObjetos.add(panelEnvClonaPokemon);
 		
-		JButton btnClonaPokemon = new JButton("Clonar Pokemon");
+		//ClonaPokemon
 		panelEnvClonaPokemon.add(btnClonaPokemon);
+                btnClonaPokemon.setActionCommand(CLONAPOKEMON);
 		
 		JPanel panelInicioTorneo = new JPanel();
 		panelBotones.add(panelInicioTorneo);
 		panelInicioTorneo.setLayout(new GridLayout(2, 0, 0, 0));
 		
-		JButton btnIniciarTorneo = new JButton("INICIO DEL TORNEO");
+		//IniciarTorneo
 		btnIniciarTorneo.setFont(new Font("Tahoma", Font.BOLD, 12));
 		panelInicioTorneo.add(btnIniciarTorneo);
+                btnIniciarTorneo.setActionCommand(INICIARTORNEO);
 		
 		JPanel panelEnvRestriccionTorneo = new JPanel();
 		panelEnvRestriccionTorneo.setBorder(new LineBorder(Color.LIGHT_GRAY, 1, true));
@@ -154,4 +171,28 @@ public class RegistroDeParticipantes extends JFrame {
 		scrollRestriccionTorneo.setViewportView(lblRestriccionTorneo);
 	}
 
+    public void setControlador(ActionListener c){
+        controlador = (ControladorRegistroDeParticipantes) c;
+        btnAgregarEntrenador.addActionListener(c);
+        btnClonaEntrenador.addActionListener(c);
+        btnAgregarPokemon.addActionListener(c);
+        btnClonaPokemon.addActionListener(c);
+        btnIniciarTorneo.addActionListener(c);
+    }
+    
+    @Override
+    public void abrir(){
+        setBounds(100, 100, 634, 588);
+        setVisible(true);
+    }
+
+    @Override
+    public void cerrar() {
+        setVisible(false);
+    }
+
+    @Override
+    public void muestraMensajeAlerta(String mensaje) {
+        // TODO Implement this method
+    }
 }

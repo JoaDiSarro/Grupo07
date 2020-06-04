@@ -1,7 +1,12 @@
 package vista;
 
+import controlador.ControladorAgregaEntrenador;
+import controlador.ControladorRegistroDeParticipantes;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -24,14 +29,21 @@ import javax.swing.JScrollPane;
 import javax.swing.JList;
 import javax.swing.JButton;
 
-public class AgregaEntrenador extends JFrame {
+import javax.swing.JOptionPane;
+
+import vista.interfacesVista.IVistaAgregaEntrenador;
+
+public class AgregaEntrenador extends JFrame implements IVistaAgregaEntrenador{
 
 	private JPanel panelRegistroEntrenador;
 	private JTextField textNombre;
+        private ControladorAgregaEntrenador controlador;
+        private JButton btnAgregaPokemon = new JButton("Agregar Pok\u00E9mon");
+        private JButton btnAceptar = new JButton("Aceptar");
 
-	/**
+/*	/**
 	 * Launch the application.
-	 */
+	 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -44,13 +56,12 @@ public class AgregaEntrenador extends JFrame {
 			}
 		});
 	}
-
+*/
 	/**
 	 * Create the frame.
 	 */
 	public AgregaEntrenador() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 498, 416);
 		panelRegistroEntrenador = new JPanel();
 		panelRegistroEntrenador.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Registrar entrenador", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelRegistroEntrenador.setLayout(new BorderLayout(0, 0));
@@ -116,18 +127,47 @@ public class AgregaEntrenador extends JFrame {
 		panelBotones.add(panelEnvNuevoPokemon);
 		panelEnvNuevoPokemon.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 20));
 		
-		JButton btnAgregaPokemon = new JButton("Agregar Pok\u00E9mon");
-		btnAgregaPokemon.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		//Boton Agrega Pokemon
+                btnAgregaPokemon.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		panelEnvNuevoPokemon.add(btnAgregaPokemon);
+                btnAgregaPokemon.setActionCommand(AGREGARPOKEMON);
 		
 		JPanel panelEnvCrear = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panelEnvCrear.getLayout();
 		flowLayout.setVgap(20);
 		panelBotones.add(panelEnvCrear);
 		
-		JButton btnAceptar = new JButton("Aceptar");
+                //Boton Aceptar
 		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		panelEnvCrear.add(btnAceptar);
+                btnAceptar.setActionCommand(ACEPTAR);
 	}
+        
+    public void abrir(){
+        setBounds(100, 100, 498, 416);
+        setVisible(true);
+    }
 
+    @Override
+    public void cerrar() {
+        setVisible(false);
+    }
+
+    @Override
+    public void setControlador(ActionListener c) {
+        controlador = (ControladorAgregaEntrenador) c;
+        btnAgregaPokemon.addActionListener(c);
+        btnAceptar.addActionListener(c);
+        
+    }
+
+    @Override
+    public String getNombre() {
+        return textNombre.getText();
+    }
+
+    @Override
+    public void muestraMensajeAlerta(String mensaje) {
+        JOptionPane.showMessageDialog(null, mensaje);
+    }
 }
