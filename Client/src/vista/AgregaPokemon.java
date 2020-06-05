@@ -1,7 +1,11 @@
 package vista;
 
+import controlador.ControladorAgregaPokemon;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -20,10 +24,13 @@ import javax.swing.JList;
 import javax.swing.JButton;
 import java.awt.Font;
 
-public class AgregaPokemon extends JFrame {
+import vista.interfacesVista.IVistaAgregaPokemon;
+
+public class AgregaPokemon extends JFrame implements IVistaAgregaPokemon {
 
 	private JPanel panelAgregaPokemon;
 	private JTextField textNombre;
+        private ControladorAgregaPokemon controlador;
 
 	/**
 	 * Launch the application.
@@ -46,7 +53,6 @@ public class AgregaPokemon extends JFrame {
 	 */
 	public AgregaPokemon() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 323, 457);
 		panelAgregaPokemon = new JPanel();
 		panelAgregaPokemon.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Agregar Pokemon", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelAgregaPokemon.setLayout(new BorderLayout(0, 0));
@@ -105,4 +111,25 @@ public class AgregaPokemon extends JFrame {
 		panelBoton.add(btnAceptar);
 	}
 
+    @Override
+    public void abrir() {
+        setBounds(100, 100, 323, 457);
+        setVisible(true);
+    }
+
+    @Override
+    public void cerrar() {
+        setVisible(false);
+    }
+
+    @Override
+    public void setControlador(ActionListener c) {
+        controlador = (ControladorAgregaPokemon) c;
+        
+    }
+
+    @Override
+    public void muestraMensajeAlerta(String mensaje) {
+        // TODO Implement this method
+    }
 }

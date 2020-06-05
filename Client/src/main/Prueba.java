@@ -1,5 +1,7 @@
 package main;
 
+import controlador.ControladorRegistroDeParticipantes;
+
 import exceptions.SinCartasDisponiblesException;
 
 import java.util.ArrayList;
@@ -13,6 +15,10 @@ import modeloClases.Pokemon;
 import modeloClases.PokemonFactory;
 import modeloClases.Torneo;
 
+import vista.RegistroDeParticipantes;
+
+import vista.interfacesVista.IVistaRegistroParticipantes;
+
 public class Prueba {
     public static PokemonFactory factory = new PokemonFactory();
     public Prueba() {
@@ -21,10 +27,13 @@ public class Prueba {
 
     public static void main(String[] args) {
         Prueba prueba = new Prueba();
-    
+        IVistaRegistroParticipantes vistaPrincipal = new RegistroDeParticipantes();
+        ControladorRegistroDeParticipantes controladorPrincipal = new ControladorRegistroDeParticipantes(vistaPrincipal);
+        vistaPrincipal.setControlador(controladorPrincipal);
+        vistaPrincipal.abrir();
 
 //CREACION POKEMON
-
+/*
         Pokemon p1 = factory.creaPokemon("Pikachu", "Comun", "Agua");
         Pokemon p1clon = null;
 
@@ -254,7 +263,7 @@ public class Prueba {
 //COMIENZA EL TORNEO
         
         torneo.ejecutaTorneo();        
-        
+        */
 } //ES LA DEL MAIN
                   
     public static void generaDatosEntrenador(Entrenador entrenador){

@@ -36,10 +36,11 @@ public class Torneo {
      * Metodo el cual se encarga de agregar entrenadores a la Lista de Entrenadores del Torneo.<br>
      * <b>Pre:</b> El entrenador debe ser distinto de null.<br>
      * <b>Post:</b> Se agrega un entrenador a la lista de Entrenadores.<br>
-     * @param entrenador de tipo Entrenador: sera el nuevo entrenador que participara en el Torneo.
+     * @param nombre de tipo String: nombre del entrenador a crear<br>
+     * @param cantCartas de tipo Int: cantidad de cartas disponibles a usar por el entrenador<br>
      */
-    public void agregaEntrenador(Entrenador entrenador){
-        this.listaEntrenadores.add(entrenador);
+    public void agregaEntrenador(String nombre, int cantCartas){
+        this.listaEntrenadores.add(new Entrenador(nombre,cantCartas));
     }
 
     /**
