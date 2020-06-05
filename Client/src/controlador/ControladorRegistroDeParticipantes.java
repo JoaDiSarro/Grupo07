@@ -2,22 +2,16 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import modeloClases.Sistema;
-
 import vista.AgregaEntrenador;
-
 import vista.interfacesVista.IVista;
 import vista.interfacesVista.IVistaAgregaEntrenador;
 import vista.interfacesVista.IVistaRegistroParticipantes;
 
 public class ControladorRegistroDeParticipantes implements ActionListener{
     private IVistaRegistroParticipantes vista;
-    //private Sistema sistema;
     
     public ControladorRegistroDeParticipantes(IVistaRegistroParticipantes vista) {
         this.vista = vista;
-        //this.sistema = Sistema.getInstance();
     }
 
     @Override

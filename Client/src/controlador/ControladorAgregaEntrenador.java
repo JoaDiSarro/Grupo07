@@ -3,7 +3,7 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import modeloClases.Sistema;
+import modeloClases.Torneo;
 
 import vista.AgregaPokemon;
 
@@ -13,11 +13,11 @@ import vista.interfacesVista.IVistaAgregaPokemon;
 public class ControladorAgregaEntrenador implements ActionListener{
     
     private IVistaAgregaEntrenador vista;
-    private Sistema sistema;
+    private Torneo torneo;
     
     public ControladorAgregaEntrenador(IVistaAgregaEntrenador vista) {
         this.vista = vista;
-        sistema = Sistema.getInstance();
+        torneo = Torneo.getInstance();
     }
 
     @Override
@@ -25,7 +25,9 @@ public class ControladorAgregaEntrenador implements ActionListener{
         if(evento.getActionCommand().equalsIgnoreCase(vista.ACEPTAR)){
             String nombre = vista.getNombre();
             if(nombre != null && !nombre.isEmpty())
-                sistema.nuevoEntrenador(nombre);
+                //torneo.nuevoEntrenador(nombre);
+                //TODO:agregar la cantidad de cartas iniciales, debe estar en la vista. Falta agregar.
+                torneo.agregaEntrenador(nombre,0);
             else
                 vista.muestraMensajeAlerta("Ingrese un nombre valido");
         }else if(evento.getActionCommand().equalsIgnoreCase(vista.AGREGARPOKEMON)){
