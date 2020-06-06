@@ -31,7 +31,7 @@ public class Prueba {
         ControladorRegistroDeParticipantes controladorPrincipal = new ControladorRegistroDeParticipantes(vistaPrincipal);
         vistaPrincipal.setControlador(controladorPrincipal);
         vistaPrincipal.abrir();
-
+//Probando si anda 
 //CREACION POKEMON
 /*
         Pokemon p1 = factory.creaPokemon("Pikachu", "Comun", "Agua");
