@@ -11,10 +11,12 @@ import java.util.ArrayList;
  */
 public class Torneo {
     
-    private ArrayList<Entrenador> listaEntrenadores = new ArrayList<>();
-    private Ronda ronda = new Ronda();
+	private static Torneo instance;
+	private Ronda ronda = new Ronda();
+	private ArrayList<Entrenador> listaEntrenadores = new ArrayList<>();
     private ArrayList<Reporte> reporteResultados = new ArrayList<>();
-    private static Torneo instance;
+    private ArrayList<Arena> arenas = new ArrayList<>();
+    
 
     /**
      * Constructor sin parametros

@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import modeloClases.Torneo;
 
-import vista.AgregaPokemon;
+import vista.VistaAgregaPokemon;
 
 import vista.interfacesVista.IVistaAgregaEntrenador;
 import vista.interfacesVista.IVistaAgregaPokemon;
@@ -37,7 +37,7 @@ public class ControladorAgregaEntrenador implements ActionListener{
     }
     
     public void abrirVentanaPokemon(){
-        IVistaAgregaPokemon vista = new AgregaPokemon();
+        IVistaAgregaPokemon vista = new VistaAgregaPokemon();
         ControladorAgregaPokemon controlador = new ControladorAgregaPokemon(vista);
         vista.setControlador(controlador);
         vista.abrir();
