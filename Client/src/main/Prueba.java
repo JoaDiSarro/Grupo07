@@ -15,7 +15,7 @@ import modeloClases.Pokemon;
 import modeloClases.PokemonFactory;
 import modeloClases.Torneo;
 
-import vista.RegistroDeParticipantes;
+import vista.VistaRegistroDeParticipantes;
 
 import vista.interfacesVista.IVistaRegistroParticipantes;
 
@@ -27,7 +27,7 @@ public class Prueba {
 
     public static void main(String[] args) {
         Prueba prueba = new Prueba();
-        IVistaRegistroParticipantes vistaPrincipal = new RegistroDeParticipantes();
+        IVistaRegistroParticipantes vistaPrincipal = new VistaRegistroDeParticipantes();
         ControladorRegistroDeParticipantes controladorPrincipal = new ControladorRegistroDeParticipantes(vistaPrincipal);
         vistaPrincipal.setControlador(controladorPrincipal);
         vistaPrincipal.abrir();
@@ -265,7 +265,7 @@ public class Prueba {
         torneo.ejecutaTorneo();        
         */
 } //ES LA DEL MAIN
-                  
+
     public static void generaDatosEntrenador(Entrenador entrenador){
         entrenador.agregaPokemon(factory.creaPokemon("Pikachu1", "Comun", "tierra"));
         entrenador.agregaPokemon(factory.creaPokemon("Pikachu2", "Comun", "hielo recargado"));

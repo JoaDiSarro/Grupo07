@@ -26,8 +26,9 @@ import java.awt.Font;
 
 import vista.interfacesVista.IVistaAgregaPokemon;
 
-public class AgregaPokemon extends JFrame implements IVistaAgregaPokemon {
+public class VistaAgregaPokemon extends JFrame implements IVistaAgregaPokemon {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel panelAgregaPokemon;
 	private JTextField textNombre;
         private ControladorAgregaPokemon controlador;
@@ -39,7 +40,7 @@ public class AgregaPokemon extends JFrame implements IVistaAgregaPokemon {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AgregaPokemon frame = new AgregaPokemon();
+					VistaAgregaPokemon frame = new VistaAgregaPokemon();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,8 +52,9 @@ public class AgregaPokemon extends JFrame implements IVistaAgregaPokemon {
 	/**
 	 * Create the frame.
 	 */
-	public AgregaPokemon() {
+	public VistaAgregaPokemon() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(300, 300, 450, 408); //Despues borrar
 		panelAgregaPokemon = new JPanel();
 		panelAgregaPokemon.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Agregar Pokemon", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelAgregaPokemon.setLayout(new BorderLayout(0, 0));
@@ -72,12 +74,12 @@ public class AgregaPokemon extends JFrame implements IVistaAgregaPokemon {
 		
 		JPanel panelEnvTextNombre = new JPanel();
 		FlowLayout fl_panelEnvTextNombre = (FlowLayout) panelEnvTextNombre.getLayout();
-		fl_panelEnvTextNombre.setVgap(38);
+		fl_panelEnvTextNombre.setVgap(33);
 		panelNombre.add(panelEnvTextNombre);
 		
 		textNombre = new JTextField();
 		panelEnvTextNombre.add(textNombre);
-		textNombre.setColumns(12);
+		textNombre.setColumns(18);
 		
 		JPanel panelTipo = new JPanel();
 		panelTipo.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Seleccionar tipo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -93,22 +95,47 @@ public class AgregaPokemon extends JFrame implements IVistaAgregaPokemon {
 		JPanel panelElemento = new JPanel();
 		panelElemento.setBorder(new TitledBorder(null, "Seleccionar elemento", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panelDatos.add(panelElemento);
-		panelElemento.setLayout(new BorderLayout(0, 0));
+		panelElemento.setLayout(new GridLayout(2, 3, 0, 0));
 		
-		JScrollPane scrollElemento = new JScrollPane();
-		panelElemento.add(scrollElemento);
+		JRadioButton rdbtnFuego = new JRadioButton("Fuego");
+		panelElemento.add(rdbtnFuego);
 		
-		JList listElementos = new JList();
-		scrollElemento.setViewportView(listElementos);
+		JRadioButton rdbtnHielo = new JRadioButton("Hielo");
+		panelElemento.add(rdbtnHielo);
+		
+		JRadioButton rdbtnAgua = new JRadioButton("Agua");
+		panelElemento.add(rdbtnAgua);
+		
+		JRadioButton rdbtnTierra = new JRadioButton("Tierra");
+		panelElemento.add(rdbtnTierra);
+		
+		JRadioButton rdbtnHieloRecargado = new JRadioButton("Hielo Recargado");
+		panelElemento.add(rdbtnHieloRecargado);
+		
+		JRadioButton rdbtnElectrico = new JRadioButton("El\u00E9ctrico");
+		panelElemento.add(rdbtnElectrico);
 		
 		JPanel panelBoton = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) panelBoton.getLayout();
-		flowLayout.setVgap(25);
 		panelDatos.add(panelBoton);
+		panelBoton.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		JPanel panelEnvAgregaOtro = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panelEnvAgregaOtro.getLayout();
+		flowLayout.setVgap(25);
+		panelBoton.add(panelEnvAgregaOtro);
+		
+		JButton btnAgregarOtro = new JButton("Agregar Otro");
+		panelEnvAgregaOtro.add(btnAgregarOtro);
+		btnAgregarOtro.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		
+		JPanel panelAceptar = new JPanel();
+		FlowLayout flowLayout_1 = (FlowLayout) panelAceptar.getLayout();
+		flowLayout_1.setVgap(25);
+		panelBoton.add(panelAceptar);
 		
 		JButton btnAceptar = new JButton("Aceptar");
+		panelAceptar.add(btnAceptar);
 		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		panelBoton.add(btnAceptar);
 	}
 
     @Override
