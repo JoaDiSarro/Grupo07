@@ -41,22 +41,6 @@ public class AgregaEntrenador extends JFrame implements IVistaAgregaEntrenador{
         private JButton btnAgregaPokemon = new JButton("Agregar Pok\u00E9mon");
         private JButton btnAceptar = new JButton("Aceptar");
 
-/*	/**
-	 * Launch the application.
-	 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AgregaEntrenador frame = new AgregaEntrenador();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-*/
 	/**
 	 * Create the frame.
 	 */

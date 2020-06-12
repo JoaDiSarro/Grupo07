@@ -33,22 +33,6 @@ public class AgregaPokemon extends JFrame implements IVistaAgregaPokemon {
         private ControladorAgregaPokemon controlador;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AgregaPokemon frame = new AgregaPokemon();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public AgregaPokemon() {

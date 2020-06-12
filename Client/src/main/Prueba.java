@@ -6,6 +6,7 @@ import exceptions.SinCartasDisponiblesException;
 
 import java.util.ArrayList;
 
+import modeloClases.Arena;
 import modeloClases.Carta;
 import modeloClases.CartaNiebla;
 import modeloClases.CartaTormenta;
@@ -27,13 +28,14 @@ public class Prueba {
 
     public static void main(String[] args) {
         Prueba prueba = new Prueba();
+        //aca llama a la vista principal, y empieza el flujo de UIs
         IVistaRegistroParticipantes vistaPrincipal = new RegistroDeParticipantes();
         ControladorRegistroDeParticipantes controladorPrincipal = new ControladorRegistroDeParticipantes(vistaPrincipal);
         vistaPrincipal.setControlador(controladorPrincipal);
         vistaPrincipal.abrir();
 
 //CREACION POKEMON
-/*
+
         Pokemon p1 = factory.creaPokemon("Pikachu", "Comun", "Agua");
         Pokemon p1clon = null;
 
@@ -68,7 +70,7 @@ public class Prueba {
         Pokemon p11clon = null;
         
 //MUESTRA POKEMONES
-        
+       /* 
         System.out.println(p1.toString());
         System.out.println(p2.toString());
         System.out.println(p3.toString());
@@ -80,9 +82,9 @@ public class Prueba {
         System.out.println(p9.toString());
         System.out.println(p10.toString());
         System.out.println(p11.toString());
-        
+        */
 //CLONACION POKEMONES
-        
+        /*
                 try {
 			p1clon=(Pokemon) p1.clone();
 		} catch (CloneNotSupportedException e) {
@@ -153,7 +155,7 @@ public class Prueba {
                 System.out.println(p9clon.toString());
                 //System.out.println(p10clon.toString());
                 System.out.println(p11clon.toString());
-           
+           */
 //CREACION DE CARTAS
                 
         Carta cartaNiebla = new CartaNiebla();
@@ -260,17 +262,24 @@ public class Prueba {
         torneo.agregaEntrenador(e15);
         torneo.agregaEntrenador(e16);
         
+//CREACION DE LAS ARENAS
+        
+ 
+        torneo.agregaArena(new Arena("ARENA 1"));
+        torneo.agregaArena(new Arena("ARENA 2"));
+        torneo.agregaArena(new Arena("ARENA 3"));
+        
 //COMIENZA EL TORNEO
         
         torneo.ejecutaTorneo();        
-        */
-} //ES LA DEL MAIN
+        
+} //llave del main
                   
     public static void generaDatosEntrenador(Entrenador entrenador){
         entrenador.agregaPokemon(factory.creaPokemon("Pikachu1", "Comun", "tierra"));
         entrenador.agregaPokemon(factory.creaPokemon("Pikachu2", "Comun", "hielo recargado"));
-        //entrenador.agregaPokemon(factory.creaPokemon("Pikachu3", "Comun", "agua"));
-        //entrenador.agregaPokemon(factory.creaPokemon("Pikachu4", "Comun", "fuego"));
-        //entrenador.agregaPokemon(factory.creaPokemon("Pikachu5", "Comun", "Electrico"));
+        entrenador.agregaPokemon(factory.creaPokemon("Pikachu3", "Comun", "agua"));
+        entrenador.agregaPokemon(factory.creaPokemon("Pikachu4", "Comun", "fuego"));
+        entrenador.agregaPokemon(factory.creaPokemon("Pikachu5", "Comun", "Electrico"));
     }
 }
