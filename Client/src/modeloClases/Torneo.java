@@ -1,6 +1,9 @@
 package modeloClases;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.Random;
 
 /**
  * @author DiSarro,Joaquina.
@@ -9,14 +12,15 @@ import java.util.ArrayList;
  * Clase que representa un Torneo que tiene una unica instancia en toda la aplicacion, con sus respectivos atributos y metodos.<br>
  * Solo pueden competir 16 entrenadores, con sus respectivos Pokemones.<br>
  */
-public class Torneo {
+public class Torneo implements Observer{
     
-	private static Torneo instance;
-	private Ronda ronda = new Ronda();
-	private ArrayList<Entrenador> listaEntrenadores = new ArrayList<>();
+    private ArrayList<Entrenador> listaEntrenadores = new ArrayList<>();
+    private ArrayList<Entrenador> listaCompetidoresActual = new ArrayList<>() ;
+    private ArrayList<Arena> listaArenas = new ArrayList<>();
     private ArrayList<Reporte> reporteResultados = new ArrayList<>();
-    private ArrayList<Arena> arenas = new ArrayList<>();
-    
+    private static Torneo instance;
+    private ArrayList<Observable> observables = new ArrayList<>();
+
 
     /**
      * Constructor sin parametros
@@ -44,17 +48,28 @@ public class Torneo {
     public void agregaEntrenador(String nombre, int cantCartas){
         this.listaEntrenadores.add(new Entrenador(nombre,cantCartas));
     }
+    
+    //Se creo el metodo con el fin de probar cosas, Borrarlo al final cuando creemos bien desde la ui / main
+    public void agregaEntrenador(Entrenador entrenador){
+        this.listaEntrenadores.add(entrenador);
+    }
 
+    public void agregaArena(Arena arena) {
+        this.listaArenas.add(arena);
+    }
+    
     /**
      * Metodo el cual comienza una ronda dentro del Torneo.<br>
      * Se inicia la ronda, pasando los datos de los entrenadores y obteniendo el reporte de los resultados.<br>
      * <b>Pre:</b> La lista de entrenadores debe ser distinta de null.<br>
      * <b>Post:</b> Se ejecuta la ronda y se obtienen los Entrenadores ganadores de la misma.<br>
-     * @param entrenadores de tipo ArrayList Entrenador: tiene los datos de todos los entrenadores que participan en la Ronda. 
-     * @return  Devuelve un ArrayList de Entrenadores con los ganadores de esa Ronda.
+     * @param entrenadores de tipo ArrayList Entrenador: tiene los datos de todos los entrenadores que participan en la Ronda.
      */
-    public ArrayList<Entrenador> comienzaRonda(ArrayList<Entrenador> entrenadores){
-        return ronda.inicia(entrenadores,reporteResultados);
+    public void comienzaRonda(ArrayList<Entrenador> entrenadores){
+        Ronda ronda = new Ronda();
+        ronda.addObserver(this);
+        this.observables.add(ronda);
+        ronda.inicia(entrenadores,reporteResultados,listaArenas);
     }
 
     /**
@@ -90,13 +105,21 @@ public class Torneo {
     public void ejecutaTorneo() {
         Entrenador ganador;
         System.out.println("\n------COMIENZA EL TORNEO------\n");
-        ArrayList<Entrenador> listaCompetidoresActual = listaEntrenadores;
-        while (listaCompetidoresActual.size() != 1) {
-            listaCompetidoresActual = comienzaRonda(listaCompetidoresActual);
+        listaCompetidoresActual = listaEntrenadores;
+        comienzaRonda(listaCompetidoresActual);
+    }
+
+    @Override
+    public void update(Observable observable, Object object) {
+        if(!this.observables.contains(observable))
+            throw new IllegalArgumentException();
+        listaCompetidoresActual = (ArrayList<Entrenador>) object;
+        if(listaCompetidoresActual.size() != 1) {
+            comienzaRonda(listaCompetidoresActual);
+        }else{
+            System.out.println("GANDOR FINAL: " + listaCompetidoresActual.get(0) );
+            System.out.println("\n------FINALIZA EL TORNEO------\n");
         }
-        ganador = listaCompetidoresActual.get(0);
-        muestraReporte();
-        System.out.println("\nEl Ganador del torneo es: "+ganador);     
-        System.out.println("\n------FINALIZA EL TORNEO------\n");
+        this.observables.remove(observable);
     }
 }

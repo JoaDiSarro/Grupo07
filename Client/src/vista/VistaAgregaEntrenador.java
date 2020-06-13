@@ -43,22 +43,6 @@ public class VistaAgregaEntrenador extends JFrame implements IVistaAgregaEntrena
 	private JButton btnAceptar = new JButton("Aceptar");
 	private JTextField textField;
 
-	/*
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VistaAgregaEntrenador frame = new VistaAgregaEntrenador();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	/**
 	 * Create the frame.
 	 */

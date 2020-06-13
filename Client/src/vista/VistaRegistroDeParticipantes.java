@@ -40,6 +40,8 @@ public class VistaRegistroDeParticipantes extends JFrame implements IVistaRegist
         private JButton btnAgregarPokemon = new JButton("Agregar Pokemon");
         private JButton btnClonaPokemon = new JButton("Clonar Pokemon");
         private JButton btnIniciarTorneo = new JButton("INICIO DEL TORNEO");
+  
+  //TODO: cambiar estos main, solo deberia de haber un main en Prueba, donde llame a la ejecucion a la ventana principal. No en cada ui un main.
         
 
 	/*

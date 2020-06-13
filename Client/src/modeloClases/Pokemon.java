@@ -168,7 +168,7 @@ public abstract class Pokemon implements Cloneable,IHechizable, IClasificable{
      * @param pokemon  de tipo Pokemon : Pokemon al que se le hara daño.<br>
      */
     public void ataca(Pokemon pokemon){
-        System.out.println("\n-->"+this.nombre+" realiza su secuencia de ataque..\n");
+        //System.out.println("\n-->"+this.nombre+" realiza su secuencia de ataque..\n");
         golpeInicial(pokemon);
         recarga();
         golpeFinal(pokemon);
