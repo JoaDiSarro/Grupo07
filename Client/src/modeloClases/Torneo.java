@@ -21,6 +21,7 @@ public class Torneo implements Observer{
     private static Torneo instance;
     private ArrayList<Observable> observables = new ArrayList<>();
 
+
     /**
      * Constructor sin parametros
      */

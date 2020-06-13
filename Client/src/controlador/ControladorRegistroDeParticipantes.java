@@ -2,7 +2,7 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import vista.AgregaEntrenador;
+import vista.VistaAgregaEntrenador;
 import vista.interfacesVista.IVista;
 import vista.interfacesVista.IVistaAgregaEntrenador;
 import vista.interfacesVista.IVistaRegistroParticipantes;
@@ -31,7 +31,7 @@ public class ControladorRegistroDeParticipantes implements ActionListener{
     }
     
     public void abreVistaAgregaEntrenador(){
-        IVistaAgregaEntrenador vista = new AgregaEntrenador();
+        IVistaAgregaEntrenador vista = new VistaAgregaEntrenador();
         ControladorAgregaEntrenador controlador = new ControladorAgregaEntrenador(vista);
         vista.setControlador(controlador);
         vista.abrir();

@@ -29,7 +29,7 @@ import java.awt.event.ActionListener;
 
 import vista.interfacesVista.IVistaRegistroParticipantes;
 
-public class RegistroDeParticipantes extends JFrame implements IVistaRegistroParticipantes {
+public class VistaRegistroDeParticipantes extends JFrame implements IVistaRegistroParticipantes {
 
 
 	private static final long serialVersionUID = 1L;
@@ -43,15 +43,15 @@ public class RegistroDeParticipantes extends JFrame implements IVistaRegistroPar
   
   //TODO: cambiar estos main, solo deberia de haber un main en Prueba, donde llame a la ejecucion a la ventana principal. No en cada ui un main.
         
-/*
-	/**
+
+	/*
 	 * Launch the application.
-	 
+	*/ 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					RegistroDeParticipantes frame = new RegistroDeParticipantes();
+					VistaRegistroDeParticipantes frame = new VistaRegistroDeParticipantes();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -59,12 +59,13 @@ public class RegistroDeParticipantes extends JFrame implements IVistaRegistroPar
 			}
 		});
 	}
-*/
+
 	/**
 	 * Create the frame.
 	 */
-	public RegistroDeParticipantes() {
+	public VistaRegistroDeParticipantes() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(300, 300, 620, 619);
 		panelGeneral = new JPanel();
 		panelGeneral.setBorder(new TitledBorder(null, "Registro de Participantes", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		setContentPane(panelGeneral);
