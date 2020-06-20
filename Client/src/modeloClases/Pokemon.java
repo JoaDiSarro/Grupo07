@@ -70,6 +70,10 @@ public abstract class Pokemon implements Cloneable,IHechizable, IClasificable{
     public double getVitalidad() {
         return vitalidad;
     }
+    
+    public boolean isMuerto() {
+        return vitalidad <= 0;
+    }
 
     public double getEscudo() {
         return escudo;

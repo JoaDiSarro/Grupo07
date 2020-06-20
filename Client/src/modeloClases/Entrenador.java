@@ -177,15 +177,9 @@ public class Entrenador implements IClasificable,Cloneable{
     /**
      * Metodo por el cual un Entrenador verifica si tiene cartas disponibles para utilizar.<br>
      * @return true en caso de poder utilizar una carta.<br>
-     * @throws SinCartasDisponiblesException se lanza en caso de no tener cartas disponibles a utilizar.
      */
-    public boolean cartaDisponible() throws SinCartasDisponiblesException {
-    	boolean auxRandom;
-    	if (this.cartasDisponibles>0)
-    		auxRandom = new Random().nextBoolean();
-    	else
-    		throw new SinCartasDisponiblesException("\n-->El entrenador "+this.nombre+" quizo utilizar una carta, pero ya agotó su cantidad de usos.\n");
-		return auxRandom;
+    public boolean decideUtilizarCarta(){
+        return cartasDisponibles > 0 ? new Random().nextBoolean() : false;
     }
 
     /**

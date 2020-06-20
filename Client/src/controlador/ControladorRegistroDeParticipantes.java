@@ -16,16 +16,16 @@ public class ControladorRegistroDeParticipantes implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        if (actionEvent.getActionCommand().equalsIgnoreCase(vista.AGREGARENTRENADOR)){
+        if (actionEvent.getActionCommand().equalsIgnoreCase(IVistaRegistroParticipantes.AGREGARENTRENADOR)){
             vista.cerrar();
             abreVistaAgregaEntrenador();
-        }else if(actionEvent.getActionCommand().equalsIgnoreCase(vista.CLONAENTRENADOR)){
+        }else if(actionEvent.getActionCommand().equalsIgnoreCase(IVistaRegistroParticipantes.CLONAENTRENADOR)){
             System.out.println("Clona Entrenador");
-        }else if(actionEvent.getActionCommand().equalsIgnoreCase(vista.AGREGARPOKEMON)){
+        }else if(actionEvent.getActionCommand().equalsIgnoreCase(IVistaRegistroParticipantes.AGREGARPOKEMON)){
             System.out.println("Agregar Pokemon");
-        }else if(actionEvent.getActionCommand().equalsIgnoreCase(vista.CLONAPOKEMON)){
+        }else if(actionEvent.getActionCommand().equalsIgnoreCase(IVistaRegistroParticipantes.CLONAPOKEMON)){
             System.out.println("Clona Pokemon");
-        }else if(actionEvent.getActionCommand().equalsIgnoreCase(vista.INICIARTORNEO)){
+        }else if(actionEvent.getActionCommand().equalsIgnoreCase(IVistaRegistroParticipantes.INICIARTORNEO)){
             System.out.println("Iniciar Torneo");
         }
     }
