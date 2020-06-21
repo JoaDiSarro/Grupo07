@@ -117,6 +117,6 @@ public final class PokemonTierra extends PokemonDecorator {
      */
     @Override
 	public String toString() {
-		return super.toString()+" / "+" Elemento: Tierra";
+		return super.toString()+" | Elemento: Tierra";
 	}
 }

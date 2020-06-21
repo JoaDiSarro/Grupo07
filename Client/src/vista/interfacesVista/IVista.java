@@ -1,6 +1,9 @@
 package vista.interfacesVista;
 
 import java.awt.event.ActionListener;
+import java.util.Iterator;
+
+import modeloClases.Entrenador;
 
 public interface IVista {
     

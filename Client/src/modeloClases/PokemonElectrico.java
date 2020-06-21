@@ -109,6 +109,6 @@ public final class PokemonElectrico extends PokemonDecorator {
      */
     @Override
 	public String toString() {
-		return super.toString()+" / "+" Elemento: Electrico";
+		return super.toString()+" | Elemento: Electrico";
 	}
 }

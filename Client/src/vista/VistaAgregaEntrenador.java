@@ -2,11 +2,16 @@ package vista;
 
 import controlador.ControladorAgregaEntrenador;
 import controlador.ControladorRegistroDeParticipantes;
+import modeloClases.Entrenador;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseListener;
+import java.util.Iterator;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -33,7 +38,7 @@ import javax.swing.JOptionPane;
 
 import vista.interfacesVista.IVistaAgregaEntrenador;
 
-public class VistaAgregaEntrenador extends JFrame implements IVistaAgregaEntrenador {
+public class VistaAgregaEntrenador extends JFrame implements IVistaAgregaEntrenador, KeyListener{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel panelRegistroEntrenador;
@@ -41,18 +46,16 @@ public class VistaAgregaEntrenador extends JFrame implements IVistaAgregaEntrena
 	private ControladorAgregaEntrenador controlador;
 	private JButton btnAgregaPokemon = new JButton("Agregar Pok\u00E9mon");
 	private JButton btnAceptar = new JButton("Aceptar");
-	private JTextField textField;
+	private JTextField textCantidadCartas;
 
 	/**
 	 * Create the frame.
 	 */
 	public VistaAgregaEntrenador() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 493, 430); //Borrar después, lo dejo para probar ahora
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 493, 430); // Borrar después, lo dejo para probar ahora
+		this.setTitle("Registrar Entrenador");
 		panelRegistroEntrenador = new JPanel();
-		panelRegistroEntrenador.setBorder(new TitledBorder(
-				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
-				"Registrar entrenador", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelRegistroEntrenador.setLayout(new BorderLayout(0, 0));
 		setContentPane(panelRegistroEntrenador);
 
@@ -88,6 +91,7 @@ public class VistaAgregaEntrenador extends JFrame implements IVistaAgregaEntrena
 		panelEnvNombre.add(textNombre);
 		textNombre.setColumns(20);
 
+
 		JLabel lblCartas = new JLabel("Cantidad de Cartas:");
 		lblCartas.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblCartas.setHorizontalAlignment(SwingConstants.CENTER);
@@ -99,9 +103,9 @@ public class VistaAgregaEntrenador extends JFrame implements IVistaAgregaEntrena
 		flowLayout_1.setAlignment(FlowLayout.LEADING);
 		panelNombre.add(panelEnvCartas);
 
-		textField = new JTextField();
-		panelEnvCartas.add(textField);
-		textField.setColumns(20);
+		textCantidadCartas = new JTextField();
+		panelEnvCartas.add(textCantidadCartas);
+		textCantidadCartas.setColumns(20);
 
 		JPanel panelListaPokemones = new JPanel();
 		panelListaPokemones
@@ -143,13 +147,20 @@ public class VistaAgregaEntrenador extends JFrame implements IVistaAgregaEntrena
 		panelBotones.add(panelEnvCrear);
 
 		// Boton Aceptar
+		btnAceptar.setEnabled(false);
 		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		panelEnvCrear.add(btnAceptar);
 		btnAceptar.setActionCommand(ACEPTAR);
+		
+		//Listeners:
+		
+		//this.btnAceptar.addKeyListener(this);
+		this.textCantidadCartas.addKeyListener(this);
+		this.textNombre.addKeyListener(this);
 	}
 
 	public void abrir() {
-		setBounds(100, 100, 498, 416);
+		setBounds(100, 100, 493, 430);
 		setVisible(true);
 	}
 
@@ -163,16 +174,44 @@ public class VistaAgregaEntrenador extends JFrame implements IVistaAgregaEntrena
 		controlador = (ControladorAgregaEntrenador) c;
 		btnAgregaPokemon.addActionListener(c);
 		btnAceptar.addActionListener(c);
-
 	}
 
 	@Override
-	public String getNombre() {
-		return textNombre.getText();
+	public String getNombreEntrenador() {
+		return this.textNombre.getText();
 	}
 
+	@Override
+	public int getCantidadDeCartas() {
+		return Integer.parseInt(this.textCantidadCartas.getText());
+	}
+	
 	@Override
 	public void muestraMensajeAlerta(String mensaje) {
 		JOptionPane.showMessageDialog(null, mensaje);
 	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		String nombreEntrenador = null;
+		int cantidadDeCartas=0;
+		boolean cond = false;
+		
+		nombreEntrenador=this.textNombre.getText();
+		try {
+			cantidadDeCartas = Integer.parseInt(this.textCantidadCartas.getText());
+		} catch (NumberFormatException arg) {}
+		
+		cond = cantidadDeCartas>0 && nombreEntrenador!=null && !nombreEntrenador.isEmpty();
+		this.btnAceptar.setEnabled(cond);
+	}
+
 }

@@ -1,9 +1,12 @@
 package modeloClases;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Random;
+
+import vista.interfacesVista.IVistaRegistroParticipantes;
 
 /**
  * @author DiSarro,Joaquina.
@@ -12,7 +15,7 @@ import java.util.Random;
  * Clase que representa un Torneo que tiene una unica instancia en toda la aplicacion, con sus respectivos atributos y metodos.<br>
  * Solo pueden competir 16 entrenadores, con sus respectivos Pokemones.<br>
  */
-public class Torneo implements Observer{
+public class Torneo extends Observable implements Observer{
     
     private ArrayList<Entrenador> listaEntrenadores = new ArrayList<>();
     private ArrayList<Entrenador> listaCompetidoresActual = new ArrayList<>() ;
@@ -38,7 +41,11 @@ public class Torneo implements Observer{
         return instance;
     }
 
-    /**
+    public ArrayList<Entrenador> getListaEntrenadores() {
+		return listaEntrenadores;
+	}
+
+	/**
      * Metodo el cual se encarga de agregar entrenadores a la Lista de Entrenadores del Torneo.<br>
      * <b>Pre:</b> El entrenador debe ser distinto de null.<br>
      * <b>Post:</b> Se agrega un entrenador a la lista de Entrenadores.<br>
@@ -47,11 +54,15 @@ public class Torneo implements Observer{
      */
     public void agregaEntrenador(String nombre, int cantCartas){
         this.listaEntrenadores.add(new Entrenador(nombre,cantCartas));
+        this.setChanged();
+	    this.notifyObservers(IVistaRegistroParticipantes.AGREGAR_ENTRENADOR);
     }
     
     //Se creo el metodo con el fin de probar cosas, Borrarlo al final cuando creemos bien desde la ui / main
     public void agregaEntrenador(Entrenador entrenador){
         this.listaEntrenadores.add(entrenador);
+        this.setChanged();
+	    this.notifyObservers(IVistaRegistroParticipantes.AGREGAR_ENTRENADOR);
     }
 
     public void agregaArena(Arena arena) {

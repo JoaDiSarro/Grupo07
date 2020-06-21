@@ -1,14 +1,14 @@
 package modeloClases;
 
-import com.sun.java.swing.plaf.windows.WindowsOptionPaneUI;
-
 import exceptions.SinCartasDisponiblesException;
 
 import interfaces.IClasificable;
 
 import interfaces.IHechizable;
+import vista.interfacesVista.IVistaRegistroParticipantes;
 
 import java.util.ArrayList;
+import java.util.Observable;
 import java.util.Random;
 
 /**
@@ -17,7 +17,7 @@ import java.util.Random;
  * <br>
  * Clase que representa un entrenador participante de un torneo pokémon. Esta clase es clasificable y clonable.
  */
-public class Entrenador implements IClasificable,Cloneable{
+public class Entrenador extends Observable implements IClasificable,Cloneable{
 	
     private String nombre;
     private int clasificacionActual = 1;
@@ -56,9 +56,15 @@ public class Entrenador implements IClasificable,Cloneable{
      */
     public void agregaPokemon(Pokemon pokemon) {
     	this.pokemones.add(pokemon);
+    	this.setChanged();
+	    this.notifyObservers(IVistaRegistroParticipantes.AGREGAR_POKEMON);
     }
-    
-    public String getNombre() {
+
+	public ArrayList<Pokemon> getPokemones() {
+		return pokemones;
+	}
+
+	public String getNombre() {
             return nombre;
     }
 
@@ -193,7 +199,7 @@ public class Entrenador implements IClasificable,Cloneable{
 	 */
 	@Override
 	public String toString() {
-		return "Entrenador: " + nombre + " / ClasificacionActual: " + clasificacionActual + " / Creditos: "+ creditos + "\n";
+		return "Nombre: " + nombre + " | Cartas Disponibles: "+this.cartasDisponibles+" | ClasificacionActual: " + clasificacionActual + " | Creditos: "+ creditos + "\n";
 	}
 
 	

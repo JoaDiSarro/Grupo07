@@ -114,6 +114,6 @@ public final class PokemonFuego extends PokemonDecorator {
      */
     @Override
 	public String toString() {
-		return super.toString()+" / "+" Elemento: Fuego";
+		return super.toString()+" | Elemento: Fuego";
 	}
 }
