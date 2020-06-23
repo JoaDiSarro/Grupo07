@@ -1,5 +1,7 @@
 package modeloClases;
 
+import java.awt.Toolkit;
+
 import vista.interfacesVista.IVista;
 
 /**
@@ -27,6 +29,7 @@ public class PokemonLegendario extends Pokemon implements Cloneable {
      */
     @Override
 	public Object clone() throws CloneNotSupportedException {
+    	Toolkit.getDefaultToolkit().beep();
     	IVista.muestraMensajeAlerta("No se puede clonar un pokémon legendario o un entrenador en posesión de uno");
 		throw new CloneNotSupportedException("");
 		

@@ -50,7 +50,6 @@ public class VistaAgregaPokemon extends JFrame implements IVistaAgregaPokemon, K
 	private JRadioButton rdbtnHieloRecargado;
 	private JRadioButton rdbtnElectrico;
 	private JButton btnAceptar;
-	private JButton btnAgregarOtro;
 	private final ButtonGroup buttonGroupTipo = new ButtonGroup();
 	private final ButtonGroup buttonGroupElemento = new ButtonGroup();
 
@@ -143,17 +142,7 @@ public class VistaAgregaPokemon extends JFrame implements IVistaAgregaPokemon, K
 
 		JPanel panelBoton = new JPanel();
 		panelDatos.add(panelBoton);
-		panelBoton.setLayout(new GridLayout(0, 2, 0, 0));
-
-		JPanel panelEnvAgregaOtro = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) panelEnvAgregaOtro.getLayout();
-		flowLayout.setVgap(25);
-		panelBoton.add(panelEnvAgregaOtro);
-
-		this.btnAgregarOtro = new JButton("Agregar Otro");
-		btnAgregarOtro.setEnabled(false);
-		panelEnvAgregaOtro.add(btnAgregarOtro);
-		btnAgregarOtro.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		panelBoton.setLayout(new GridLayout(0, 1, 0, 0));
 
 		JPanel panelAceptar = new JPanel();
 		FlowLayout flowLayout_1 = (FlowLayout) panelAceptar.getLayout();
@@ -193,7 +182,6 @@ public class VistaAgregaPokemon extends JFrame implements IVistaAgregaPokemon, K
 	public void setControlador(ActionListener c) {
 		controlador = (ControladorAgregaPokemon) c;
 		this.btnAceptar.addActionListener(c);
-		this.btnAgregarOtro.addActionListener(c);
 	}
 
 	@Override
@@ -228,7 +216,6 @@ public class VistaAgregaPokemon extends JFrame implements IVistaAgregaPokemon, K
 		this.nombreOk = (nombrePokemon != null) && (!nombrePokemon.isEmpty());
 		if (this.nombreOk && this.elementoOk && this.tipoOk) {
 			this.btnAceptar.setEnabled(true);
-			this.btnAgregarOtro.setEnabled(true);
 		}
 		else {
 			this.btnAceptar.setEnabled(false);
@@ -257,11 +244,9 @@ public class VistaAgregaPokemon extends JFrame implements IVistaAgregaPokemon, K
 
 		if (this.nombreOk && this.elementoOk && this.tipoOk) {
 			this.btnAceptar.setEnabled(true);
-			this.btnAgregarOtro.setEnabled(true);
 		}
 		else {
 			this.btnAceptar.setEnabled(false);
-			this.btnAgregarOtro.setEnabled(false);
 		}
 	}
 

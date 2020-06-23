@@ -1,5 +1,6 @@
 package controlador;
 
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -70,6 +71,9 @@ public class ControladorRegistroDeParticipantes implements ActionListener, Obser
 					entrenador.agregaPokemon((Pokemon) pokemonClon);
 				}
 			} catch (CloneNotSupportedException e) {
+			} catch (NullPointerException e) {
+				Toolkit.getDefaultToolkit().beep();
+				IVistaRegistroParticipantes.muestraMensajeAlerta("Debe seleccionar un entrenador con su pokemon para clonar el pokemon");
 			}
 
 		} else if (actionEvent.getActionCommand().equalsIgnoreCase(IVistaRegistroParticipantes.INICIAR_TORNEO)) {

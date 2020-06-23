@@ -141,6 +141,7 @@ public class VistaAgregaEntrenador extends JFrame implements IVistaAgregaEntrena
 		JPanel panelEnvNuevoPokemon = new JPanel();
 		panelBotones.add(panelEnvNuevoPokemon);
 		panelEnvNuevoPokemon.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 20));
+		btnAgregaPokemon.setEnabled(false);
 
 		// Boton Agrega Pokemon
 		btnAgregaPokemon.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -213,6 +214,7 @@ public class VistaAgregaEntrenador extends JFrame implements IVistaAgregaEntrena
 		
 		cond = cantidadDeCartas>0 && nombreEntrenador!=null && !nombreEntrenador.isEmpty();
 		this.btnAceptar.setEnabled(cond);
+		this.btnAgregaPokemon.setEnabled(cond);
 	}
 	
 	@Override
