@@ -22,7 +22,7 @@ public class ControladorAgregaEntrenador implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent evento) {
-        if(evento.getActionCommand().equalsIgnoreCase(vista.ACEPTAR)){
+        if(evento.getActionCommand().equalsIgnoreCase(IVistaAgregaEntrenador.ACEPTAR)){
             String nombre = vista.getNombre();
             if(nombre != null && !nombre.isEmpty())
                 //torneo.nuevoEntrenador(nombre);

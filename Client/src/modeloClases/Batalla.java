@@ -28,43 +28,22 @@ public class Batalla extends Observable implements Runnable{
         this.arena = arena;
     }
 
-    //Aclaracion: deje comentado los system.out.println para ver bien el funcionamiento de los hilos. Esa informacion es la que deberiamos de mostrar en la ui?
     @Override
     public void run() {
-        Pokemon p1, p2;
-        Entrenador ganador=null;
-        boolean randomCartaA =false;
-        boolean randomCartaB =false;
-        p1 = entrenadorA.eligePokemon();
-        p2 = entrenadorB.eligePokemon();
-        //System.out.println("\n----------------------COMIENZA LA BATALLA----------------------\n");
-       // System.out.println("Se enfrentan: \n"+entrenadorA.getNombre()+" junto a "+p1.toString()+"\n        vs\n"+entrenadorB.getNombre()+" junto a "+p2.toString());
+        Entrenador ganador = arena.inicia(generaModeloBatalla());
         try {
-                randomCartaA = entrenadorA.cartaDisponible();
-        }
-        catch(SinCartasDisponiblesException e) {
-                //System.out.println(e.getMessage());
-        }
-        
-        try {
-                randomCartaB = entrenadorB.cartaDisponible();
-        }
-        catch(SinCartasDisponiblesException e) {
-                //System.out.println(e.getMessage());
-        }
-        
-        //EJECUCION DE LA ARENA
-        
-        ganador = arena.inicia(entrenadorA, p1, randomCartaA, entrenadorB, p2, randomCartaB, maxAtaques);
-        try {
-            Thread.sleep(3000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
         }
         arena.termina();
-        
         setChanged();
         notifyObservers(ganador);
+    } 
+    
+    private ModeloBatalla generaModeloBatalla(){
+        return new ModeloBatalla(entrenadorA, entrenadorA.eligePokemon(), entrenadorA.decideUtilizarCarta(),
+                               entrenadorB, entrenadorB.eligePokemon(), entrenadorB.decideUtilizarCarta(),
+                               maxAtaques);
     }
-
 }
 
