@@ -32,7 +32,7 @@ public class Batalla extends Observable implements Runnable{
     public void run() {
         Entrenador ganador = arena.inicia(generaModeloBatalla());
         try {
-            Thread.sleep(3000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
         }
         arena.termina();

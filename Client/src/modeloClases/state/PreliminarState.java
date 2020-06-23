@@ -12,7 +12,7 @@ public class PreliminarState implements State{
 
     @Override
     public void ejecutar(ModeloBatalla modelo) {
-        System.out.println("\n Estado PRELIMINAR "+arena.getNombre());
+        arena.notificarEstado("\n Estado PRELIMINAR "+arena.getNombre());
         arena.setEstado(new EnfrentamientoState(arena));
         arena.continua(modelo);
     }

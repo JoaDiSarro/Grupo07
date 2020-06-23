@@ -7,7 +7,7 @@ import java.util.Observable;
 
 import modeloClases.state.PreliminarState;
 
-public class Arena{
+public class Arena extends Observable {
     private String nombre;
     private boolean batallaEnCurso = false;
     private State estado;
@@ -26,14 +26,10 @@ public class Arena{
         this.batallaEnCurso = true;
         estado = new PreliminarState(this);
         estado.ejecutar(modelo);
-        while (estado != null) {
-            System.out.println("Batalla aun en curso");
+        while (estado != null) {    // Espera hasta que el estado de la arena sea null (Batalla finalizada)
         }
         notifyAll();
-        // notifyObservers(modelo.getGanador()); // Esto le avisa al Torneo quien es el ganador de la batalla :)
         return modelo.getGanador();
-        //TODO: hay que ver que hacer con los resultados, creo que esta parte seria la de serializacion.
-        //listaResultados.add(new Reporte(entrenadorA,p1,entrenadorB,p2,ganador));
     }
     
     
@@ -58,8 +54,12 @@ public class Arena{
         estado.ejecutar(modelo);
     }
 
-
     public String getNombre() {
         return nombre;
+    }
+    
+    public void notificarEstado(String mensaje){
+        setChanged();
+        notifyObservers(mensaje);
     }
 }

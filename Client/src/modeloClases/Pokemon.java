@@ -4,6 +4,8 @@ import interfaces.IClasificable;
 
 import interfaces.IHechizable;
 
+import java.io.Serializable;
+
 import java.util.Random;
 
 /**
@@ -14,7 +16,7 @@ import java.util.Random;
  * Pokemon es una clase abstracta e implementa las interfaces Cloneable, IHechizable,IClasificable.<br>
  */
 
-public abstract class Pokemon implements Cloneable,IHechizable, IClasificable{
+public abstract class Pokemon implements Cloneable,IHechizable, IClasificable, Serializable {
 
     protected String nombre;
     protected double vitalidad;

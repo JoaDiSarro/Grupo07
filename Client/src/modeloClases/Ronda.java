@@ -5,6 +5,8 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Random;
 
+import modeloClases.persistencia.PersistenciaModelo;
+
 /**
  * @author DiSarro,Joaquina.
  * @version 1.0
@@ -16,12 +18,13 @@ public class Ronda extends Observable implements Observer {
     private ArrayList<Observable> observables = new ArrayList<>();
     private ArrayList<Entrenador> ganadoresRonda = new ArrayList<>();
     private int cantBatallasPendientes = 0;
+    private PersistenciaModelo<ArrayList<Entrenador>> persistidor;
 
     /**
      * Constructor por defecto.
      */
-    public Ronda() {
-        super();
+    public Ronda(PersistenciaModelo<ArrayList<Entrenador>> persistidor) {
+        this.persistidor = persistidor;
     }
 
     //TODO: ver que hacer con esa listaResultados. Si va serializado no seria necesario pasar por parametro.
@@ -53,9 +56,10 @@ public class Ronda extends Observable implements Observer {
         ganadoresRonda.add(ganadorBatalla);
         this.cantBatallasPendientes--;
         if(this.cantBatallasPendientes == 0){
-            setChanged();
+            persistidor.guardar(ganadoresRonda);
             System.out.println("\nGANADORES DE LA RONDA:\n" +ganadoresRonda);
-            notifyObservers(ganadoresRonda);
+            setChanged();
+            notifyObservers(); // Notifica fin de ronda
         }
             
     }

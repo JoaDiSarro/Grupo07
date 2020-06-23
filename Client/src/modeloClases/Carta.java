@@ -3,11 +3,13 @@ package modeloClases;
 import interfaces.ICarta;
 import interfaces.IHechizable;
 
+import java.io.Serializable;
+
 /**
  * @author Frangolini,Luciano.<br>
  * Clase que representa una carta utilizada por participantes de un torneo pokémon.
  */
-public abstract class Carta implements ICarta,Cloneable{
+public abstract class Carta implements ICarta,Cloneable, Serializable {
 
 	/**
 	 *Método encargado de hechizar un objeto de tipo IHechizable.<br>

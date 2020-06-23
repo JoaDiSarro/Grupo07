@@ -8,6 +8,8 @@ import interfaces.IClasificable;
 
 import interfaces.IHechizable;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -17,7 +19,7 @@ import java.util.Random;
  * <br>
  * Clase que representa un entrenador participante de un torneo pokémon. Esta clase es clasificable y clonable.
  */
-public class Entrenador implements IClasificable,Cloneable{
+public class Entrenador implements IClasificable,Cloneable, Serializable {
 	
     private String nombre;
     private int clasificacionActual = 1;

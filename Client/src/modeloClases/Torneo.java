@@ -5,6 +5,8 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Random;
 
+import modeloClases.persistencia.PersistenciaModelo;
+
 /**
  * @author DiSarro,Joaquina.
  * @version 1.0
@@ -12,7 +14,7 @@ import java.util.Random;
  * Clase que representa un Torneo que tiene una unica instancia en toda la aplicacion, con sus respectivos atributos y metodos.<br>
  * Solo pueden competir 16 entrenadores, con sus respectivos Pokemones.<br>
  */
-public class Torneo implements Observer{
+public class Torneo extends Observable implements Observer{
     
     private ArrayList<Entrenador> listaEntrenadores = new ArrayList<>();
     private ArrayList<Entrenador> listaCompetidoresActual = new ArrayList<>() ;
@@ -20,6 +22,7 @@ public class Torneo implements Observer{
     private ArrayList<Reporte> reporteResultados = new ArrayList<>();
     private static Torneo instance;
     private ArrayList<Observable> observables = new ArrayList<>();
+    private PersistenciaModelo<ArrayList<Entrenador>> persistidor = new PersistenciaModelo<>();
 
 
     /**
@@ -56,6 +59,8 @@ public class Torneo implements Observer{
 
     public void agregaArena(Arena arena) {
         this.listaArenas.add(arena);
+        arena.addObserver(this);
+        observables.add(arena);
     }
     
     /**
@@ -66,7 +71,7 @@ public class Torneo implements Observer{
      * @param entrenadores de tipo ArrayList Entrenador: tiene los datos de todos los entrenadores que participan en la Ronda.
      */
     public void comienzaRonda(ArrayList<Entrenador> entrenadores){
-        Ronda ronda = new Ronda();
+        Ronda ronda = new Ronda(persistidor);
         ronda.addObserver(this);
         this.observables.add(ronda);
         ronda.inicia(entrenadores,reporteResultados,listaArenas);
@@ -103,6 +108,7 @@ public class Torneo implements Observer{
      * <b>Post:</b> El Torneo se ejecuta de principio a fin.
      */
     public void ejecutaTorneo() {
+        persistidor.guardar(listaEntrenadores);
         Entrenador ganador;
         System.out.println("\n------COMIENZA EL TORNEO------\n");
         listaCompetidoresActual = listaEntrenadores;
@@ -113,12 +119,21 @@ public class Torneo implements Observer{
     public void update(Observable observable, Object object) {
         if(!this.observables.contains(observable))
             throw new IllegalArgumentException();
-        listaCompetidoresActual = (ArrayList<Entrenador>) object;
+        if (observable.getClass().getName().equalsIgnoreCase(Arena.class.getName())) {
+            setChanged();
+            notifyObservers(object);
+        } else {
+            manejaComportamientoTorneo(observable);
+        }
+    }
+    
+    private void manejaComportamientoTorneo(Observable observable) {
+        listaCompetidoresActual = persistidor.leerDatos();
         if(listaCompetidoresActual.size() != 1) {
             comienzaRonda(listaCompetidoresActual);
         }else{
-            System.out.println("GANDOR FINAL: " + listaCompetidoresActual.get(0) );
-            System.out.println("\n------FINALIZA EL TORNEO------\n");
+            setChanged();
+            notifyObservers("GANDOR FINAL: " + listaCompetidoresActual.get(0) +"\n"+ "\n------FINALIZA EL TORNEO------\n");
         }
         this.observables.remove(observable);
     }

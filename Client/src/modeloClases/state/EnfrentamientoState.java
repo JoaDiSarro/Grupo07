@@ -15,7 +15,7 @@ public class EnfrentamientoState implements State{
 
     @Override
     public void ejecutar(ModeloBatalla modelo) {
-        System.out.println("\n Estado ENFRENTAMIENTO "+arena.getNombre());
+        arena.notificarEstado(("\n Estado ENFRENTAMIENTO "+arena.getNombre()));
         this.modelo = modelo;
         modelo.setGanador(iniciaEnfrentamiento());
         arena.setEstado(new DefinicionState(arena));
