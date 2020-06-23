@@ -14,8 +14,11 @@ import java.awt.GridLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
@@ -36,7 +39,7 @@ import java.util.Iterator;
 import vista.interfacesVista.IVistaRegistroParticipantes;
 import java.awt.event.MouseAdapter;
 
-public class VistaRegistroDeParticipantes extends JFrame implements IVistaRegistroParticipantes, MouseListener {
+public class VistaRegistroDeParticipantes extends JFrame implements IVistaRegistroParticipantes {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel panelGeneral;
@@ -50,6 +53,7 @@ public class VistaRegistroDeParticipantes extends JFrame implements IVistaRegist
 	private JList<Entrenador> listEntrenadores;
 	private DefaultListModel<Pokemon> listModelPokemones = new DefaultListModel<Pokemon>();
 	private JList<Pokemon> listPokemones;
+	private JLabel lblRestriccionTorneo;
 	
 
 	// TODO: cambiar estos main, solo deberia de haber un main en Prueba, donde
@@ -199,7 +203,7 @@ public class VistaRegistroDeParticipantes extends JFrame implements IVistaRegist
 		JScrollPane scrollRestriccionTorneo = new JScrollPane();
 		panelEnvRestriccionTorneo.add(scrollRestriccionTorneo);
 
-		JLabel lblRestriccionTorneo = new JLabel(
+		this.lblRestriccionTorneo = new JLabel(
 				" Se requieren 16 entrenadores con al menos 1 pokémon cada uno para comenzar el torneo ");
 		lblRestriccionTorneo.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblRestriccionTorneo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -207,8 +211,44 @@ public class VistaRegistroDeParticipantes extends JFrame implements IVistaRegist
 		
 		//Listeners: 
 		
-		this.listEntrenadores.addMouseListener(this);
-		this.listPokemones.addMouseListener(this);
+		addListeners();
+	}
+
+	private void addListeners() {
+		ListSelectionListener escuchaEntrenadores = new ListSelectionListener() {
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				Entrenador entrenador = listEntrenadores.getSelectedValue();
+				
+				actualizaListaPokemones(entrenador);
+			}
+			
+			private void actualizaListaPokemones(Entrenador entrenador) {
+				if (entrenador!=null) {
+					btnAgregarPokemon.setEnabled(true);
+					actualizarListaPokemones(entrenador.getPokemones().iterator());
+					if (listModelEntrenadores.size()<16)
+						btnClonaEntrenador.setEnabled(true);
+				}	
+			}	
+		};
+		
+		ListSelectionListener escuchaPokemones = new ListSelectionListener() {
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				Pokemon pokemon = listPokemones.getSelectedValue();
+				
+				if (pokemon!=null) {
+					btnClonaPokemon.setEnabled(true);
+				}	
+			}
+			
+		};
+		
+		this.listEntrenadores.addListSelectionListener(escuchaEntrenadores);
+		this.listPokemones.addListSelectionListener(escuchaPokemones);
 	}
 
 	public void setControlador(ActionListener c) {
@@ -232,9 +272,15 @@ public class VistaRegistroDeParticipantes extends JFrame implements IVistaRegist
 	}
 
 	@Override
-	public void muestraMensajeAlerta(String mensaje) {
-		// TODO Implement this method
+	public void setResultado(String ganador) {
+		this.lblRestriccionTorneo.setText(ganador);
 	}
+	
+	/*public static void muestraMensajeAlerta(String mensaje) { //pasar a static?
+		JOptionPane.showMessageDialog(null, mensaje);
+	}*/
+	
+	
 
 	@Override
 	public int getCantidadParticipantes() {
@@ -254,15 +300,21 @@ public class VistaRegistroDeParticipantes extends JFrame implements IVistaRegist
 	@Override
 	public void actualizarListaEntrenadores(Iterator<Entrenador> it) {
 		this.listModelEntrenadores.clear();
-		while (it.hasNext()) 
-			this.listModelEntrenadores.addElement(it.next());
+		boolean completos = true;
+		while (it.hasNext()) {
+			Entrenador entrenador = it.next();
+			this.listModelEntrenadores.addElement(entrenador);
+			if (completos && entrenador.getPokemones().size()==0)
+				completos=false;	
+		}
 		this.repaint();
 		this.btnClonaEntrenador.setEnabled(false);
 		this.btnAgregarPokemon.setEnabled(false);
 		this.btnClonaPokemon.setEnabled(false);
 		if (this.listModelEntrenadores.size()==16) {
-			this.btnIniciarTorneo.setEnabled(true);
 			this.btnAgregarEntrenador.setEnabled(false);
+			if (completos)
+				this.btnIniciarTorneo.setEnabled(true);
 		}
 	}
 	
@@ -274,39 +326,10 @@ public class VistaRegistroDeParticipantes extends JFrame implements IVistaRegist
 		this.repaint();
 		this.btnClonaPokemon.setEnabled(false);
 	}
-
+	
 	@Override
-	public void mouseClicked(MouseEvent e) {
+	public void deshabilitaBotonTorneo() {
+		this.btnIniciarTorneo.setEnabled(false);
 	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		Entrenador entrenador = this.listEntrenadores.getSelectedValue();
-		Pokemon pokemon = this.listPokemones.getSelectedValue();
-		
-		if (entrenador!=null) {
-			this.btnAgregarPokemon.setEnabled(true);
-			this.actualizarListaPokemones(entrenador.getPokemones().iterator());
-			if (this.listModelEntrenadores.size()<16)
-				this.btnClonaEntrenador.setEnabled(true);
-		}	
-		
-		if (pokemon!=null) {
-			this.btnClonaPokemon.setEnabled(true);
-		}
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-	}
-
 	
 }

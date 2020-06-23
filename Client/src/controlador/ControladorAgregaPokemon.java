@@ -15,6 +15,7 @@ import modeloClases.Entrenador;
 import modeloClases.Pokemon;
 import modeloClases.PokemonFactory;
 import modeloClases.Torneo;
+import vista.interfacesVista.IVistaAgregaEntrenador;
 import vista.interfacesVista.IVistaAgregaPokemon;
 import vista.interfacesVista.IVistaRegistroParticipantes;
 
@@ -34,6 +35,9 @@ public class ControladorAgregaPokemon extends Observable implements ActionListen
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
 		if (actionEvent.getActionCommand().equalsIgnoreCase(IVistaAgregaPokemon.AGREGAR_POKEMON)) {
+			if (entrenador==null) {
+				this.entrenador= new Entrenador("  ",0);
+			}
 			String nombre = this.vista.getNombrePokemon();
 			String tipo = this.vista.getTipoPokemon();
 			String elemento = this.vista.getElementoPokemon();
@@ -41,12 +45,13 @@ public class ControladorAgregaPokemon extends Observable implements ActionListen
 			this.entrenador.agregaPokemon(pokemon);
 			this.setChanged();
 			this.notifyObservers(IVistaAgregaPokemon.AGREGAR_POKEMON);
+			//this.notifyObservers(IVistaAgregaEntrenador.AGREGAR_OTRO_POKEMON); era para la lista de pokemones en agregaentrenador
 			this.vista.cerrar();
 		}
 	}
 
 	public Entrenador getEntrenadorActual() {
-		return entrenador;
+		return this.entrenador;
 	}
 	
 	

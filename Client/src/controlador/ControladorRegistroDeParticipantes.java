@@ -9,14 +9,21 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import modeloClases.Arena;
+import modeloClases.Carta;
+import modeloClases.CartaNiebla;
+import modeloClases.CartaTormenta;
+import modeloClases.CartaViento;
 import modeloClases.Entrenador;
 import modeloClases.Pokemon;
 import modeloClases.Torneo;
 import vista.VistaAgregaEntrenador;
 import vista.VistaAgregaPokemon;
+import vista.VistaDesarrolloTorneo;
 import vista.interfacesVista.IVista;
 import vista.interfacesVista.IVistaAgregaEntrenador;
 import vista.interfacesVista.IVistaAgregaPokemon;
+import vista.interfacesVista.IVistaDesarrolloTorneo;
 import vista.interfacesVista.IVistaRegistroParticipantes;
 
 public class ControladorRegistroDeParticipantes implements ActionListener, Observer {
@@ -41,7 +48,10 @@ public class ControladorRegistroDeParticipantes implements ActionListener, Obser
 			Object entrenadorClon;
 			try {
 				entrenadorClon = vista.getEntrenadorActual().clone();
-				torneo.agregaEntrenador((Entrenador) entrenadorClon);
+				Entrenador entrenadorNuevo = (Entrenador) entrenadorClon;
+				if (!entrenadorNuevo.getPokemones().contains(null)) {
+					torneo.agregaEntrenador(entrenadorNuevo);
+				}
 			} catch (CloneNotSupportedException e) {
 			}
 
@@ -53,15 +63,28 @@ public class ControladorRegistroDeParticipantes implements ActionListener, Obser
 			Object pokemonClon;
 			try {
 				pokemonClon = vista.getPokemonActual().clone();
-				entrenador.agregaPokemon((Pokemon) pokemonClon); 
+				Pokemon pokemonNuevo = (Pokemon) pokemonClon;
+				if (pokemonNuevo!=null) {
+					this.observables.add(entrenador);
+					entrenador.addObserver(this);					
+					entrenador.agregaPokemon((Pokemon) pokemonClon);
+				}
 			} catch (CloneNotSupportedException e) {
-				this.vista.muestraMensajeAlerta("No se puede clonar pokemones legendarios o entrenadores con ellos");
 			}
 
 		} else if (actionEvent.getActionCommand().equalsIgnoreCase(IVistaRegistroParticipantes.INICIAR_TORNEO)) {
-			System.out.println("Iniciar Torneo");
-
+			this.vista.deshabilitaBotonTorneo();
+			abreVistaTorneo();
+			repartoDeCartas();
+			preparaArenas();
+			this.torneo.ejecutaTorneo();
 		}
+	}
+	
+	public void abreVistaTorneo() {
+		IVistaDesarrolloTorneo vistaDesarrollo = new VistaDesarrolloTorneo();
+		ControladorDesarrolloTorneo controlador = new ControladorDesarrolloTorneo(vistaDesarrollo);
+		vistaDesarrollo.abrir();
 	}
 
 	public void abreVistaAgregaEntrenador() {
@@ -85,19 +108,46 @@ public class ControladorRegistroDeParticipantes implements ActionListener, Obser
 	public void update(Observable o, Object arg) {
 		if(!this.observables.contains(o))
 			throw new InvalidParameterException();
-		
+
 		if (arg.toString().contentEquals(IVistaRegistroParticipantes.AGREGAR_ENTRENADOR))
 			this.vista.actualizarListaEntrenadores(this.torneo.getListaEntrenadores().iterator());
 		else if (arg.toString().contentEquals(IVistaAgregaPokemon.AGREGAR_POKEMON)) {
 			ControladorAgregaPokemon controlador = (ControladorAgregaPokemon) o;
 			Entrenador entrenadorActual = controlador.getEntrenadorActual();
 			this.vista.actualizarListaPokemones(entrenadorActual.getPokemones().iterator());
+			this.vista.actualizarListaEntrenadores(this.torneo.getListaEntrenadores().iterator());
 		}
 		else if (arg.toString().contentEquals(IVistaRegistroParticipantes.AGREGAR_POKEMON)) {
 			Entrenador entrenador = (Entrenador) o;
 			this.vista.actualizarListaPokemones(entrenador.getPokemones().iterator());
+			this.vista.actualizarListaEntrenadores(this.torneo.getListaEntrenadores().iterator());
 		}
-			
-		
+		else if (arg.toString().contentEquals(IVistaRegistroParticipantes.FIN_TORNEO)) {
+			this.vista.setResultado("Felicitaciones al ganador del torneo!: "+this.torneo.getGanadorTorneo());
+		}
+		else if (arg.toString().contentEquals(IVistaRegistroParticipantes.FIN_RONDA)) {
+			this.vista.actualizarListaEntrenadores(this.torneo.getListaEntrenadores().iterator());
+		}
+	}
+	
+	public void repartoDeCartas() {
+		Carta cartaNiebla = new CartaNiebla();
+        Carta cartaTormenta = new CartaTormenta();
+        Carta cartaViento = new CartaViento();
+        
+        ArrayList<Carta> mazo = new ArrayList<>();
+        mazo.add(cartaNiebla);
+        mazo.add(cartaTormenta);
+        mazo.add(cartaViento);
+        
+        for (Entrenador entrenadores : this.torneo.getListaEntrenadores()) {
+        	entrenadores.setMazo(mazo);
+        }
+	}
+	
+	public void preparaArenas() {
+		this.torneo.agregaArena(new Arena("ARENA 1"));
+		this.torneo.agregaArena(new Arena("ARENA 2"));
+		this.torneo.agregaArena(new Arena("ARENA 3"));
 	}
 }

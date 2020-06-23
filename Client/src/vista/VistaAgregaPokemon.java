@@ -25,6 +25,7 @@ import java.awt.FlowLayout;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.Font;
 
@@ -193,11 +194,6 @@ public class VistaAgregaPokemon extends JFrame implements IVistaAgregaPokemon, K
 		controlador = (ControladorAgregaPokemon) c;
 		this.btnAceptar.addActionListener(c);
 		this.btnAgregarOtro.addActionListener(c);
-	}
-
-	@Override
-	public void muestraMensajeAlerta(String mensaje) {
-		// TODO Implement this method
 	}
 
 	@Override

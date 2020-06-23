@@ -23,6 +23,7 @@ public class Torneo extends Observable implements Observer{
     private ArrayList<Reporte> reporteResultados = new ArrayList<>();
     private static Torneo instance;
     private ArrayList<Observable> observables = new ArrayList<>();
+    private String ganadorTorneo;
 
 
     /**
@@ -126,11 +127,22 @@ public class Torneo extends Observable implements Observer{
             throw new IllegalArgumentException();
         listaCompetidoresActual = (ArrayList<Entrenador>) object;
         if(listaCompetidoresActual.size() != 1) {
+        	this.setChanged();
+        	this.notifyObservers(IVistaRegistroParticipantes.FIN_RONDA);
             comienzaRonda(listaCompetidoresActual);
         }else{
-            System.out.println("GANDOR FINAL: " + listaCompetidoresActual.get(0) );
+        	this.ganadorTorneo = listaCompetidoresActual.get(0).toString();
+        	this.setChanged();
+    	    this.notifyObservers(IVistaRegistroParticipantes.FIN_TORNEO);
+            System.out.println("GANADOR FINAL: " + listaCompetidoresActual.get(0) );
             System.out.println("\n------FINALIZA EL TORNEO------\n");
         }
         this.observables.remove(observable);
     }
+
+	public String getGanadorTorneo() {
+		return ganadorTorneo;
+	}
+    
+    
 }

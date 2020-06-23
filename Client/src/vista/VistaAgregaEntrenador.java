@@ -3,6 +3,7 @@ package vista;
 import controlador.ControladorAgregaEntrenador;
 import controlador.ControladorRegistroDeParticipantes;
 import modeloClases.Entrenador;
+import modeloClases.Pokemon;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -28,6 +29,8 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
+
 import java.awt.Font;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JScrollPane;
@@ -47,6 +50,8 @@ public class VistaAgregaEntrenador extends JFrame implements IVistaAgregaEntrena
 	private JButton btnAgregaPokemon = new JButton("Agregar Pok\u00E9mon");
 	private JButton btnAceptar = new JButton("Aceptar");
 	private JTextField textCantidadCartas;
+	private DefaultListModel<Pokemon> listModelPokemones = new DefaultListModel<Pokemon>();
+	private JList<Pokemon> listPokemones;
 
 	/**
 	 * Create the frame.
@@ -109,7 +114,7 @@ public class VistaAgregaEntrenador extends JFrame implements IVistaAgregaEntrena
 
 		JPanel panelListaPokemones = new JPanel();
 		panelListaPokemones
-				.setBorder(new TitledBorder(null, "Pokemones", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Pokemones agregados", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		GridBagConstraints gbc_panelListaPokemones = new GridBagConstraints();
 		gbc_panelListaPokemones.fill = GridBagConstraints.BOTH;
 		gbc_panelListaPokemones.insets = new Insets(0, 0, 5, 0);
@@ -121,8 +126,9 @@ public class VistaAgregaEntrenador extends JFrame implements IVistaAgregaEntrena
 		JScrollPane scrollPokemones = new JScrollPane();
 		panelListaPokemones.add(scrollPokemones, BorderLayout.CENTER);
 
-		JList listPokemones = new JList();
+		this.listPokemones = new JList<Pokemon>();
 		scrollPokemones.setViewportView(listPokemones);
+		listPokemones.setModel(this.listModelPokemones);
 
 		JPanel panelBotones = new JPanel();
 		GridBagConstraints gbc_panelBotones = new GridBagConstraints();
@@ -139,7 +145,7 @@ public class VistaAgregaEntrenador extends JFrame implements IVistaAgregaEntrena
 		// Boton Agrega Pokemon
 		btnAgregaPokemon.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		panelEnvNuevoPokemon.add(btnAgregaPokemon);
-		btnAgregaPokemon.setActionCommand(AGREGARPOKEMON);
+		btnAgregaPokemon.setActionCommand(IVistaAgregaEntrenador.AGREGAR_OTRO_POKEMON);
 
 		JPanel panelEnvCrear = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panelEnvCrear.getLayout();
@@ -185,11 +191,6 @@ public class VistaAgregaEntrenador extends JFrame implements IVistaAgregaEntrena
 	public int getCantidadDeCartas() {
 		return Integer.parseInt(this.textCantidadCartas.getText());
 	}
-	
-	@Override
-	public void muestraMensajeAlerta(String mensaje) {
-		JOptionPane.showMessageDialog(null, mensaje);
-	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -212,6 +213,14 @@ public class VistaAgregaEntrenador extends JFrame implements IVistaAgregaEntrena
 		
 		cond = cantidadDeCartas>0 && nombreEntrenador!=null && !nombreEntrenador.isEmpty();
 		this.btnAceptar.setEnabled(cond);
+	}
+	
+	@Override
+	public void actualizarListaPokemones(Iterator<Pokemon> it) {
+		this.listModelPokemones.clear();
+		while (it.hasNext())
+			this.listModelPokemones.addElement(it.next());
+		this.repaint();
 	}
 
 }

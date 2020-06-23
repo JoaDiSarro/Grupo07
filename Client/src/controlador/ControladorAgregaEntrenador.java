@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import modeloClases.Entrenador;
 import modeloClases.Torneo;
 
 import vista.VistaAgregaPokemon;
@@ -32,15 +33,15 @@ public class ControladorAgregaEntrenador implements ActionListener{
 				torneo.agregaEntrenador(nombreEntrenador, cantidadDeCartas);
 				vista.cerrar();
 			}
-		} else if (evento.getActionCommand().equalsIgnoreCase(vista.AGREGARPOKEMON)) {
-			//abrirVentanaPokemon();
+		} else if (evento.getActionCommand().equalsIgnoreCase(IVistaAgregaEntrenador.AGREGAR_OTRO_POKEMON)) {
+			//this.abrirVentanaPokemon();
 		}
 		
 	}
 
 	/*public void abrirVentanaPokemon() {
-		IVistaAgregaPokemon vista = new VistaAgregaPokemon();
-		ControladorAgregaPokemon controlador = new ControladorAgregaPokemon(vista);
+		IVistaAgregaPokemon vistaPokemon = new VistaAgregaPokemon();
+		ControladorAgregaPokemon controlador = new ControladorAgregaPokemon(vistaPokemon,entrenadorActual);
 		vista.setControlador(controlador);
 		vista.abrir();
 	}*/
