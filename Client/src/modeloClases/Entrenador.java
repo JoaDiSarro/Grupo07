@@ -1,25 +1,27 @@
 package modeloClases;
 
-import com.sun.java.swing.plaf.windows.WindowsOptionPaneUI;
-
 import exceptions.SinCartasDisponiblesException;
 
 import interfaces.IClasificable;
 
 import interfaces.IHechizable;
+import vista.interfacesVista.IVistaRegistroParticipantes;
 
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.Observable;
 import java.util.Random;
 
 /**
  * @author DiSarro,Joaquina.<br>
  * @version 1.0<br>
- * <br>
- * Clase que representa un entrenador participante de un torneo pokémon. Esta clase es clasificable y clonable.
+ *          <br>
+ *          Clase que representa un entrenador participante de un torneo
+ *          pokémon. Esta clase es clasificable y clonable.
  */
-public class Entrenador implements IClasificable,Cloneable, Serializable {
+
+public class Entrenador extends Observable implements IClasificable,Cloneable, Serializable {
 	
     private String nombre;
     private int clasificacionActual = 1;
@@ -58,6 +60,10 @@ public class Entrenador implements IClasificable,Cloneable, Serializable {
      */
     public void agregaPokemon(Pokemon pokemon) {
     	this.pokemones.add(pokemon);
+    }
+    
+    public ArrayList<Pokemon> getPokemones() {
+            return pokemones;
     }
     
     public String getNombre() {
@@ -117,49 +123,50 @@ public class Entrenador implements IClasificable,Cloneable, Serializable {
 	public void actualizaClasificacion() {
 		int auxClasificacion = 0;
 
-		for (Pokemon itPokemones : this.pokemones) 
+		for (Pokemon itPokemones : this.pokemones)
 			auxClasificacion += itPokemones.getClasificacionActual();
-		
-		if (auxClasificacion>20) {
-			this.clasificacionActual=3;
-			for (Pokemon itPokemones : this.pokemones) 
-				itPokemones.setFuerza(itPokemones.getFuerza()+100);
+
+		if (auxClasificacion > 20) {
+			this.clasificacionActual = 3;
+			for (Pokemon itPokemones : this.pokemones)
+				itPokemones.setFuerza(itPokemones.getFuerza() + 100);
 		}
-		
-		else
-			if (auxClasificacion>10) {
-				this.clasificacionActual=2;
-				for (Pokemon itPokemones : this.pokemones) 
-					itPokemones.setVitalidad(itPokemones.getVitalidad()+200);
-			}
+
+		else if (auxClasificacion > 10) {
+			this.clasificacionActual = 2;
+			for (Pokemon itPokemones : this.pokemones)
+				itPokemones.setVitalidad(itPokemones.getVitalidad() + 200);
+		}
 	}
-    
-    /**
-     *Método encargado de clonar un entrenador.<br>
-     *@return Retorna un objeto clonado de tipo Entrenador.<br>
-     *@throws CloneNotSupportedException en caso que el entrenador posea un pokémon legendario, los cuales no se pueden clonar.<br>
-     */
-    @Override
+
+	/**
+	 * Método encargado de clonar un entrenador.<br>
+	 * 
+	 * @return Retorna un objeto clonado de tipo Entrenador.<br>
+	 * @throws CloneNotSupportedException en caso que el entrenador posea un pokémon
+	 *                                    legendario, los cuales no se pueden
+	 *                                    clonar.<br>
+	 */
+	@Override
 	public Object clone() throws CloneNotSupportedException {
-		
+
 		Entrenador entrenadorClonado = null;
 		entrenadorClonado = (Entrenador) super.clone();
 		ArrayList<Carta> cartasClon = new ArrayList<>();
-                ArrayList<Pokemon> pokemonClon = new ArrayList<>();
-            
-		if (this.cartas.isEmpty()==false) 
-			for (Carta itCartas : this.cartas) 
-				cartasClon.add( (Carta) itCartas.clone() );
-                entrenadorClonado.setMazo(cartasClon);
-                
-		if (this.pokemones.isEmpty()==false)   
-			for (Pokemon itPokemones : this.pokemones) 
-				pokemonClon.add( (Pokemon) itPokemones.clone() );
-                entrenadorClonado.setPokemones(pokemonClon);
-                
+		ArrayList<Pokemon> pokemonClon = new ArrayList<>();
+
+		if (this.cartas.isEmpty() == false)
+			for (Carta itCartas : this.cartas)
+				cartasClon.add((Carta) itCartas.clone());
+		entrenadorClonado.setMazo(cartasClon);
+
+		if (this.pokemones.isEmpty() == false)
+			for (Pokemon itPokemones : this.pokemones)
+				pokemonClon.add((Pokemon) itPokemones.clone());
+		entrenadorClonado.setPokemones(pokemonClon);
+
 		return entrenadorClonado;
 	}
-
 
     public void setPokemones(ArrayList<Pokemon> pokemones) {
         this.pokemones = pokemones;
@@ -184,18 +191,14 @@ public class Entrenador implements IClasificable,Cloneable, Serializable {
         return cartasDisponibles > 0 ? new Random().nextBoolean() : false;
     }
 
-    /**
-	 *Sobreescritura del metodo toString. Se utiliza para mostrar los atributos de un entrenador.
+	/**
+	 * Sobreescritura del metodo toString. Se utiliza para mostrar los atributos de
+	 * un entrenador.
 	 */
 	@Override
 	public String toString() {
-		return "Entrenador: " + nombre + " / ClasificacionActual: " + clasificacionActual + " / Creditos: "+ creditos + "\n";
+		return "Nombre: " + nombre + " | Cartas Disponibles: " + this.cartasDisponibles + " | ClasificacionActual: "
+				+ clasificacionActual + " | Creditos: " + creditos + "\n";
 	}
 
-	
-	
-	
-	
-    
-    
 }

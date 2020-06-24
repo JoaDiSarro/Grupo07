@@ -21,12 +21,15 @@ import vista.VistaRegistroDeParticipantes;
 import vista.interfacesVista.IVistaRegistroParticipantes;
 
 public class Prueba {
+	
     public static PokemonFactory factory = new PokemonFactory();
+    
     public Prueba() {
         super();
     }
 
     public static void main(String[] args) {
+    	
         Prueba prueba = new Prueba();
         //aca llama a la vista principal, y empieza el flujo de UIs
         IVistaRegistroParticipantes vistaPrincipal = new VistaRegistroDeParticipantes();

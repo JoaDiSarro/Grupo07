@@ -233,5 +233,14 @@ public abstract class Pokemon implements Cloneable,IHechizable, IClasificable, S
         return auxRetorno;
     }
     
+    @Override
+	public String toString() {
+		return "Nombre: "+this.nombre+" | "+
+				"Vitalidad: "+this.vitalidad+" | "+
+				"Escudo: "+this.escudo+" | "+
+				"Fuerza: "+this.fuerza+" | "+
+				"Experiencia: "+this.experiencia+" | "+
+				"Clasificacion Actual: "+this.clasificacionActual;
+	}
 
 }

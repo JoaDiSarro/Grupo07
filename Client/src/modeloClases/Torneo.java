@@ -1,11 +1,13 @@
 package modeloClases;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Random;
-
+import vista.interfacesVista.IVistaRegistroParticipantes;
 import modeloClases.persistencia.PersistenciaModelo;
+
 
 /**
  * @author DiSarro,Joaquina.
@@ -22,6 +24,7 @@ public class Torneo extends Observable implements Observer{
     private ArrayList<Reporte> reporteResultados = new ArrayList<>();
     private static Torneo instance;
     private ArrayList<Observable> observables = new ArrayList<>();
+    private String ganadorTorneo;
     private PersistenciaModelo<ArrayList<Entrenador>> persistidor = new PersistenciaModelo<>();
 
 
@@ -41,7 +44,11 @@ public class Torneo extends Observable implements Observer{
         return instance;
     }
 
-    /**
+    public ArrayList<Entrenador> getListaEntrenadores() {
+		return listaEntrenadores;
+	}
+
+	/**
      * Metodo el cual se encarga de agregar entrenadores a la Lista de Entrenadores del Torneo.<br>
      * <b>Pre:</b> El entrenador debe ser distinto de null.<br>
      * <b>Post:</b> Se agrega un entrenador a la lista de Entrenadores.<br>
@@ -50,11 +57,15 @@ public class Torneo extends Observable implements Observer{
      */
     public void agregaEntrenador(String nombre, int cantCartas){
         this.listaEntrenadores.add(new Entrenador(nombre,cantCartas));
+        this.setChanged();
+	    this.notifyObservers(IVistaRegistroParticipantes.AGREGAR_ENTRENADOR);
     }
     
     //Se creo el metodo con el fin de probar cosas, Borrarlo al final cuando creemos bien desde la ui / main
     public void agregaEntrenador(Entrenador entrenador){
         this.listaEntrenadores.add(entrenador);
+        this.setChanged();
+	    this.notifyObservers(IVistaRegistroParticipantes.AGREGAR_ENTRENADOR);
     }
 
     public void agregaArena(Arena arena) {
@@ -130,11 +141,22 @@ public class Torneo extends Observable implements Observer{
     private void manejaComportamientoTorneo(Observable observable) {
         listaCompetidoresActual = persistidor.leerDatos();
         if(listaCompetidoresActual.size() != 1) {
+            this.setChanged();
+            this.notifyObservers(IVistaRegistroParticipantes.FIN_RONDA);
             comienzaRonda(listaCompetidoresActual);
         }else{
-            setChanged();
-            notifyObservers("GANDOR FINAL: " + listaCompetidoresActual.get(0) +"\n"+ "\n------FINALIZA EL TORNEO------\n");
+            this.ganadorTorneo = listaCompetidoresActual.get(0).toString();
+            this.setChanged();
+    	    this.notifyObservers(IVistaRegistroParticipantes.FIN_TORNEO);
+            System.out.println("GANADOR FINAL: " + listaCompetidoresActual.get(0) );
+            System.out.println("\n------FINALIZA EL TORNEO------\n");
         }
         this.observables.remove(observable);
     }
+
+	public String getGanadorTorneo() {
+		return ganadorTorneo;
+	}
+    
+    
 }

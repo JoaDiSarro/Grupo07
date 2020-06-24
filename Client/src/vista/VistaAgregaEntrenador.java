@@ -2,11 +2,17 @@ package vista;
 
 import controlador.ControladorAgregaEntrenador;
 import controlador.ControladorRegistroDeParticipantes;
+import modeloClases.Entrenador;
+import modeloClases.Pokemon;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseListener;
+import java.util.Iterator;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -23,6 +29,8 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
+
 import java.awt.Font;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JScrollPane;
@@ -33,7 +41,7 @@ import javax.swing.JOptionPane;
 
 import vista.interfacesVista.IVistaAgregaEntrenador;
 
-public class VistaAgregaEntrenador extends JFrame implements IVistaAgregaEntrenador {
+public class VistaAgregaEntrenador extends JFrame implements IVistaAgregaEntrenador, KeyListener{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel panelRegistroEntrenador;
@@ -41,18 +49,18 @@ public class VistaAgregaEntrenador extends JFrame implements IVistaAgregaEntrena
 	private ControladorAgregaEntrenador controlador;
 	private JButton btnAgregaPokemon = new JButton("Agregar Pok\u00E9mon");
 	private JButton btnAceptar = new JButton("Aceptar");
-	private JTextField textField;
+	private JTextField textCantidadCartas;
+	private DefaultListModel<Pokemon> listModelPokemones = new DefaultListModel<Pokemon>();
+	private JList<Pokemon> listPokemones;
 
 	/**
 	 * Create the frame.
 	 */
 	public VistaAgregaEntrenador() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 493, 430); //Borrar después, lo dejo para probar ahora
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 493, 430); // Borrar después, lo dejo para probar ahora
+		this.setTitle("Registrar Entrenador");
 		panelRegistroEntrenador = new JPanel();
-		panelRegistroEntrenador.setBorder(new TitledBorder(
-				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
-				"Registrar entrenador", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelRegistroEntrenador.setLayout(new BorderLayout(0, 0));
 		setContentPane(panelRegistroEntrenador);
 
@@ -88,6 +96,7 @@ public class VistaAgregaEntrenador extends JFrame implements IVistaAgregaEntrena
 		panelEnvNombre.add(textNombre);
 		textNombre.setColumns(20);
 
+
 		JLabel lblCartas = new JLabel("Cantidad de Cartas:");
 		lblCartas.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblCartas.setHorizontalAlignment(SwingConstants.CENTER);
@@ -99,13 +108,13 @@ public class VistaAgregaEntrenador extends JFrame implements IVistaAgregaEntrena
 		flowLayout_1.setAlignment(FlowLayout.LEADING);
 		panelNombre.add(panelEnvCartas);
 
-		textField = new JTextField();
-		panelEnvCartas.add(textField);
-		textField.setColumns(20);
+		textCantidadCartas = new JTextField();
+		panelEnvCartas.add(textCantidadCartas);
+		textCantidadCartas.setColumns(20);
 
 		JPanel panelListaPokemones = new JPanel();
 		panelListaPokemones
-				.setBorder(new TitledBorder(null, "Pokemones", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Pokemones agregados", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		GridBagConstraints gbc_panelListaPokemones = new GridBagConstraints();
 		gbc_panelListaPokemones.fill = GridBagConstraints.BOTH;
 		gbc_panelListaPokemones.insets = new Insets(0, 0, 5, 0);
@@ -117,8 +126,9 @@ public class VistaAgregaEntrenador extends JFrame implements IVistaAgregaEntrena
 		JScrollPane scrollPokemones = new JScrollPane();
 		panelListaPokemones.add(scrollPokemones, BorderLayout.CENTER);
 
-		JList listPokemones = new JList();
+		this.listPokemones = new JList<Pokemon>();
 		scrollPokemones.setViewportView(listPokemones);
+		listPokemones.setModel(this.listModelPokemones);
 
 		JPanel panelBotones = new JPanel();
 		GridBagConstraints gbc_panelBotones = new GridBagConstraints();
@@ -131,11 +141,12 @@ public class VistaAgregaEntrenador extends JFrame implements IVistaAgregaEntrena
 		JPanel panelEnvNuevoPokemon = new JPanel();
 		panelBotones.add(panelEnvNuevoPokemon);
 		panelEnvNuevoPokemon.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 20));
+		btnAgregaPokemon.setEnabled(false);
 
 		// Boton Agrega Pokemon
 		btnAgregaPokemon.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		panelEnvNuevoPokemon.add(btnAgregaPokemon);
-		btnAgregaPokemon.setActionCommand(AGREGARPOKEMON);
+		btnAgregaPokemon.setActionCommand(IVistaAgregaEntrenador.AGREGAR_OTRO_POKEMON);
 
 		JPanel panelEnvCrear = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panelEnvCrear.getLayout();
@@ -143,13 +154,20 @@ public class VistaAgregaEntrenador extends JFrame implements IVistaAgregaEntrena
 		panelBotones.add(panelEnvCrear);
 
 		// Boton Aceptar
+		btnAceptar.setEnabled(false);
 		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		panelEnvCrear.add(btnAceptar);
 		btnAceptar.setActionCommand(ACEPTAR);
+		
+		//Listeners:
+		
+		//this.btnAceptar.addKeyListener(this);
+		this.textCantidadCartas.addKeyListener(this);
+		this.textNombre.addKeyListener(this);
 	}
 
 	public void abrir() {
-		setBounds(100, 100, 498, 416);
+		setBounds(100, 100, 493, 430);
 		setVisible(true);
 	}
 
@@ -163,16 +181,48 @@ public class VistaAgregaEntrenador extends JFrame implements IVistaAgregaEntrena
 		controlador = (ControladorAgregaEntrenador) c;
 		btnAgregaPokemon.addActionListener(c);
 		btnAceptar.addActionListener(c);
-
 	}
 
 	@Override
-	public String getNombre() {
-		return textNombre.getText();
+	public String getNombreEntrenador() {
+		return this.textNombre.getText();
 	}
 
 	@Override
-	public void muestraMensajeAlerta(String mensaje) {
-		JOptionPane.showMessageDialog(null, mensaje);
+	public int getCantidadDeCartas() {
+		return Integer.parseInt(this.textCantidadCartas.getText());
 	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		String nombreEntrenador = null;
+		int cantidadDeCartas=0;
+		boolean cond = false;
+		
+		nombreEntrenador=this.textNombre.getText();
+		try {
+			cantidadDeCartas = Integer.parseInt(this.textCantidadCartas.getText());
+		} catch (NumberFormatException arg) {}
+		
+		cond = cantidadDeCartas>0 && nombreEntrenador!=null && !nombreEntrenador.isEmpty();
+		this.btnAceptar.setEnabled(cond);
+		this.btnAgregaPokemon.setEnabled(cond);
+	}
+	
+	@Override
+	public void actualizarListaPokemones(Iterator<Pokemon> it) {
+		this.listModelPokemones.clear();
+		while (it.hasNext())
+			this.listModelPokemones.addElement(it.next());
+		this.repaint();
+	}
+
 }

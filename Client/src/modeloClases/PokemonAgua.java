@@ -108,7 +108,7 @@ public final class PokemonAgua extends PokemonDecorator {
 	 */
 	@Override
 	public String toString() {
-		return super.toString()+" / "+" Elemento: Agua";
+		return super.toString()+" | Elemento: Agua";
 	}
     
     

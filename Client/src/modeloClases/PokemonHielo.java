@@ -126,6 +126,6 @@ public class PokemonHielo extends PokemonDecorator {
      */
     @Override
 	public String toString() {
-		return super.toString()+" / "+" Elemento: Hielo";
+		return super.toString()+" | Elemento: Hielo";
 	}
 }

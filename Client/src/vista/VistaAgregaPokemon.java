@@ -6,6 +6,10 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -21,126 +25,237 @@ import java.awt.FlowLayout;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.Font;
 
 import vista.interfacesVista.IVistaAgregaPokemon;
+import javax.swing.ButtonGroup;
 
-public class VistaAgregaPokemon extends JFrame implements IVistaAgregaPokemon {
+public class VistaAgregaPokemon extends JFrame implements IVistaAgregaPokemon, KeyListener,MouseListener {
 
 	private static final long serialVersionUID = 1L;
+	private boolean nombreOk=false;
+	private boolean tipoOk=false;
+	private boolean elementoOk=false;
 	private JPanel panelAgregaPokemon;
 	private JTextField textNombre;
-        private ControladorAgregaPokemon controlador;
+	private ControladorAgregaPokemon controlador;
+	private JRadioButton rdbtnComun;
+	private JRadioButton rdbtnLegendario;
+	private JRadioButton rdbtnFuego;
+	private JRadioButton rdbtnHielo;
+	private JRadioButton rdbtnAgua;
+	private JRadioButton rdbtnTierra;
+	private JRadioButton rdbtnHieloRecargado;
+	private JRadioButton rdbtnElectrico;
+	private JButton btnAceptar;
+	private final ButtonGroup buttonGroupTipo = new ButtonGroup();
+	private final ButtonGroup buttonGroupElemento = new ButtonGroup();
 
 	/**
 	 * Create the frame.
 	 */
 	public VistaAgregaPokemon() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(300, 300, 450, 408); //Despues borrar
+
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(300, 300, 450, 408); // Despues borrar
+		this.setTitle("Registrar Pokémon");
 		panelAgregaPokemon = new JPanel();
-		panelAgregaPokemon.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Agregar Pokemon", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelAgregaPokemon.setLayout(new BorderLayout(0, 0));
 		setContentPane(panelAgregaPokemon);
-		
+
 		JPanel panelDatos = new JPanel();
 		panelAgregaPokemon.add(panelDatos, BorderLayout.CENTER);
 		panelDatos.setLayout(new GridLayout(4, 0, 0, 0));
-		
+
 		JPanel panelNombre = new JPanel();
 		panelDatos.add(panelNombre);
 		panelNombre.setLayout(new GridLayout(0, 2, 0, 0));
-		
+
 		JLabel lblNombre = new JLabel("Nombre: ");
 		lblNombre.setHorizontalAlignment(SwingConstants.CENTER);
 		panelNombre.add(lblNombre);
-		
+
 		JPanel panelEnvTextNombre = new JPanel();
 		FlowLayout fl_panelEnvTextNombre = (FlowLayout) panelEnvTextNombre.getLayout();
-		fl_panelEnvTextNombre.setVgap(33);
+		fl_panelEnvTextNombre.setAlignment(FlowLayout.LEADING);
+		fl_panelEnvTextNombre.setVgap(38);
 		panelNombre.add(panelEnvTextNombre);
-		
+
 		textNombre = new JTextField();
 		panelEnvTextNombre.add(textNombre);
-		textNombre.setColumns(18);
-		
+		textNombre.setColumns(15);
+
 		JPanel panelTipo = new JPanel();
-		panelTipo.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Seleccionar tipo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelTipo.setBorder(new TitledBorder(
+				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
+				"Seleccionar tipo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelDatos.add(panelTipo);
 		panelTipo.setLayout(new GridLayout(2, 0, 0, 0));
-		
-		JRadioButton rdbtnComun = new JRadioButton("Com\u00FAn");
+
+		this.rdbtnComun = new JRadioButton("Comun");
+		this.rdbtnComun.setActionCommand("Comun");
+		buttonGroupTipo.add(rdbtnComun);
 		panelTipo.add(rdbtnComun);
-		
-		JRadioButton rdbtnLegendario = new JRadioButton("Legendario");
+
+		this.rdbtnLegendario = new JRadioButton("Legendario");
+		this.rdbtnLegendario.setActionCommand("Legendario");
+		buttonGroupTipo.add(rdbtnLegendario);
 		panelTipo.add(rdbtnLegendario);
-		
+
 		JPanel panelElemento = new JPanel();
-		panelElemento.setBorder(new TitledBorder(null, "Seleccionar elemento", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panelElemento.setBorder(
+				new TitledBorder(null, "Seleccionar elemento", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panelDatos.add(panelElemento);
 		panelElemento.setLayout(new GridLayout(2, 3, 0, 0));
-		
-		JRadioButton rdbtnFuego = new JRadioButton("Fuego");
+
+		this.rdbtnFuego = new JRadioButton("Fuego");
+		this.rdbtnFuego.setActionCommand("Fuego");
+		buttonGroupElemento.add(rdbtnFuego);
 		panelElemento.add(rdbtnFuego);
-		
-		JRadioButton rdbtnHielo = new JRadioButton("Hielo");
+
+		this.rdbtnHielo = new JRadioButton("Hielo");
+		this.rdbtnHielo.setActionCommand("Hielo");
+		buttonGroupElemento.add(rdbtnHielo);
 		panelElemento.add(rdbtnHielo);
-		
-		JRadioButton rdbtnAgua = new JRadioButton("Agua");
+
+		this.rdbtnAgua = new JRadioButton("Agua");
+		this.rdbtnAgua.setActionCommand("Agua");
+		buttonGroupElemento.add(rdbtnAgua);
 		panelElemento.add(rdbtnAgua);
-		
-		JRadioButton rdbtnTierra = new JRadioButton("Tierra");
+
+		this.rdbtnTierra = new JRadioButton("Tierra");
+		this.rdbtnTierra.setActionCommand("Tierra");
+		buttonGroupElemento.add(rdbtnTierra);
 		panelElemento.add(rdbtnTierra);
-		
-		JRadioButton rdbtnHieloRecargado = new JRadioButton("Hielo Recargado");
+
+		this.rdbtnHieloRecargado = new JRadioButton("Hielo Recargado");
+		this.rdbtnHieloRecargado.setActionCommand("Hielo Recargado");
+		buttonGroupElemento.add(rdbtnHieloRecargado);
 		panelElemento.add(rdbtnHieloRecargado);
-		
-		JRadioButton rdbtnElectrico = new JRadioButton("El\u00E9ctrico");
+
+		this.rdbtnElectrico = new JRadioButton("Electrico");
+		this.rdbtnElectrico.setActionCommand("Electrico");
+		buttonGroupElemento.add(rdbtnElectrico);
 		panelElemento.add(rdbtnElectrico);
-		
+
 		JPanel panelBoton = new JPanel();
 		panelDatos.add(panelBoton);
-		panelBoton.setLayout(new GridLayout(0, 2, 0, 0));
-		
-		JPanel panelEnvAgregaOtro = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) panelEnvAgregaOtro.getLayout();
-		flowLayout.setVgap(25);
-		panelBoton.add(panelEnvAgregaOtro);
-		
-		JButton btnAgregarOtro = new JButton("Agregar Otro");
-		panelEnvAgregaOtro.add(btnAgregarOtro);
-		btnAgregarOtro.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		
+		panelBoton.setLayout(new GridLayout(0, 1, 0, 0));
+
 		JPanel panelAceptar = new JPanel();
 		FlowLayout flowLayout_1 = (FlowLayout) panelAceptar.getLayout();
 		flowLayout_1.setVgap(25);
 		panelBoton.add(panelAceptar);
-		
-		JButton btnAceptar = new JButton("Aceptar");
+
+		this.btnAceptar = new JButton("Aceptar");
 		panelAceptar.add(btnAceptar);
 		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnAceptar.setEnabled(false);
+		
+		//Listeners:
+		
+		this.rdbtnAgua.addMouseListener(this);
+		this.rdbtnComun.addMouseListener(this);
+		this.rdbtnElectrico.addMouseListener(this);
+		this.rdbtnFuego.addMouseListener(this);
+		this.rdbtnHielo.addMouseListener(this);
+		this.rdbtnHieloRecargado.addMouseListener(this);
+		this.rdbtnLegendario.addMouseListener(this);
+		this.rdbtnTierra.addMouseListener(this);
+		this.textNombre.addKeyListener(this);
 	}
 
-    @Override
-    public void abrir() {
-        setBounds(100, 100, 323, 457);
-        setVisible(true);
-    }
+	@Override
+	public void abrir() {
+		setBounds(300, 300, 450, 408);
+		setVisible(true);
+	}
 
-    @Override
-    public void cerrar() {
-        setVisible(false);
-    }
+	@Override
+	public void cerrar() {
+		setVisible(false);
+	}
 
-    @Override
-    public void setControlador(ActionListener c) {
-        controlador = (ControladorAgregaPokemon) c;
-        
-    }
+	@Override
+	public void setControlador(ActionListener c) {
+		controlador = (ControladorAgregaPokemon) c;
+		this.btnAceptar.addActionListener(c);
+	}
 
-    @Override
-    public void muestraMensajeAlerta(String mensaje) {
-        // TODO Implement this method
-    }
+	@Override
+	public String getNombrePokemon() {
+		return this.textNombre.getText();
+	}
+	
+	@Override
+	public String getTipoPokemon() {
+		return this.buttonGroupTipo.getSelection().getActionCommand();
+	}
+	
+	@Override
+	public String getElementoPokemon() {
+		return this.buttonGroupElemento.getSelection().getActionCommand();
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		String nombrePokemon = null;
+
+		nombrePokemon = this.textNombre.getText();
+
+		this.nombreOk = (nombrePokemon != null) && (!nombrePokemon.isEmpty());
+		if (this.nombreOk && this.elementoOk && this.tipoOk) {
+			this.btnAceptar.setEnabled(true);
+		}
+		else {
+			this.btnAceptar.setEnabled(false);
+			this.btnAceptar.setEnabled(false);
+		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		Object o = e.getSource();
+		JRadioButton btn = (JRadioButton) o;
+
+		if (btn.getActionCommand().contentEquals(IVistaAgregaPokemon.POKEMON_COMUN)
+				|| btn.getActionCommand().contentEquals(IVistaAgregaPokemon.POKEMON_LEGENDARIO))
+			this.tipoOk = true;
+		else //Estoy seguro que los otros radio button son de un elemento
+			this.elementoOk = true;
+
+		if (this.nombreOk && this.elementoOk && this.tipoOk) {
+			this.btnAceptar.setEnabled(true);
+		}
+		else {
+			this.btnAceptar.setEnabled(false);
+		}
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+	}
+
 }

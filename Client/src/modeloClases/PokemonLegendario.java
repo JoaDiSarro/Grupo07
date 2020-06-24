@@ -1,6 +1,10 @@
 package modeloClases;
 
- /**
+import java.awt.Toolkit;
+
+import vista.interfacesVista.IVista;
+
+/**
   * @author DiSarro,Joaquina.
   * @version 1.0
   * <br>
@@ -25,7 +29,10 @@ public class PokemonLegendario extends Pokemon implements Cloneable {
      */
     @Override
 	public Object clone() throws CloneNotSupportedException {
-		throw new CloneNotSupportedException("No se puede clonar un pokemon legendario");
+    	Toolkit.getDefaultToolkit().beep();
+    	IVista.muestraMensajeAlerta("No se puede clonar un pokémon legendario o un entrenador en posesión de uno");
+		throw new CloneNotSupportedException("");
+		
 	}
 
     /**
@@ -83,5 +90,7 @@ public class PokemonLegendario extends Pokemon implements Cloneable {
      */
     @Override
     public void hechizarTormenta() {}
+    
+    
 }
 

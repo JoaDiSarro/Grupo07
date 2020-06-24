@@ -48,15 +48,15 @@ public abstract class PokemonDecorator extends Pokemon implements Cloneable{
 	 *Sobreescritura del método toString.<br>
 	 *Muestra los atributos propios del pokemon.
 	 */
-	@Override
+	/*@Override
 	public String toString() {
-		return "Nombre: "+this.nombre+" / "+
-				"Vitalidad: "+this.vitalidad+" / "+
-				"Escudo: "+this.escudo+" / "+
-				"Fuerza: "+this.fuerza+" / "+
-				"Experiencia: "+this.experiencia+" / "+
+		return "Nombre: "+this.nombre+" | "+
+				"Vitalidad: "+this.vitalidad+" | "+
+				"Escudo: "+this.escudo+" | "+
+				"Fuerza: "+this.fuerza+" | "+
+				"Experiencia: "+this.experiencia+" | "+
 				"Clasificacion Actual: "+this.clasificacionActual;
-	}
+	}*/
 
 	public void setPokemon(Pokemon pokemon) {
         this.pokemon = pokemon;
