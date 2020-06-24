@@ -11,7 +11,7 @@ import java.awt.Font;
 import javax.swing.border.TitledBorder;
 import java.awt.Color;
 
-public class VistaInfoPokemon extends JFrame {
+public class NoSeUsa_VistaInfoPokemon extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel panelInfoPokemon;
@@ -23,7 +23,7 @@ public class VistaInfoPokemon extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VistaInfoPokemon frame = new VistaInfoPokemon();
+					NoSeUsa_VistaInfoPokemon frame = new NoSeUsa_VistaInfoPokemon();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,7 +35,7 @@ public class VistaInfoPokemon extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VistaInfoPokemon() {
+	public NoSeUsa_VistaInfoPokemon() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 299, 457);
 		panelInfoPokemon = new JPanel();

@@ -21,7 +21,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import java.awt.FlowLayout;
 
-public class VistaArena extends JFrame {
+public class NoSeUsa_VistaArena extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel panelArena;
@@ -33,7 +33,7 @@ public class VistaArena extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VistaArena frame = new VistaArena();
+					NoSeUsa_VistaArena frame = new NoSeUsa_VistaArena();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,7 +45,7 @@ public class VistaArena extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VistaArena() {
+	public NoSeUsa_VistaArena() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 455, 563);
 		panelArena = new JPanel();

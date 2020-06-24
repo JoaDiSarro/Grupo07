@@ -41,7 +41,12 @@ import javax.swing.JOptionPane;
 
 import vista.interfacesVista.IVistaAgregaEntrenador;
 
-public class VistaAgregaEntrenador extends JFrame implements IVistaAgregaEntrenador, KeyListener{
+/**
+ * @author Frangolini,Luciano.<br>
+ *         Clase que representa una ventana donde se ingresan los datos de un
+ *         entrenador que será registrado en un torneo.<br>
+ */
+public class VistaAgregaEntrenador extends JFrame implements IVistaAgregaEntrenador, KeyListener {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel panelRegistroEntrenador;
@@ -54,7 +59,7 @@ public class VistaAgregaEntrenador extends JFrame implements IVistaAgregaEntrena
 	private JList<Pokemon> listPokemones;
 
 	/**
-	 * Create the frame.
+	 * Constructor de la clase VistaAgregaEntrenador.
 	 */
 	public VistaAgregaEntrenador() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -96,7 +101,6 @@ public class VistaAgregaEntrenador extends JFrame implements IVistaAgregaEntrena
 		panelEnvNombre.add(textNombre);
 		textNombre.setColumns(20);
 
-
 		JLabel lblCartas = new JLabel("Cantidad de Cartas:");
 		lblCartas.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblCartas.setHorizontalAlignment(SwingConstants.CENTER);
@@ -113,8 +117,9 @@ public class VistaAgregaEntrenador extends JFrame implements IVistaAgregaEntrena
 		textCantidadCartas.setColumns(20);
 
 		JPanel panelListaPokemones = new JPanel();
-		panelListaPokemones
-				.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Pokemones agregados", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelListaPokemones.setBorder(new TitledBorder(
+				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
+				"Pokemones agregados", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		GridBagConstraints gbc_panelListaPokemones = new GridBagConstraints();
 		gbc_panelListaPokemones.fill = GridBagConstraints.BOTH;
 		gbc_panelListaPokemones.insets = new Insets(0, 0, 5, 0);
@@ -158,24 +163,37 @@ public class VistaAgregaEntrenador extends JFrame implements IVistaAgregaEntrena
 		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		panelEnvCrear.add(btnAceptar);
 		btnAceptar.setActionCommand(ACEPTAR);
-		
-		//Listeners:
-		
-		//this.btnAceptar.addKeyListener(this);
+
+		// Listeners:
+
+		// this.btnAceptar.addKeyListener(this);
 		this.textCantidadCartas.addKeyListener(this);
 		this.textNombre.addKeyListener(this);
 	}
 
+	/**
+	 * Método encargado de posicionar y hacer visible la ventana.
+	 */
 	public void abrir() {
 		setBounds(100, 100, 493, 430);
 		setVisible(true);
 	}
 
+	/**
+	 * Método encargado de cerrar la ventana.
+	 */
 	@Override
 	public void cerrar() {
 		setVisible(false);
 	}
 
+	/**
+	 * Método encargado de asignarle un controlador a esta ventana.<br>
+	 * <b> Pre: </b> El parámetro no puede ser nulo.
+	 * 
+	 * @param c de tipo ActionListener: Representa el controlador que se le asigna a
+	 *          la ventana.<br>
+	 */
 	@Override
 	public void setControlador(ActionListener c) {
 		controlador = (ControladorAgregaEntrenador) c;
@@ -183,11 +201,23 @@ public class VistaAgregaEntrenador extends JFrame implements IVistaAgregaEntrena
 		btnAceptar.addActionListener(c);
 	}
 
+	/**
+	 * Método encargado de devolver el texto que se encuentre en el textfield
+	 * nombre.
+	 * 
+	 * @return Contenido del textfield nombre en formato String.
+	 */
 	@Override
 	public String getNombreEntrenador() {
 		return this.textNombre.getText();
 	}
 
+	/**
+	 * Método encargado de devolver el texto que se encuentre en el textfield
+	 * cantidad de cartas como un número.
+	 * 
+	 * @return Contenido del textfield cantidad de cartas en formato integer.
+	 */
 	@Override
 	public int getCantidadDeCartas() {
 		return Integer.parseInt(this.textCantidadCartas.getText());
@@ -204,19 +234,27 @@ public class VistaAgregaEntrenador extends JFrame implements IVistaAgregaEntrena
 	@Override
 	public void keyReleased(KeyEvent e) {
 		String nombreEntrenador = null;
-		int cantidadDeCartas=0;
+		int cantidadDeCartas = 0;
 		boolean cond = false;
-		
-		nombreEntrenador=this.textNombre.getText();
+
+		nombreEntrenador = this.textNombre.getText();
 		try {
 			cantidadDeCartas = Integer.parseInt(this.textCantidadCartas.getText());
-		} catch (NumberFormatException arg) {}
-		
-		cond = cantidadDeCartas>0 && nombreEntrenador!=null && !nombreEntrenador.isEmpty();
+		} catch (NumberFormatException arg) {
+		}
+
+		cond = cantidadDeCartas > 0 && nombreEntrenador != null && !nombreEntrenador.isEmpty();
 		this.btnAceptar.setEnabled(cond);
 		this.btnAgregaPokemon.setEnabled(cond);
 	}
-	
+
+	/**
+	 * Método encargado de actualizar la lista visual de pokemones pertenecientes a
+	 * un entrenador. <b> Pre: </b> El parámetro no debe ser nulo.
+	 * 
+	 * @param it de tipo Iterator<Pokemon>: Representa un iterador de un arraylist
+	 *           de pokemones.
+	 */
 	@Override
 	public void actualizarListaPokemones(Iterator<Pokemon> it) {
 		this.listModelPokemones.clear();

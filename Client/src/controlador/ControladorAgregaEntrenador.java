@@ -17,6 +17,13 @@ import vista.VistaAgregaPokemon;
 import vista.interfacesVista.IVistaAgregaEntrenador;
 import vista.interfacesVista.IVistaAgregaPokemon;
 
+/**
+ * @author Frangolini,Luciano.<br>
+ *         Clase que representa un controlador. Se encarga de relacionar las
+ *         acciones tomadas en la ventana utilizada para agregar entrenadores
+ *         con su correspondiente modelo y con las demás ventanas dependientes
+ *         de ella.<br>
+ */
 public class ControladorAgregaEntrenador implements ActionListener, Observer {
 
 	private IVistaAgregaEntrenador vista;
@@ -24,12 +31,25 @@ public class ControladorAgregaEntrenador implements ActionListener, Observer {
 	private Entrenador entrenador;
 	private ArrayList<Observable> observados = new ArrayList<Observable>();
 
+	/**
+	 * Constructor de la clase ControladorAgregaEntrenador.<br>
+	 * <b> Pre: </b> El parámetro debe ser distinto de null.<br>
+	 * 
+	 * @param vista de tipo IVistaAgregaEntrenador: Representa la vista que
+	 *              supervisa este controlador.<br>
+	 */
 	public ControladorAgregaEntrenador(IVistaAgregaEntrenador vista) {
 		this.vista = vista;
 		this.torneo = Torneo.getInstance();
 		this.entrenador = null;
 	}
 
+	/**
+	 * Método encargado de recibir eventos originados en el parámetro vista y
+	 * realizar tareas acorde a estos eventos.<br>
+	 * 
+	 * @param evento de tipo ActionEvent : Identifica el evento que será analizado.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent evento) {
 
@@ -53,6 +73,10 @@ public class ControladorAgregaEntrenador implements ActionListener, Observer {
 
 	}
 
+	/**
+	 * Método encargado de instanciar y mostrar una ventana con su respectivo
+	 * controlador para añadir un pokémon.
+	 */
 	public void abrirVentanaPokemon() {
 		IVistaAgregaPokemon vistaPokemon = new VistaAgregaPokemon();
 		ControladorAgregaPokemon controlador = new ControladorAgregaPokemon(vistaPokemon, this.entrenador);

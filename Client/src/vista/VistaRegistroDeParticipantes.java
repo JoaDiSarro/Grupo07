@@ -39,11 +39,16 @@ import java.util.Iterator;
 import vista.interfacesVista.IVistaRegistroParticipantes;
 import java.awt.event.MouseAdapter;
 
+/**
+ * @author Frangolini,Luciano.<br>
+ *         Clase que representa una ventana donde se observan y registran los
+ *         entrenadores y pokemones que participarán en un torneo<br>
+ */
 public class VistaRegistroDeParticipantes extends JFrame implements IVistaRegistroParticipantes {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel panelGeneral;
-	private ControladorRegistroDeParticipantes controlador; //ActionListener
+	private ControladorRegistroDeParticipantes controlador; // ActionListener
 	private JButton btnAgregarEntrenador = new JButton("Agregar Entrenador");
 	private JButton btnClonaEntrenador = new JButton("Clonar Entrenador");
 	private JButton btnAgregarPokemon = new JButton("Agregar Pokemon");
@@ -54,29 +59,9 @@ public class VistaRegistroDeParticipantes extends JFrame implements IVistaRegist
 	private DefaultListModel<Pokemon> listModelPokemones = new DefaultListModel<Pokemon>();
 	private JList<Pokemon> listPokemones;
 	private JLabel lblRestriccionTorneo;
-	
-
-	// TODO: cambiar estos main, solo deberia de haber un main en Prueba, donde
-	// llame a la ejecucion a la ventana principal. No en cada ui un main.
-
-	/*
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VistaRegistroDeParticipantes frame = new VistaRegistroDeParticipantes();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
-	 * Create the frame.
+	 * Constructor de la clase VistaRegistroDeParticipantes.<br>
 	 */
 	public VistaRegistroDeParticipantes() {
 
@@ -115,7 +100,7 @@ public class VistaRegistroDeParticipantes extends JFrame implements IVistaRegist
 		JScrollPane scrollListaEntrenadores = new JScrollPane();
 		panelEntrenadores.add(scrollListaEntrenadores, BorderLayout.CENTER);
 
-		this.listEntrenadores = new JList<Entrenador>();		
+		this.listEntrenadores = new JList<Entrenador>();
 		scrollListaEntrenadores.setViewportView(listEntrenadores);
 		listEntrenadores.setModel(this.listModelEntrenadores);
 
@@ -208,49 +193,61 @@ public class VistaRegistroDeParticipantes extends JFrame implements IVistaRegist
 		lblRestriccionTorneo.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblRestriccionTorneo.setHorizontalAlignment(SwingConstants.CENTER);
 		scrollRestriccionTorneo.setViewportView(lblRestriccionTorneo);
-		
-		//Listeners: 
-		
+
+		// Listeners:
+
 		addListeners();
 	}
 
+	/**
+	 * Método encargado de asignarle un Listener a cada lista de la ventana, las
+	 * cuales son la de entrenadores y la de pokemones.
+	 */
 	private void addListeners() {
 		ListSelectionListener escuchaEntrenadores = new ListSelectionListener() {
 
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				Entrenador entrenador = listEntrenadores.getSelectedValue();
-				
+
 				actualizaListaPokemones(entrenador);
 			}
-			
+
 			private void actualizaListaPokemones(Entrenador entrenador) {
-				if (entrenador!=null) {
+				if (entrenador != null) {
 					btnAgregarPokemon.setEnabled(true);
 					actualizarListaPokemones(entrenador.getPokemones().iterator());
-					if (listModelEntrenadores.size()<16)
+					if (listModelEntrenadores.size() < 16)
 						btnClonaEntrenador.setEnabled(true);
-				}	
-			}	
+				}
+			}
 		};
-		
+
 		ListSelectionListener escuchaPokemones = new ListSelectionListener() {
 
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				Pokemon pokemon = listPokemones.getSelectedValue();
-				
-				if (pokemon!=null) {
+
+				if (pokemon != null) {
 					btnClonaPokemon.setEnabled(true);
-				}	
+				}
 			}
-			
+
 		};
-		
+
 		this.listEntrenadores.addListSelectionListener(escuchaEntrenadores);
 		this.listPokemones.addListSelectionListener(escuchaPokemones);
 	}
 
+	/**
+	 * Método encargado de asignar un controlador a ésta ventana y sus
+	 * elementos.<br>
+	 * <b> Pre: </b> El parámetro debe ser distinto de null.<br>
+	 * 
+	 * @param c de tipo ActionListener: Representa el controlador que controlará
+	 *          esta ventana.<br>
+	 */
 	public void setControlador(ActionListener c) {
 		controlador = (ControladorRegistroDeParticipantes) c;
 		btnAgregarEntrenador.addActionListener(c);
@@ -260,43 +257,76 @@ public class VistaRegistroDeParticipantes extends JFrame implements IVistaRegist
 		btnIniciarTorneo.addActionListener(c);
 	}
 
+	/**
+	 * Método encargado de posicionar y hacer visible ésta ventana.<br>
+	 */
 	@Override
 	public void abrir() {
 		setBounds(300, 300, 920, 619);
 		setVisible(true);
 	}
 
+	/**
+	 * Método encargado de ocultar ésta ventana.<br>
+	 */
 	@Override
 	public void cerrar() {
 		setVisible(false);
 	}
 
+	/**
+	 * Método encargado de cambiar el texto del label Restriccion Torneo para que
+	 * muestre al ganador del torneo.<br>
+	 * <b> Pre: </b> El parámetro debe ser distinto de null.<br>
+	 * 
+	 * @param ganador de tipo String: Representa el nombre y los atributos del
+	 *                ganador del torneo en formato String.<br>
+	 */
 	@Override
 	public void setResultado(String ganador) {
 		this.lblRestriccionTorneo.setText(ganador);
 	}
-	
-	/*public static void muestraMensajeAlerta(String mensaje) { //pasar a static?
-		JOptionPane.showMessageDialog(null, mensaje);
-	}*/
-	
-	
 
+	/**
+	 * Método encargado de devolver la cantidad de participantes que se encuentran
+	 * actualmente registrados al torneo.<br>
+	 * 
+	 * @return Cantidad de entrenadores registrados en el torneo. Tipo int.<br>
+	 */
 	@Override
 	public int getCantidadParticipantes() {
 		return this.listModelEntrenadores.size();
 	}
-	
+
+	/**
+	 * Método encargado de devolver el entrenador seleccionado de la lista de
+	 * participantes.<br>
+	 * 
+	 * @return Entrenador seleccionado de la lista de participantes. Tipo
+	 *         Entrenador.<br>
+	 */
 	@Override
 	public Entrenador getEntrenadorActual() {
 		return this.listEntrenadores.getSelectedValue();
 	}
-	
+
+	/**
+	 * Método encargado de devolver el pokémon seleccionado de la lista de
+	 * pokémones.<br>
+	 * 
+	 * @return Pokemon seleccionado de la lista de pokemones. Tipo Pokemon.<br>
+	 */
 	@Override
 	public Pokemon getPokemonActual() {
 		return this.listPokemones.getSelectedValue();
 	}
-	
+
+	/**
+	 * Método encargado de actualizar la lista de entrenadores de la ventana.<br>
+	 * 
+	 * @param it de tipo Iterator<Entrenador>: Representa un iterador de la lista de
+	 *           entrenadores registrados al torneo.<br>
+	 */
 	@Override
 	public void actualizarListaEntrenadores(Iterator<Entrenador> it) {
 		this.listModelEntrenadores.clear();
@@ -304,20 +334,26 @@ public class VistaRegistroDeParticipantes extends JFrame implements IVistaRegist
 		while (it.hasNext()) {
 			Entrenador entrenador = it.next();
 			this.listModelEntrenadores.addElement(entrenador);
-			if (completos && entrenador.getPokemones().size()==0)
-				completos=false;	
+			if (completos && entrenador.getPokemones().size() == 0)
+				completos = false;
 		}
 		this.repaint();
 		this.btnClonaEntrenador.setEnabled(false);
 		this.btnAgregarPokemon.setEnabled(false);
 		this.btnClonaPokemon.setEnabled(false);
-		if (this.listModelEntrenadores.size()==16) {
+		if (this.listModelEntrenadores.size() == 16) {
 			this.btnAgregarEntrenador.setEnabled(false);
 			if (completos)
 				this.btnIniciarTorneo.setEnabled(true);
 		}
 	}
-	
+
+	/**
+	 * Método encargado de actualizar la lista de pokemones de la ventana.<br>
+	 * 
+	 * @param it de tipo Iterator<Pokemon>: Representa un iterador de la lista de
+	 *           pokemones registrados al torneo.<br>
+	 */
 	@Override
 	public void actualizarListaPokemones(Iterator<Pokemon> it) {
 		this.listModelPokemones.clear();
@@ -326,10 +362,13 @@ public class VistaRegistroDeParticipantes extends JFrame implements IVistaRegist
 		this.repaint();
 		this.btnClonaPokemon.setEnabled(false);
 	}
-	
+
+	/**
+	 * Método encargado de deshabilitar el botón para comenzar el torneo.
+	 */
 	@Override
 	public void deshabilitaBotonTorneo() {
 		this.btnIniciarTorneo.setEnabled(false);
 	}
-	
+
 }

@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 
-public class VistaInfoEntrenador extends JFrame {
+public class NoSeUsa_VistaInfoEntrenador extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel panelInfoEntrenador;
@@ -27,7 +27,7 @@ public class VistaInfoEntrenador extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VistaInfoEntrenador frame = new VistaInfoEntrenador();
+					NoSeUsa_VistaInfoEntrenador frame = new NoSeUsa_VistaInfoEntrenador();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,7 +39,7 @@ public class VistaInfoEntrenador extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VistaInfoEntrenador() {
+	public NoSeUsa_VistaInfoEntrenador() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 452, 377);
 		panelInfoEntrenador = new JPanel();
