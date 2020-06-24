@@ -5,8 +5,9 @@ import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Random;
-
 import vista.interfacesVista.IVistaRegistroParticipantes;
+import modeloClases.persistencia.PersistenciaModelo;
+
 
 /**
  * @author DiSarro,Joaquina.
@@ -24,6 +25,7 @@ public class Torneo extends Observable implements Observer{
     private static Torneo instance;
     private ArrayList<Observable> observables = new ArrayList<>();
     private String ganadorTorneo;
+    private PersistenciaModelo<ArrayList<Entrenador>> persistidor = new PersistenciaModelo<>();
 
 
     /**
@@ -68,6 +70,8 @@ public class Torneo extends Observable implements Observer{
 
     public void agregaArena(Arena arena) {
         this.listaArenas.add(arena);
+        arena.addObserver(this);
+        observables.add(arena);
     }
     
     /**
@@ -78,7 +82,7 @@ public class Torneo extends Observable implements Observer{
      * @param entrenadores de tipo ArrayList Entrenador: tiene los datos de todos los entrenadores que participan en la Ronda.
      */
     public void comienzaRonda(ArrayList<Entrenador> entrenadores){
-        Ronda ronda = new Ronda();
+        Ronda ronda = new Ronda(persistidor);
         ronda.addObserver(this);
         this.observables.add(ronda);
         ronda.inicia(entrenadores,reporteResultados,listaArenas);
@@ -115,6 +119,7 @@ public class Torneo extends Observable implements Observer{
      * <b>Post:</b> El Torneo se ejecuta de principio a fin.
      */
     public void ejecutaTorneo() {
+        persistidor.guardar(listaEntrenadores);
         Entrenador ganador;
         System.out.println("\n------COMIENZA EL TORNEO------\n");
         listaCompetidoresActual = listaEntrenadores;
@@ -125,14 +130,23 @@ public class Torneo extends Observable implements Observer{
     public void update(Observable observable, Object object) {
         if(!this.observables.contains(observable))
             throw new IllegalArgumentException();
-        listaCompetidoresActual = (ArrayList<Entrenador>) object;
+        if (observable.getClass().getName().equalsIgnoreCase(Arena.class.getName())) {
+            setChanged();
+            notifyObservers(object);
+        } else {
+            manejaComportamientoTorneo(observable);
+        }
+    }
+    
+    private void manejaComportamientoTorneo(Observable observable) {
+        listaCompetidoresActual = persistidor.leerDatos();
         if(listaCompetidoresActual.size() != 1) {
-        	this.setChanged();
-        	this.notifyObservers(IVistaRegistroParticipantes.FIN_RONDA);
+            this.setChanged();
+            this.notifyObservers(IVistaRegistroParticipantes.FIN_RONDA);
             comienzaRonda(listaCompetidoresActual);
         }else{
-        	this.ganadorTorneo = listaCompetidoresActual.get(0).toString();
-        	this.setChanged();
+            this.ganadorTorneo = listaCompetidoresActual.get(0).toString();
+            this.setChanged();
     	    this.notifyObservers(IVistaRegistroParticipantes.FIN_TORNEO);
             System.out.println("GANADOR FINAL: " + listaCompetidoresActual.get(0) );
             System.out.println("\n------FINALIZA EL TORNEO------\n");
