@@ -42,7 +42,7 @@ public class Arena extends Observable {
             }
         }
         this.batallaEnCurso = false;
-        System.out.println("\nSaliendo A LA ARENA "+this.nombre);
+        //System.out.println("\nSaliendo A LA "+this.nombre);
         notifyAll();
     } 
 

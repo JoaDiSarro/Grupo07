@@ -32,12 +32,18 @@ import java.awt.Font;
 import vista.interfacesVista.IVistaAgregaPokemon;
 import javax.swing.ButtonGroup;
 
-public class VistaAgregaPokemon extends JFrame implements IVistaAgregaPokemon, KeyListener,MouseListener {
+/**
+ * @author Frangolini,Luciano.<br>
+ *         Clase que representa una ventana donde se ingresan los datos de un
+ *         pokémon que será registrado en un torneo.<br>
+ */
+
+public class VistaAgregaPokemon extends JFrame implements IVistaAgregaPokemon, KeyListener, MouseListener {
 
 	private static final long serialVersionUID = 1L;
-	private boolean nombreOk=false;
-	private boolean tipoOk=false;
-	private boolean elementoOk=false;
+	private boolean nombreOk = false;
+	private boolean tipoOk = false;
+	private boolean elementoOk = false;
 	private JPanel panelAgregaPokemon;
 	private JTextField textNombre;
 	private ControladorAgregaPokemon controlador;
@@ -54,8 +60,9 @@ public class VistaAgregaPokemon extends JFrame implements IVistaAgregaPokemon, K
 	private final ButtonGroup buttonGroupElemento = new ButtonGroup();
 
 	/**
-	 * Create the frame.
+	 * Constructor de la clase VistaAgregaPokemon.<br>
 	 */
+
 	public VistaAgregaPokemon() {
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -153,9 +160,9 @@ public class VistaAgregaPokemon extends JFrame implements IVistaAgregaPokemon, K
 		panelAceptar.add(btnAceptar);
 		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnAceptar.setEnabled(false);
-		
-		//Listeners:
-		
+
+		// Listeners:
+
 		this.rdbtnAgua.addMouseListener(this);
 		this.rdbtnComun.addMouseListener(this);
 		this.rdbtnElectrico.addMouseListener(this);
@@ -167,16 +174,32 @@ public class VistaAgregaPokemon extends JFrame implements IVistaAgregaPokemon, K
 		this.textNombre.addKeyListener(this);
 	}
 
+	/**
+	 * Método encargado de posicionar y hacer visible esta ventana.<br>
+	 */
+
 	@Override
 	public void abrir() {
 		setBounds(300, 300, 450, 408);
 		setVisible(true);
 	}
 
+	/**
+	 * Método encargado de ocultar esta ventana.
+	 */
+
 	@Override
 	public void cerrar() {
 		setVisible(false);
 	}
+
+	/**
+	 * Método encargado de asignarle un controlador a esta ventana.<br>
+	 * <b> Pre: </b> El parámetro no puede ser nulo.
+	 * 
+	 * @param c de tipo ActionListener: Representa el controlador que se le asigna a
+	 *          la ventana.<br>
+	 */
 
 	@Override
 	public void setControlador(ActionListener c) {
@@ -184,16 +207,35 @@ public class VistaAgregaPokemon extends JFrame implements IVistaAgregaPokemon, K
 		this.btnAceptar.addActionListener(c);
 	}
 
+	/**
+	 * Método encargado de devolver el texto en el textfield nombre.
+	 * 
+	 * @return Nombre del pokemon en formato String.
+	 */
+
 	@Override
 	public String getNombrePokemon() {
 		return this.textNombre.getText();
 	}
-	
+
+	/**
+	 * Método encargado de devolver qué tipo de pokémon se quiere instanciar.
+	 * 
+	 * @return Cadena representante del tipo de pokémon a instanciar.
+	 */
+
 	@Override
 	public String getTipoPokemon() {
 		return this.buttonGroupTipo.getSelection().getActionCommand();
 	}
-	
+
+	/**
+	 * Método encargado de devolver el elemento del pokémon que se quiere
+	 * instanciar.
+	 * 
+	 * @return Cadena representante del elemento del pokémon a instanciar.
+	 */
+
 	@Override
 	public String getElementoPokemon() {
 		return this.buttonGroupElemento.getSelection().getActionCommand();
@@ -216,8 +258,7 @@ public class VistaAgregaPokemon extends JFrame implements IVistaAgregaPokemon, K
 		this.nombreOk = (nombrePokemon != null) && (!nombrePokemon.isEmpty());
 		if (this.nombreOk && this.elementoOk && this.tipoOk) {
 			this.btnAceptar.setEnabled(true);
-		}
-		else {
+		} else {
 			this.btnAceptar.setEnabled(false);
 			this.btnAceptar.setEnabled(false);
 		}
@@ -239,13 +280,12 @@ public class VistaAgregaPokemon extends JFrame implements IVistaAgregaPokemon, K
 		if (btn.getActionCommand().contentEquals(IVistaAgregaPokemon.POKEMON_COMUN)
 				|| btn.getActionCommand().contentEquals(IVistaAgregaPokemon.POKEMON_LEGENDARIO))
 			this.tipoOk = true;
-		else //Estoy seguro que los otros radio button son de un elemento
+		else // Estoy seguro que los otros radio button son de un elemento
 			this.elementoOk = true;
 
 		if (this.nombreOk && this.elementoOk && this.tipoOk) {
 			this.btnAceptar.setEnabled(true);
-		}
-		else {
+		} else {
 			this.btnAceptar.setEnabled(false);
 		}
 	}

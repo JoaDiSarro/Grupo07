@@ -12,8 +12,15 @@ public class DefinicionState implements State{
     //TODO: Debe de avisarle a la vista quien es el ganador de la arena
     @Override
     public void ejecutar(ModeloBatalla modelo) {
-        arena.notificarEstado("\n Estado DEFINICION "+arena.getNombre());
+        arena.notificarEstado("\n La arena "+arena.getNombre()+" se encuentra ahora en estado de definición.");
         arena.setEstado(new LimpiezaState(arena));
         arena.continua(modelo);
     }
+    
+	@Override
+	public String toString() {
+		return " de definición.";
+	}
+    
+    
 }

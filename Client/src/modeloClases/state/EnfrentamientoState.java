@@ -15,7 +15,7 @@ public class EnfrentamientoState implements State{
 
     @Override
     public void ejecutar(ModeloBatalla modelo) {
-        arena.notificarEstado(("\n Estado ENFRENTAMIENTO "+arena.getNombre()));
+        arena.notificarEstado("\n La arena "+arena.getNombre()+" se encuentra ahora en estado de enfrentamiento.");
         this.modelo = modelo;
         modelo.setGanador(iniciaEnfrentamiento());
         arena.setEstado(new DefinicionState(arena));
@@ -54,8 +54,10 @@ public class EnfrentamientoState implements State{
         if (usaraCarta) {
             atacante.usarCarta(pokemonAtacado);
         }
+        arena.notificarEstado("\nArena "+this.arena.getNombre()+": El pokemon "+pokemonAtacante.getNombre()+" ataca a "+pokemonAtacado.getNombre());
         pokemonAtacante.ataca(pokemonAtacado);
         if (pokemonAtacado.isMuerto()) {
+        	arena.notificarEstado("\nArena "+this.arena.getNombre()+": "+pokemonAtacado.getNombre()+" ha muerto.");
             atacado.eliminaPokemon(pokemonAtacado);
             actualizaEstado(atacante, pokemonAtacante);
             return atacante;
@@ -64,6 +66,7 @@ public class EnfrentamientoState implements State{
     }
     
     private Entrenador defineGanadorPorEmpate() {
+    	arena.notificarEstado("\nArena "+this.arena.getNombre()+": Hubo un empate y se decidirá el ganador comparando los estados de los pokemones.");
         if (modelo.getPokemonEntrenadorA().comparaEstado(modelo.getPokemonEntrenadorB())== 1) {
                 modelo.getPokemonEntrenadorB().pierdeBatalla();
                 actualizaEstado(modelo.getEntrenadorA(), modelo.getPokemonEntrenadorA());
@@ -75,4 +78,9 @@ public class EnfrentamientoState implements State{
             return modelo.getEntrenadorB();
         }
     }
+    
+    @Override
+	public String toString() {
+		return " de enfrentamiento.";
+	}
 }

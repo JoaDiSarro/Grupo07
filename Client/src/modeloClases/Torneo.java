@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Random;
+
+import interfaces.IAvisos;
 import vista.interfacesVista.IVistaRegistroParticipantes;
 import modeloClases.persistencia.PersistenciaModelo;
 
@@ -48,6 +50,10 @@ public class Torneo extends Observable implements Observer{
 		return listaEntrenadores;
 	}
 
+	public ArrayList<Observable> getObservables() {
+		return observables;
+	}
+
 	/**
      * Metodo el cual se encarga de agregar entrenadores a la Lista de Entrenadores del Torneo.<br>
      * <b>Pre:</b> El entrenador debe ser distinto de null.<br>
@@ -85,6 +91,8 @@ public class Torneo extends Observable implements Observer{
         Ronda ronda = new Ronda(persistidor);
         ronda.addObserver(this);
         this.observables.add(ronda);
+        this.setChanged();
+        this.notifyObservers(IAvisos.COMIENZA_RONDA);
         ronda.inicia(entrenadores,reporteResultados,listaArenas);
     }
 
@@ -121,21 +129,36 @@ public class Torneo extends Observable implements Observer{
     public void ejecutaTorneo() {
         persistidor.guardar(listaEntrenadores);
         Entrenador ganador;
-        System.out.println("\n------COMIENZA EL TORNEO------\n");
+        this.setChanged();
+        this.notifyObservers(IAvisos.COMIENZA_TORNEO);
+        //System.out.println("\n------COMIENZA EL TORNEO------\n");
         listaCompetidoresActual = listaEntrenadores;
         comienzaRonda(listaCompetidoresActual);
     }
 
     @Override
-    public void update(Observable observable, Object object) {
+    public synchronized void update(Observable observable, Object object) {
         if(!this.observables.contains(observable))
             throw new IllegalArgumentException();
+        
         if (observable.getClass().getName().equalsIgnoreCase(Arena.class.getName())) {
             setChanged();
             notifyObservers(object);
-        } else {
+        } 
+        else if (object!=null && object.getClass().getName().equalsIgnoreCase(ModeloBatalla.class.getName())) {
+        	ModeloBatalla modelo = (ModeloBatalla) object;
+        	this.setChanged();
+        	this.notifyObservers(modelo.toString());
+        }
+        else if (object!=null && object.getClass().getName().equalsIgnoreCase(String.class.getName())) {
+        	String resultado = (String) object;
+        	this.setChanged();
+        	this.notifyObservers(resultado.toString());
+        }
+        else {
             manejaComportamientoTorneo(observable);
         }
+        notifyAll();
     }
     
     private void manejaComportamientoTorneo(Observable observable) {
@@ -148,8 +171,13 @@ public class Torneo extends Observable implements Observer{
             this.ganadorTorneo = listaCompetidoresActual.get(0).toString();
             this.setChanged();
     	    this.notifyObservers(IVistaRegistroParticipantes.FIN_TORNEO);
-            System.out.println("GANADOR FINAL: " + listaCompetidoresActual.get(0) );
-            System.out.println("\n------FINALIZA EL TORNEO------\n");
+    	    this.setChanged();
+    	    this.notifyObservers("\n\n-GANADOR DEL TORNEO:  " + listaCompetidoresActual.get(0)+"\n-FELICITACIONES!\n");
+    	    this.setChanged();
+    	    this.notifyObservers("\n\t\t------FINALIZA EL TORNEO------\n");
+    	    //this.muestraReporte();
+            //System.out.println("GANADOR FINAL: " + listaCompetidoresActual.get(0) );
+            //System.out.println("\n------FINALIZA EL TORNEO------\n");
         }
         this.observables.remove(observable);
     }

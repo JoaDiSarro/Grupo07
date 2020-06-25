@@ -41,9 +41,12 @@ public class Batalla extends Observable implements Runnable{
     } 
     
     private ModeloBatalla generaModeloBatalla(){
-        return new ModeloBatalla(entrenadorA, entrenadorA.eligePokemon(), entrenadorA.decideUtilizarCarta(),
-                               entrenadorB, entrenadorB.eligePokemon(), entrenadorB.decideUtilizarCarta(),
-                               maxAtaques);
+    	ModeloBatalla modelo = new ModeloBatalla(entrenadorA, entrenadorA.eligePokemon(), entrenadorA.decideUtilizarCarta(),
+                entrenadorB, entrenadorB.eligePokemon(), entrenadorB.decideUtilizarCarta(),
+                maxAtaques);
+        setChanged();
+        notifyObservers(modelo);
+        return modelo;
     }
 }
 
