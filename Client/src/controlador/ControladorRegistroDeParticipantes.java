@@ -27,11 +27,26 @@ import vista.interfacesVista.IVistaAgregaPokemon;
 import vista.interfacesVista.IVistaDesarrolloTorneo;
 import vista.interfacesVista.IVistaRegistroParticipantes;
 
+/**
+ * @author Frangolini,Luciano.<br>
+ *         Clase que representa un controlador. Se encarga de relacionar las
+ *         acciones tomadas en la ventana utilizada para comenzar el torneo y
+ *         registrar participantes con su correspondiente modelo y con las demás
+ *         ventanas dependientes de ella.<br>
+ */
+
 public class ControladorRegistroDeParticipantes implements ActionListener, Observer {
 
 	private IVistaRegistroParticipantes vista;
 	private Torneo torneo;
 	private ArrayList<Observable> observables = new ArrayList<>();
+
+	/**
+	 * Constructor de la clase RegistroDeParticipantes<br>
+	 * 
+	 * @param vista de tipo IVistaRegistroParticipantes: Representa la vista
+	 *              supervisada por este controlador.<br>
+	 */
 
 	public ControladorRegistroDeParticipantes(IVistaRegistroParticipantes vista) {
 		this.vista = vista;
@@ -39,6 +54,13 @@ public class ControladorRegistroDeParticipantes implements ActionListener, Obser
 		this.observables.add(this.torneo);
 		this.torneo.addObserver(this);
 	}
+
+	/**
+	 * Método encargado de recibir eventos originados en el parámetro vista y
+	 * realizar tareas acorde a estos eventos.<br>
+	 * 
+	 * @param evento de tipo ActionEvent : Identifica el evento que será analizado.
+	 */
 
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
@@ -65,15 +87,16 @@ public class ControladorRegistroDeParticipantes implements ActionListener, Obser
 			try {
 				pokemonClon = vista.getPokemonActual().clone();
 				Pokemon pokemonNuevo = (Pokemon) pokemonClon;
-				if (pokemonNuevo!=null) {
+				if (pokemonNuevo != null) {
 					this.observables.add(entrenador);
-					entrenador.addObserver(this);					
+					entrenador.addObserver(this);
 					entrenador.agregaPokemon((Pokemon) pokemonClon);
 				}
 			} catch (CloneNotSupportedException e) {
 			} catch (NullPointerException e) {
 				Toolkit.getDefaultToolkit().beep();
-				IVistaRegistroParticipantes.muestraMensajeAlerta("Debe seleccionar un entrenador con su pokemon para clonar el pokemon");
+				IVistaRegistroParticipantes
+						.muestraMensajeAlerta("Debe seleccionar un entrenador con su pokemon para clonar el pokemon");
 			}
 
 		} else if (actionEvent.getActionCommand().equalsIgnoreCase(IVistaRegistroParticipantes.INICIAR_TORNEO)) {
@@ -84,12 +107,24 @@ public class ControladorRegistroDeParticipantes implements ActionListener, Obser
 			this.torneo.ejecutaTorneo();
 		}
 	}
-	
+
+	/**
+	 * Método encargado de instanciar y mostrar una ventana para ver el desarrollo
+	 * del torneo.<br>
+	 * Se encarga también de instanciar un controlador que observará el desarrollo
+	 * del torneo.<br>
+	 */
+
 	public void abreVistaTorneo() {
 		IVistaDesarrolloTorneo vistaDesarrollo = new VistaDesarrolloTorneo();
 		ControladorDesarrolloTorneo controlador = new ControladorDesarrolloTorneo(vistaDesarrollo);
 		vistaDesarrollo.abrir();
 	}
+
+	/**
+	 * Método encargado de instanciar y mostrar una ventana con su respectivo
+	 * controlador para agregar un entrenador.
+	 */
 
 	public void abreVistaAgregaEntrenador() {
 		IVistaAgregaEntrenador vistaAgregaEntrenador = new VistaAgregaEntrenador();
@@ -98,10 +133,15 @@ public class ControladorRegistroDeParticipantes implements ActionListener, Obser
 		vistaAgregaEntrenador.abrir();
 	}
 
+	/**
+	 * Método encargado de instanciar y mostrar una ventana con su respectivo
+	 * controlador para añadir un pokémon.
+	 */
+
 	public void abreVistaAgregaPokemon() {
 		Entrenador entrenadorSeleccionado = this.vista.getEntrenadorActual();
 		IVistaAgregaPokemon vistaAgregaPokemon = new VistaAgregaPokemon();
-		ControladorAgregaPokemon controlador = new ControladorAgregaPokemon(vistaAgregaPokemon,entrenadorSeleccionado);
+		ControladorAgregaPokemon controlador = new ControladorAgregaPokemon(vistaAgregaPokemon, entrenadorSeleccionado);
 		this.observables.add(controlador);
 		controlador.addObserver(this);
 		vistaAgregaPokemon.setControlador(controlador);
@@ -110,7 +150,7 @@ public class ControladorRegistroDeParticipantes implements ActionListener, Obser
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if(!this.observables.contains(o))
+		if (!this.observables.contains(o))
 			throw new InvalidParameterException();
 
 		if (arg.toString().contentEquals(IVistaRegistroParticipantes.AGREGAR_ENTRENADOR))
@@ -120,35 +160,42 @@ public class ControladorRegistroDeParticipantes implements ActionListener, Obser
 			Entrenador entrenadorActual = controlador.getEntrenadorActual();
 			this.vista.actualizarListaPokemones(entrenadorActual.getPokemones().iterator());
 			this.vista.actualizarListaEntrenadores(this.torneo.getListaEntrenadores().iterator());
-		}
-		else if (arg.toString().contentEquals(IVistaRegistroParticipantes.AGREGAR_POKEMON)) {
+		} else if (arg.toString().contentEquals(IVistaRegistroParticipantes.AGREGAR_POKEMON)) {
 			Entrenador entrenador = (Entrenador) o;
 			this.vista.actualizarListaPokemones(entrenador.getPokemones().iterator());
 			this.vista.actualizarListaEntrenadores(this.torneo.getListaEntrenadores().iterator());
-		}
-		else if (arg.toString().contentEquals(IVistaRegistroParticipantes.FIN_TORNEO)) {
-			this.vista.setResultado("Felicitaciones al ganador del torneo!: "+this.torneo.getGanadorTorneo());
-		}
-		else if (arg.toString().contentEquals(IVistaRegistroParticipantes.FIN_RONDA)) {
+		} else if (arg.toString().contentEquals(IVistaRegistroParticipantes.FIN_TORNEO)) {
+			this.vista.setResultado("Felicitaciones al ganador del torneo!: " + this.torneo.getGanadorTorneo());
+		} else if (arg.toString().contentEquals(IVistaRegistroParticipantes.FIN_RONDA)) {
 			this.vista.actualizarListaEntrenadores(this.torneo.getListaEntrenadores().iterator());
 		}
 	}
-	
+
+	/**
+	 * Método encargado de instanciar y repartir un mazo de cartas utilizables a los
+	 * entrenadores participantes del torneo.
+	 */
+
 	public void repartoDeCartas() {
 		Carta cartaNiebla = new CartaNiebla();
-        Carta cartaTormenta = new CartaTormenta();
-        Carta cartaViento = new CartaViento();
-        
-        ArrayList<Carta> mazo = new ArrayList<>();
-        mazo.add(cartaNiebla);
-        mazo.add(cartaTormenta);
-        mazo.add(cartaViento);
-        
-        for (Entrenador entrenadores : this.torneo.getListaEntrenadores()) {
-        	entrenadores.setMazo(mazo);
-        }
+		Carta cartaTormenta = new CartaTormenta();
+		Carta cartaViento = new CartaViento();
+
+		ArrayList<Carta> mazo = new ArrayList<>();
+		mazo.add(cartaNiebla);
+		mazo.add(cartaTormenta);
+		mazo.add(cartaViento);
+
+		for (Entrenador entrenadores : this.torneo.getListaEntrenadores()) {
+			entrenadores.setMazo(mazo);
+		}
 	}
-	
+
+	/**
+	 * Método encargado de instanciar y agregar arenas en las cuales se desarrollan
+	 * las batallas del torneo.
+	 */
+
 	public void preparaArenas() {
 		this.torneo.agregaArena(new Arena("ARENA 1"));
 		this.torneo.agregaArena(new Arena("ARENA 2"));

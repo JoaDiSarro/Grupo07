@@ -85,6 +85,8 @@ public class Torneo extends Observable implements Observer{
         Ronda ronda = new Ronda(persistidor);
         ronda.addObserver(this);
         this.observables.add(ronda);
+        this.setChanged();
+        this.notifyObservers("\n--COMIENZA UNA NUEVA RONDA DEL TORNEO\n");
         ronda.inicia(entrenadores,reporteResultados,listaArenas);
     }
 
@@ -121,7 +123,9 @@ public class Torneo extends Observable implements Observer{
     public void ejecutaTorneo() {
         persistidor.guardar(listaEntrenadores);
         Entrenador ganador;
-        System.out.println("\n------COMIENZA EL TORNEO------\n");
+        this.setChanged();
+        this.notifyObservers("------COMIENZA EL TORNEO------\n");
+        //System.out.println("\n------COMIENZA EL TORNEO------\n");
         listaCompetidoresActual = listaEntrenadores;
         comienzaRonda(listaCompetidoresActual);
     }
@@ -148,8 +152,12 @@ public class Torneo extends Observable implements Observer{
             this.ganadorTorneo = listaCompetidoresActual.get(0).toString();
             this.setChanged();
     	    this.notifyObservers(IVistaRegistroParticipantes.FIN_TORNEO);
-            System.out.println("GANADOR FINAL: " + listaCompetidoresActual.get(0) );
-            System.out.println("\n------FINALIZA EL TORNEO------\n");
+    	    //this.setChanged();
+    	    this.notifyObservers("GANADOR FINAL: " + listaCompetidoresActual.get(0));
+    	    //this.setChanged();
+    	    this.notifyObservers("\n------FINALIZA EL TORNEO------\n");
+            //System.out.println("GANADOR FINAL: " + listaCompetidoresActual.get(0) );
+            //System.out.println("\n------FINALIZA EL TORNEO------\n");
         }
         this.observables.remove(observable);
     }
