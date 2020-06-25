@@ -197,8 +197,8 @@ public class ControladorRegistroDeParticipantes implements ActionListener, Obser
 	 */
 
 	public void preparaArenas() {
-		this.torneo.agregaArena(new Arena("ARENA 1"));
-		this.torneo.agregaArena(new Arena("ARENA 2"));
-		this.torneo.agregaArena(new Arena("ARENA 3"));
+		this.torneo.agregaArena(new Arena("Gurubashi"));
+		this.torneo.agregaArena(new Arena("Wasteland"));
+		this.torneo.agregaArena(new Arena("DarkSpire"));
 	}
 }

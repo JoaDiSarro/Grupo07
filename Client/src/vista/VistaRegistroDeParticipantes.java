@@ -267,7 +267,7 @@ public class VistaRegistroDeParticipantes extends JFrame implements IVistaRegist
 
 	@Override
 	public void abrir() {
-		setBounds(300, 300, 920, 619);
+		setBounds(500, 300, 920, 619);
 		setVisible(true);
 	}
 

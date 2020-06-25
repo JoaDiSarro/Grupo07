@@ -12,7 +12,12 @@ public class LimpiezaState implements State {
 
     @Override
     public void ejecutar(ModeloBatalla modelo) {
-        arena.notificarEstado("\n Estado LIMPIEZA "+arena.getNombre());
+        arena.notificarEstado("\n La arena "+arena.getNombre()+" se encuentra en estado de limpieza.");
         arena.setEstado(null);
     }
+    
+    @Override
+	public String toString() {
+		return " de limpieza.";
+	}
 }

@@ -60,6 +60,8 @@ public class Entrenador extends Observable implements IClasificable,Cloneable, S
      */
     public void agregaPokemon(Pokemon pokemon) {
     	this.pokemones.add(pokemon);
+		this.setChanged();
+		this.notifyObservers(IVistaRegistroParticipantes.AGREGAR_POKEMON);
     }
     
     public ArrayList<Pokemon> getPokemones() {

@@ -33,8 +33,8 @@ public class VistaDesarrolloTorneo extends JFrame implements IVistaDesarrolloTor
 	 */
 	public VistaDesarrolloTorneo() {
 		setTitle("Desarrollo de batallas");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 519, 619);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 750, 619);
 		panelPrincipal = new JPanel();
 		panelPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
 		panelPrincipal.setLayout(new BorderLayout(0, 0));
@@ -54,7 +54,7 @@ public class VistaDesarrolloTorneo extends JFrame implements IVistaDesarrolloTor
 
 	@Override
 	public void abrir() {
-		setBounds(100, 100, 519, 619);
+		setBounds(500, 100, 1000, 619);
 		this.setVisible(true);
 	}
 

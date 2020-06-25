@@ -45,8 +45,13 @@ public class ControladorDesarrolloTorneo implements Observer {
 			throw new InvalidParameterException();
 
 		if (!arg.toString().contentEquals(IVistaRegistroParticipantes.FIN_TORNEO)
-				&& !arg.toString().contentEquals(IVistaRegistroParticipantes.FIN_RONDA))
+				&& !arg.toString().contentEquals(IVistaRegistroParticipantes.FIN_RONDA)) {
+			
 			this.vista.agregaDetalles((String) arg);
+			
+		}
+		
+			
 	}
 
 }

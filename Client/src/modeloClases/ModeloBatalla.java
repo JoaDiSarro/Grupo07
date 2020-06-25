@@ -66,4 +66,12 @@ public class ModeloBatalla {
     public int getAtaques() {
         return ataques;
     }
+
+
+	@Override
+	public String toString() {
+		return "\n---ENFRENTAMIENTO: \n-Entrenador: "+this.entrenadorA+"-Pokemon: "+this.pokemonEntrenadorA+"\nVS \n-Entrenador: "+this.entrenadorB+"-Pokemon:"+this.pokemonEntrenadorB;
+	}
+    
+    
 }
