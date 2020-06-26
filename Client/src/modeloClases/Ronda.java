@@ -65,10 +65,10 @@ public class Ronda extends Observable implements Observer {
 			notifyObservers(object);
 		} else {
 			Entrenador ganadorBatalla = (Entrenador) object;
-			String stringGanador = "\nPasa a la siguiente ronda: "+ganadorBatalla;
+			String stringGanador = "\nPasa a la siguiente ronda: " + ganadorBatalla;
 			setChanged();
 			notifyObservers(stringGanador);
-			//System.out.println("\nGANADOR DE LA BATALLA: " + ganadorBatalla);
+			// System.out.println("\nGANADOR DE LA BATALLA: " + ganadorBatalla);
 			ganadoresRonda.add(ganadorBatalla);
 			this.cantBatallasPendientes--;
 			if (this.cantBatallasPendientes == 0) {
@@ -76,7 +76,7 @@ public class Ronda extends Observable implements Observer {
 				String stringGanadores = "\nGANADORES DE LA RONDA:\n\n" + ganadoresRonda;
 				setChanged();
 				notifyObservers(stringGanadores);
-				//System.out.println("\nGANADORES DE LA RONDA:\n" + ganadoresRonda);
+				// System.out.println("\nGANADORES DE LA RONDA:\n" + ganadoresRonda);
 				setChanged();
 				notifyObservers(); // Notifica fin de ronda
 			}
